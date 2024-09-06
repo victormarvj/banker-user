@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  position: relative; /* For positioning pseudo-elements */
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  background-color: var(
+    --bg-secondary
+  ); /* Optional: background color for items */
+  border-radius: 50%;
+  padding: 5px;
+  position: relative; /* For positioning the lines */
+  width: 5px;
+  height: 5px;
+  margin-right: 50px;
+}
+
+.item.active {
+  width: 30px;
+  height: 30px;
+}
+
+.item:last-child {
+  margin-right: 0;
+}
+
+.item span {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.item img {
+  display: none;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 1000;
+}
+
+.item small {
+  display: none;
+  position: absolute;
+  font-size: 10px;
+  bottom: -20px;
+  left: -15px;
+  font-weight: bold;
+  margin-right: -35px;
+}
+
+.item img.icon-good {
+  width: 30px;
+  height: 30px;
+}
+
+.item.active span,
+.item.active small {
+  display: block;
+}
+.item.passed img {
+  display: block;
+}
+
+.item::after {
+  content: "";
+  position: absolute;
+  top: 50%; /* Vertically center the line */
+  left: 100%; /* Position the line to the right of the item */
+  width: 50px; /* Line thickness */
+  height: 1px; /* Line height */
+  background-color: var(--bg-primary); /* Line color */
+  transform: translateY(-50%); /* Center the line vertically */
+}
+
+.item:last-child::after {
+  content: none; /* Remove line after the last item */
+}

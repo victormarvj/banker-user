@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-md bg-white sticky-top">
+  <div class="container-fluid">
+    <!-- <button
+      type="button"
+      class="d-md-none"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      mat-icon-button
+      (click)="toggleSideNav()"
+    >
+      <fa-icon [icon]="faBars" size="lg" class="text-muted"></fa-icon>
+    </button> -->
+    <a
+      data-bs-toggle="offcanvas"
+      href="#sideNavOffCanvas"
+      role="button"
+      aria-controls="sideNavOffCanvas"
+      class="d-md-none"
+    >
+      <fa-icon [icon]="faBars" size="lg" class="text-muted"></fa-icon>
+    </a>
+
+    <a class="navbar-brand d-none d-md-inline me-5" href="#">
+      <img src="img/logo.png" class="logo" alt="" />
+    </a>
+
+    <!-- <div class="vr ms-5 d-none d-md-block"></div> -->
+
+    <h5 class="ms-5">Overview</h5>
+
+    <a class="d-md-none" href="#">
+      <img src="img/avatar.png" style="width: 50px; height: 50px" alt="" />
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="d-flex ms-auto" role="search">
+        <div class="d-flex align-items-center form-control search">
+          <span
+            ><img src="img/magnifying-glass-1.png" class="icon-good" alt=""
+          /></span>
+          <input
+            class="form-control search"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </div>
+      </form>
+
+      <a href="#" class="rounded-pill off-white p-2 mx-2">
+        <fa-icon [icon]="faCog" size="lg" class="text-ashes"></fa-icon>
+      </a>
+
+      <a href="#" class="rounded-pill off-white p-2 mx-2">
+        <fa-icon [icon]="faBell" size="lg" class="text-ashes"></fa-icon>
+      </a>
+
+      <a class="d-none d-md-inline ms-2" href="#">
+        <img src="img/avatar.png" style="width: 40px; height: 40px" alt="" />
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,47 @@
+<div class="file-upload">
+  <!-- Image Upload -->
+  <div class="image-upload">
+    <label for="imageInput" class="image-upload-label">
+      <input
+        type="file"
+        id="imageInput"
+        accept="image/*"
+        (change)="onImageSelected($event)"
+        hidden
+      />
+      @if(imagePreview) {
+      <div class="image-preview">
+        <img [src]="imagePreview" alt="Image Preview" />
+      </div>
+      }@else {
+
+      <div class="upload-button">
+        <mat-icon>cloud_upload</mat-icon>
+        <span>Upload Image</span>
+      </div>
+      }
+    </label>
+  </div>
+
+  <!-- Video Upload -->
+  <div class="video-upload">
+    <label for="videoInput" class="video-upload-label">
+      <input
+        type="file"
+        id="videoInput"
+        accept="video/*"
+        (change)="onVideoSelected($event)"
+        hidden
+      />
+      <div class="upload-button">
+        <mat-icon>cloud_upload</mat-icon>
+        <span>Upload Video</span>
+      </div>
+      @if (videoName) {
+      <div class="video-name">
+        {{ videoName }}
+      </div>
+      }
+    </label>
+  </div>
+</div>

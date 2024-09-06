@@ -1,0 +1,89 @@
+main {
+  height: 80vh;
+}
+
+/* Default styles for larger screens */
+.sidebar {
+  width: 250px; /* Fixed width for sidebar */
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Scrollable if content exceeds height */
+  position: fixed; /* Fix the sidebar in place */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin-top: 75px; /* Space for fixed header */
+  background: #f8f9fa; /* Background color for visibility */
+  z-index: 1000; /* Ensure sidebar is above other content */
+}
+
+.content {
+  margin-top: 75px; /* Offset for fixed header */
+  margin-left: 250px; /* Offset for sidebar width */
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Scrollable if content exceeds height */
+}
+
+/* Hide scrollbar buttons for WebKit-based browsers */
+.full-height-sidenav::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+}
+
+.full-height-sidenav::-webkit-scrollbar-thumb {
+  background-color: #aaa; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Round the corners of the scrollbar thumb */
+}
+
+.full-height-sidenav::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darker color on hover */
+}
+
+.full-height-sidenav::-webkit-scrollbar-track {
+  background-color: transparent; /* Background color of the scrollbar track */
+}
+
+/* Hide scrollbar buttons (arrows) */
+.full-height-sidenav::-webkit-scrollbar-button {
+  display: none; /* Hide scrollbar buttons */
+}
+
+.nav-color {
+  color: #b1b1b1;
+}
+
+.mat-mdc-nav-list .mat-mdc-list-item {
+  border-radius: 0;
+}
+
+.mat-mdc-nav-list .mat-mdc-list-item.mdc-list-item--activated {
+  position: relative; /* Position relative for pseudo-elements */
+  background-color: transparent; /* Optional: Background color for active state */
+  border-radius: 0;
+}
+
+.mat-mdc-nav-list .mat-mdc-list-item.mdc-list-item--activated .active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%; /* Full height of the list item */
+  width: 8px; /* Adjust width to match your design */
+  background-image: url("/img/active-link-indicator.png"); /* Replace with your image path */
+  background-size: contain; /* Ensure the image fits within the element */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.mat-mdc-nav-list .mat-mdc-list-item.mdc-list-item--activated a {
+  color: var(--bg-accent);
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 767.98px) {
+  .sidebar {
+    display: none; /* Hide the sidebar on small screens */
+  }
+
+  .content {
+    margin-top: 75px; /* Offset for fixed header */
+    margin-left: 0; /* Remove left margin for full width */
+  }
+}

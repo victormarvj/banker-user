@@ -1,1 +1,125 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@use "./themesm3-theme.scss";
+
+@include mat.core();
+
+html {
+  // Apply the light theme by default
+  @include mat.all-component-themes(themesm3-theme.$light-theme);
+  // @include mat.all-component-themes(themesm3-theme.$dark-theme);
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --bg-accent: #1565d8;
+  --bg-primary: #b559e9;
+  --bg-dark: #1a191e;
+  --bg-secondary: #a4b4cb;
+  --bg-success: #2f9f93;
+  --bg-white: #fff;
+  --bg-light: #f5f7fa;
+  --bg-aches: #718ebf;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.logo {
+  width: 150px;
+  height: 40px;
+}
+
+.bg-accent {
+  background-color: var(--bg-accent) !important;
+}
+
+.bg-primary {
+  background-color: var(--bg-primary) !important;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(to right, #1565d8, #b559e9) !important;
+}
+
+.btn-gradient-primary {
+  position: relative; /* Position relative to position the ripple effect */
+  overflow: hidden; /* Hide overflow of the pseudo-element */
+  background: linear-gradient(to right, #1565d8, #b559e9) !important;
+  border: none;
+  color: #fff;
+  padding: 15px 50px; /* Adjust padding as needed */
+  transition: background-color 0.3s ease; /* Optional: smooth transition for background color change */
+}
+
+.btn-gradient-primary:hover {
+  color: #fff;
+}
+
+.btn-gradient-primary::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px; /* Initial size of the ripple effect */
+  height: 200px; /* Initial size of the ripple effect */
+  background: rgba(255, 255, 255, 0.3); /* Ripple color */
+  border-radius: 50%; /* Make it circular */
+  transform: translate(-50%, -50%) scale(0); /* Center and initially hide the ripple */
+  opacity: 0; /* Hide the ripple initially */
+  pointer-events: none; /* Prevent the ripple from blocking clicks */
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth animation for ripple effect */
+}
+
+.btn-gradient-primary:hover::before {
+  transform: translate(-50%, -50%) scale(3); /* Enlarge the ripple effect */
+  opacity: 1; /* Make the ripple visible */
+}
+
+.btn-gradient-primary:disabled {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-primary {
+  color: var(--bg-primary) !important;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.off-white {
+  background-color: var(--bg-light) !important;
+}
+
+.bg-ashes {
+  background-color: var(--bg-aches);
+}
+
+.text-ashes {
+  color: var(--bg-aches);
+}
+
+.fs-10 {
+  font-size: 10px;
+}
+
+.fs-12 {
+  font-size: 12px;
+}

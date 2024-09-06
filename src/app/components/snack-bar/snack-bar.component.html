@@ -1,0 +1,16 @@
+<div class="d-flex align-items-center bg-{{ data.color }} rounded">
+  <span matSnackBarLabel> {{ data.message }} </span>
+  <span matSnackBarActions>
+    <button
+      mat-button
+      matSnackBarAction
+      (click)="snackBarRef.dismissWithAction()"
+    >
+      <mat-icon
+        aria-hidden="false"
+        aria-label="cancel button"
+        fontIcon="cancel"
+      ></mat-icon>
+    </button>
+  </span>
+</div>

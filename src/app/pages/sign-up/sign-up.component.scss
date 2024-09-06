@@ -1,0 +1,86 @@
+.signup-bg {
+  background-image: url("/img/signup-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  height: 140vh;
+}
+
+.signup-girl {
+  position: absolute;
+  bottom: 0;
+}
+
+.banking-text {
+  font-size: 80px;
+  width: 70%;
+  margin-top: 20px;
+}
+
+.login-text {
+  font-size: 22px;
+  line-height: 37.4px;
+}
+
+.icon-good {
+  width: 20px;
+  height: 20px;
+}
+
+#pageContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+#pageMenu {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.page-item {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+}
+
+.condition-list li::marker {
+  color: var(--bg-success);
+}
+
+/* Styles for tablets below */
+@media (max-width: 768px) {
+  .signup-bg {
+    height: 85vh;
+  }
+
+  .signup-girl {
+    left: 10%;
+    width: 80%;
+  }
+
+  .logo {
+    width: 76px;
+    height: 26px;
+  }
+
+  .banking-text {
+    font-size: 40px;
+    text-align: center;
+    width: 100%;
+    line-height: 44px;
+    text-align: center;
+  }
+
+  .login-text {
+    font-size: 14px;
+    line-height: 23.8px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .fs-auto {
+    font-size: 10px;
+    width: 100%;
+  }
+}

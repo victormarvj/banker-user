@@ -1,0 +1,53 @@
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.image-upload-label,
+.video-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.image-upload-label:hover,
+.video-upload-label:hover {
+  background-color: #f1f1f1;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 200px;
+  display: block;
+  margin-top: 10px;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.upload-button mat-icon {
+  font-size: 48px;
+  color: #607d8b;
+}
+
+.upload-button span {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #607d8b;
+}
+
+.video-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #607d8b;
+}
