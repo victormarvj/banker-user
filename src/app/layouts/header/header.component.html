@@ -1,4 +1,10 @@
-<nav class="navbar navbar-expand-md bg-white sticky-top">
+<nav
+  class="navbar navbar-expand-md sticky-top px-4 py-3"
+  [ngClass]="{
+    'dark-theme': theme === 'dark',
+    'dark-theme-bottom-divider': theme === 'dark'
+  }"
+>
   <div class="container-fluid">
     <!-- <button
       type="button"
@@ -17,20 +23,32 @@
       aria-controls="sideNavOffCanvas"
       class="d-md-none"
     >
-      <fa-icon [icon]="faBars" size="lg" class="text-muted"></fa-icon>
-    </a>
-
-    <a class="navbar-brand d-none d-md-inline me-5" href="#">
-      <img src="img/logo.png" class="logo" alt="" />
+      <fa-icon [icon]="faBars" size="lg" class="text-primary"></fa-icon>
     </a>
 
     <!-- <div class="vr ms-5 d-none d-md-block"></div> -->
 
-    <h5 class="ms-5">Overview</h5>
+    <div class="">
+      <h5 class="">Overview</h5>
+    </div>
 
-    <a class="d-md-none" href="#">
+    <button mat-button class="d-md-none" href="#" [matMenuTriggerFor]="menu">
       <img src="img/avatar.png" style="width: 50px; height: 50px" alt="" />
-    </a>
+      <mat-menu #menu="matMenu">
+        <a routerLink="/dashboard/settings" mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Account Settings</span>
+        </a>
+        <a routerLink="/dashboard/settings" mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>User Profile</span>
+        </a>
+        <a routerLink="/signin" mat-menu-item class="text-danger">
+          <mat-icon color="warn">logout</mat-icon>
+          <span>Log Out</span>
+        </a>
+      </mat-menu>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <form class="d-flex ms-auto" role="search">
@@ -43,6 +61,7 @@
             type="search"
             placeholder="Search"
             aria-label="Search"
+            name="search"
           />
         </div>
       </form>
@@ -55,9 +74,28 @@
         <fa-icon [icon]="faBell" size="lg" class="text-ashes"></fa-icon>
       </a>
 
-      <a class="d-none d-md-inline ms-2" href="#">
+      <button
+        mat-button
+        class="d-none d-md-inline ms-2"
+        href="#"
+        [matMenuTriggerFor]="menu"
+      >
         <img src="img/avatar.png" style="width: 40px; height: 40px" alt="" />
-      </a>
+        <mat-menu #menu="matMenu">
+          <a routerLink="/dashboard/settings" mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Account Settings</span>
+          </a>
+          <a routerLink="/dashboard/settings" mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            <span>User Profile</span>
+          </a>
+          <a routerLink="/signin" mat-menu-item class="text-danger">
+            <mat-icon color="warn">logout</mat-icon>
+            <span>Log Out</span>
+          </a>
+        </mat-menu>
+      </button>
     </div>
   </div>
 </nav>

@@ -135,15 +135,6 @@ $_rest: (
 $_primary: map.merge(map.get($_palettes, primary), $_rest);
 $_tertiary: map.merge(map.get($_palettes, tertiary), $_rest);
 
-$light-theme: mat.define-theme(
-  (
-    color: (
-      theme-type: light,
-      primary: $_primary,
-      tertiary: $_tertiary,
-    ),
-  )
-);
 $dark-theme: mat.define-theme(
   (
     color: (
@@ -153,3 +144,54 @@ $dark-theme: mat.define-theme(
     ),
   )
 );
+
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+
+  // Background gradient with a solid color fallback
+  background-color: var(--bg-dark-theme);
+  // background-image: linear-gradient(to right, #3e79e5, #01b8e3);
+
+  color: #fff !important; // Ensures white text across all child elements
+
+  .text-dark-varient {
+    color: var(--bg-primary); // Uses a CSS variable for color
+  }
+
+  .sidenav-dark-gradient {
+    background: var(--bg-dark-theme2);
+    // opacity: 0.1;
+  }
+
+  .nav-color {
+    color: #fff;
+  }
+
+  .dark-theme-bottom-divider {
+    border-bottom: 1px solid var(--bg-accent);
+  }
+
+  .card-dark-theme {
+    background: linear-gradient(
+      135deg,
+      rgba(50, 50, 50, 0.8),
+      rgba(16, 6, 47, 0.8)
+    ); /* Gradient with transparency */
+    opacity: 0.9;
+    border: 1px solid var(--bg-accent);
+  }
+
+  .border-dark-linear-accent {
+    border: 1px solid; /* Set border width */
+    border-image: linear-gradient(
+        45deg,
+        var(--bg-linear-accent),
+        var(--bg-linear-accent2)
+      )
+      1;
+  }
+
+  .border-dark-linear-accent.theme-rounded {
+    border-radius: 10px;
+  }
+}

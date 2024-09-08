@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-@use "./light-theme.scss";
+@use "./themesm3-theme.scss";
 
 @include mat.core();
 
@@ -12,17 +12,47 @@
   --bg-white: #fff;
   --bg-light: #f5f7fa;
   --bg-aches: #718ebf;
-
-  --bg-dark-theme: #050624;
-  --bg-dark-theme2: #080a36;
-
-  --bg-linear-accent: #3e79e5;
-  --bg-linear-accent2: #01b8e3;
-
-  --bg-purple: #a789ff;
-
-  --bg-lemon: #83dea4;
 }
+
+// .light-theme {
+//   // Apply the light theme by default
+//   // @include mat.all-component-themes(themesm3-theme.$dark-theme);
+// }
+
+.dark-theme {
+  @media (prefers-color-scheme: dark) {
+    // mat.$theme-ignore-duplication-warnings: true;
+    @include mat.all-component-themes(themesm3-theme.$dark-theme);
+    // @include mat.all-component-colors(themesm3-theme.$dark-theme);
+    // @include mat.button-color(themesm3-theme.$dark-theme);
+    background-color: var(--bg-dark);
+    color: var(--bg-light);
+  }
+}
+
+// .light-theme {
+//   // Apply the light theme by default
+//   @include mat.all-component-colors(themesm3-theme.$light-theme);
+//   // @include mat.all-component-themes(themesm3-theme.$dark-theme);
+
+//   // Use the `-color` mixins to only apply color styles without reapplying the same
+//   // typography and density styles.
+//   // @include mat.core-color(themesm3-theme.$light-theme);
+//   // @include mat.button-color(themesm3-theme.$light-theme);
+// }
+
+// .dark-theme {
+//   // Apply the dark theme only when the user prefers dark themes.
+//   @media (prefers-color-scheme: dark) {
+//     // Apply the dark theme by default
+//     // @include mat.core-theme(themesm3-theme.$dark-theme);
+//     // @include mat.button-theme(themesm3-theme.$dark-theme);
+
+//     @include mat.all-component-themes(themesm3-theme.$dark-theme);
+//   }
+//   background-color: var(--bg-dark);
+//   color: var(--bg-light);
+// }
 
 html,
 body {
@@ -105,10 +135,6 @@ body {
   color: var(--bg-primary) !important;
 }
 
-.text-accent {
-  color: var(--bg-accent) !important;
-}
-
 .text-justify {
   text-align: justify;
 }
@@ -131,21 +157,4 @@ body {
 
 .fs-12 {
   font-size: 12px;
-}
-
-.gradient-border {
-  border: 5px solid; /* Set border width */
-  border-image: linear-gradient(45deg, red, blue) 1;
-}
-
-.theme-rounded {
-  border-radius: 10px;
-}
-
-.text-purple {
-  color: var(--bg-purple);
-}
-
-.text-lemon {
-  color: var(--bg-lemon);
 }

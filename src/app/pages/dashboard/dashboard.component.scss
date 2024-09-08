@@ -1,25 +1,23 @@
 main {
-  height: 80vh;
+  height: 50vh;
 }
 
 /* Default styles for larger screens */
 .sidebar {
-  width: 250px; /* Fixed width for sidebar */
+  width: 230px; /* Fixed width for sidebar */
   height: 100vh; /* Full viewport height */
   overflow-y: auto; /* Scrollable if content exceeds height */
   position: fixed; /* Fix the sidebar in place */
   top: 0;
   left: 0;
   bottom: 0;
-  margin-top: 75px; /* Space for fixed header */
-  background: #f8f9fa; /* Background color for visibility */
+  // margin-top: 60px; /* Space for fixed header */
   z-index: 1000; /* Ensure sidebar is above other content */
 }
 
 .content {
-  margin-top: 75px; /* Offset for fixed header */
-  margin-left: 250px; /* Offset for sidebar width */
-  height: 100vh; /* Full viewport height */
+  margin-left: 230px; /* Offset for sidebar width */
+  min-height: 80vh; /* Full viewport height */
   overflow-y: auto; /* Scrollable if content exceeds height */
 }
 
@@ -76,6 +74,11 @@ main {
   color: var(--bg-accent);
 }
 
+// .form-check-input:checked {
+//   background-color: var(--bg-primary);
+//   border-color: var(--bg-primary);
+// }
+
 /* Responsive styles for smaller screens */
 @media (max-width: 767.98px) {
   .sidebar {
@@ -83,7 +86,6 @@ main {
   }
 
   .content {
-    margin-top: 75px; /* Offset for fixed header */
     margin-left: 0; /* Remove left margin for full width */
   }
 }

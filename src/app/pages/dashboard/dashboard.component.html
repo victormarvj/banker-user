@@ -1,8 +1,8 @@
-<app-header></app-header>
 <main>
   <div class="d-flex">
     <div
       class="offcanvas offcanvas-start"
+      [ngClass]="{ 'sidenav-dark-gradient': theme === 'dark' }"
       tabindex="-1"
       id="sideNavOffCanvas"
       aria-labelledby="sideNavOffCanvasLabel"
@@ -14,18 +14,21 @@
           </a>
         </h5>
         <button
-          type="button"
+          mat-icon-button
           class="btn-close"
+          type="button"
           data-bs-dismiss="offcanvas"
           aria-label="Close"
-        ></button>
+        >
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
       <div class="offcanvas-body">
         <div class="navbar-nav">
           <mat-nav-list>
             <mat-list-item
-              data-bs-dismiss="offcanvas"
               class="my-3"
+              data-bs-dismiss="offcanvas"
               [activated]="activeLink === 'dashboard'"
             >
               <a
@@ -33,6 +36,7 @@
                 routerLink="/dashboard"
                 (click)="setActiveLink('dashboard')"
                 class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == 'dashboard'"
               >
                 <mat-icon>home</mat-icon>
                 <span class="ms-2">Dashboard</span>
@@ -40,8 +44,8 @@
             </mat-list-item>
 
             <mat-list-item
-              data-bs-dismiss="offcanvas"
               class="my-3"
+              data-bs-dismiss="offcanvas"
               [activated]="activeLink === 'transactions'"
             >
               <a
@@ -49,6 +53,7 @@
                 routerLink="/transactions"
                 (click)="setActiveLink('transactions')"
                 class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == 'transactions'"
               >
                 <mat-icon>point_of_sale</mat-icon>
                 <span class="ms-2">Transactions</span>
@@ -56,8 +61,8 @@
             </mat-list-item>
 
             <mat-list-item
-              data-bs-dismiss="offcanvas"
               class="my-3"
+              data-bs-dismiss="offcanvas"
               [activated]="activeLink === 'investments'"
             >
               <a
@@ -65,6 +70,7 @@
                 routerLink="/investments"
                 (click)="setActiveLink('investments')"
                 class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == 'investments'"
               >
                 <mat-icon>currency_exchange</mat-icon>
                 <span class="ms-2">Investments</span>
@@ -72,8 +78,8 @@
             </mat-list-item>
 
             <mat-list-item
-              data-bs-dismiss="offcanvas"
               class="my-3"
+              data-bs-dismiss="offcanvas"
               [activated]="activeLink === 'credit-cards'"
             >
               <a
@@ -81,6 +87,7 @@
                 routerLink="/credit-cards"
                 (click)="setActiveLink('credit-cards')"
                 class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == 'credit-cards'"
               >
                 <mat-icon>add_card</mat-icon>
                 <span class="ms-2">Credit Cards</span>
@@ -97,6 +104,7 @@
                 routerLink="/loans"
                 (click)="setActiveLink('loans')"
                 class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == 'loans'"
               >
                 <mat-icon>local_atm</mat-icon>
                 <span class="ms-2">Loans</span>
@@ -113,6 +121,7 @@
                 routerLink="/services"
                 (click)="setActiveLink('services')"
                 class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == 'services'"
               >
                 <mat-icon>handyman</mat-icon>
                 <span class="ms-2">Services</span>
@@ -120,8 +129,8 @@
             </mat-list-item>
 
             <mat-list-item
-              data-bs-dismiss="offcanvas"
               class="my-3"
+              data-bs-dismiss="offcanvas"
               [activated]="activeLink === 'privileges'"
             >
               <a
@@ -129,6 +138,7 @@
                 routerLink="/privileges"
                 (click)="setActiveLink('privileges')"
                 class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == 'privileges'"
               >
                 <mat-icon>tips_and_updates</mat-icon>
                 <span class="ms-2">My Privileges</span>
@@ -145,6 +155,7 @@
                 routerLink="/dashboard/settings"
                 (click)="setActiveLink('settings')"
                 class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == 'settings'"
               >
                 <mat-icon>settings</mat-icon>
                 <span class="ms-2">Settings</span>
@@ -152,7 +163,7 @@
             </mat-list-item>
           </mat-nav-list>
 
-          <div class="d-flex justify-content-center my-3">
+          <div class="d-flex justify-content-center my-3 nav-color">
             <fa-icon [icon]="faInfoCircle" size="sm"></fa-icon>
             <span class="fs-12 ms-2">Get Help</span>
           </div>
@@ -163,10 +174,13 @@
                 class="form-check-input"
                 type="checkbox"
                 role="switch"
-                id="flexSwitchCheckDefault"
+                id="switchThemeOffcanvas"
+                [checked]="isDarkTheme"
                 (change)="toggleTheme($event)"
               />
-              <label class="form-check-label fs-12" for="flexSwitchCheckDefault"
+              <label
+                class="form-check-label fs-12 nav-color"
+                for="switchThemeOffcanvas"
                 >Dark mode</label
               >
             </div>
@@ -175,7 +189,15 @@
       </div>
     </div>
 
-    <nav class="sidebar">
+    <nav
+      class="sidebar"
+      [ngClass]="{ 'sidenav-dark-gradient': theme === 'dark' }"
+    >
+      <div class="py-2">
+        <a class="navbar-brand d-none d-md-inline px-4" href="#">
+          <img src="img/logo.png" class="logo" alt="" />
+        </a>
+      </div>
       <div
         class="navbar-nav navbar-nav-scroll full-height-sidenav"
         style="--bs-scroll-height: 90vh"
@@ -306,10 +328,11 @@
               class="form-check-input"
               type="checkbox"
               role="switch"
-              id="flexSwitchCheckDefault"
+              id="switchThemeMain"
+              [checked]="isDarkTheme"
               (change)="toggleTheme($event)"
             />
-            <label class="form-check-label fs-12" for="flexSwitchCheckDefault"
+            <label class="form-check-label fs-12" for="switchThemeMain"
               >Dark mode</label
             >
           </div>
@@ -318,10 +341,18 @@
     </nav>
 
     <!-- Content Area -->
-    <div class="content px-5">
-      <router-outlet></router-outlet>
+    <div class="content w-100">
+      <div class="sticky-top">
+        <app-header [theme]="theme"></app-header>
+      </div>
 
-      <app-footer></app-footer>
+      <div class="views px-3 mt-3">
+        <router-outlet></router-outlet>
+      </div>
+
+      <div class="px-4 mt-5">
+        <app-footer></app-footer>
+      </div>
     </div>
   </div>
 </main>
