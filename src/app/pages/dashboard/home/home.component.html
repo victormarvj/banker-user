@@ -1,106 +1,387 @@
 <div class="container-fluid">
-  <div class="row mb-4">
-    <div class="col-12">
-      <h6>My Card</h6>
-    </div>
-  </div>
-
   <div class="row">
-    <div class="col-12 col-md-3">
-      <div class="card-div">
-        <img src="img/card-bg.png" class="w-100 theme-rounded" alt="" />
-        <div class="content-text w-100 p-3">
-          <span class="balance-text text-light">Balance</span>
-          <div class="d-flex justify-content-between">
-            <h5 class="text-light">$5,756</h5>
-            <mat-icon class="text-light">contactless</mat-icon>
+    <div class="col-12 col-md-9">
+      <div class="row">
+        <div class="row mb-4">
+          <div class="col-12">
+            <h6>My Card</h6>
           </div>
+        </div>
+        <div class="col-12 col-md-4" id="quickTransfer">
+          <div class="card-div">
+            <img src="img/card-bg.png" class="w-100 theme-rounded" alt="" />
+            <div class="content-text w-100 p-3">
+              <span class="balance-text text-light">Balance</span>
+              <div class="d-flex justify-content-between">
+                <h5 class="text-light">$5,756</h5>
+                <mat-icon class="text-light">contactless</mat-icon>
+              </div>
 
-          <div class="d-flex justify-content-between px-2">
-            <div class="d-flex flex-column text-light">
-              <span class="fw-light fs-12">CARD HOLDER</span>
-              <span class="fs-12">Richard Austin</span>
-            </div>
-            <div>
-              <div class="d-flex flex-column text-light me-3">
-                <span class="fw-light fs-12">VALID THRU</span>
-                <span class="fs-12">12/22</span>
+              <div class="d-flex justify-content-between px-2">
+                <div class="d-flex flex-column text-light">
+                  <span class="fw-light fs-12">CARD HOLDER</span>
+                  <span class="fs-12">Richard Austin</span>
+                </div>
+                <div>
+                  <div class="d-flex flex-column text-light me-3">
+                    <span class="fw-light fs-12">VALID THRU</span>
+                    <span class="fs-12">12/22</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between px-2">
+                <div class="d-flex flex-column text-light">
+                  <p class="mt-2">3778 **** **** 1234</p>
+                </div>
+                <div>
+                  <img src="img/card-type.png" alt="" />
+                </div>
               </div>
             </div>
           </div>
-          <div class="d-flex justify-content-between px-2">
-            <div class="d-flex flex-column text-light">
-              <p class="mt-2">3778 **** **** 1234</p>
-            </div>
-            <div>
-              <img src="img/card-type.png" alt="" />
+
+          <div class="quick-transfer mt-4">
+            <div class="card theme-rounded card-dark-theme">
+              <div class="card-body">
+                <h6 class="card-title mb-5">Quick Transfer</h6>
+                <div class="my-3">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <span matPrefix class="ms-2">
+                      <img src="img/card-type.png" alt="" />
+                    </span>
+                    <mat-select value="1" class="py-3">
+                      <mat-option value="1"
+                        >Debit &nbsp;&nbsp;10,438</mat-option
+                      >
+                      <mat-option value="2"
+                        >Credit &nbsp;&nbsp;$10,438</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="my-3">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Enter Amount</mat-label>
+                    <input class="pt-5" matInput value="$1,24" />
+                  </mat-form-field>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-column align-items-center">
+                    <div class="card theme-rounded card-dark-theme">
+                      <div class="card-body p-2 px-md-3">
+                        <mat-icon class="text-purple">price_change</mat-icon>
+                      </div>
+                    </div>
+                    <p class="fs-10 mt-4">Send</p>
+                  </div>
+                  <div class="d-flex flex-column align-items-center">
+                    <div class="card theme-rounded card-dark-theme">
+                      <div class="card-body p-2 px-md-3">
+                        <mat-icon class="text-lemon">price_change</mat-icon>
+                      </div>
+                    </div>
+                    <p class="fs-10 mt-4">Receive</p>
+                  </div>
+                  <div class="d-flex flex-column align-items-center">
+                    <div class="card theme-rounded card-dark-theme">
+                      <div class="card-body p-2 px-md-3">
+                        <mat-icon class="text-lemon">receipt_long</mat-icon>
+                      </div>
+                    </div>
+                    <p class="fs-10 mt-4">Invoicing</p>
+                  </div>
+                  <div class="d-flex flex-column align-items-center">
+                    <div class="card theme-rounded card-dark-theme">
+                      <div class="card-body p-2 px-md-3">
+                        <mat-icon class="text-lemon">widgets</mat-icon>
+                      </div>
+                    </div>
+                    <p class="fs-10 mt-4">More</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="quick-transfer mt-3">
-        <div class="card theme-rounded card-dark-theme">
-          <div class="card-body">
-            <h6 class="card-title">Quick Transfer</h6>
-            <div>
-              <mat-form-field appearance="outline" class="w-100">
-                <span matPrefix class="ms-2">
-                  <img src="img/card-type.png" alt="" />
-                </span>
-                <mat-select value="1">
-                  <mat-option value="1">Debit &nbsp;&nbsp;10,438</mat-option>
-                  <mat-option value="2">Credit &nbsp;&nbsp;$10,438</mat-option>
-                </mat-select>
-              </mat-form-field>
+        <div class="col-12 col-md-8 mt-4 mt-md-0" id="moneyFlow">
+          <div class="col-12">
+            <div class="card theme-rounded card-dark-theme">
+              <div class="card-body p-2">
+                <canvasjs-chart [options]="chartOptions"></canvasjs-chart>
+              </div>
             </div>
+          </div>
 
-            <div>
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Enter Amount</mat-label>
-                <input class="pt-4" matInput value="$1,24" />
-              </mat-form-field>
+          <div class="col-12 mt-3">
+            <div class="card theme-rounded card-dark-theme">
+              <div class="card-body">
+                <h5 class="m-0">Recent Transactions</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody class="">
+                      <tr>
+                        <td class="text-truncate">
+                          <div class="d-flex align-items-center">
+                            <img
+                              src="img/icon-danger.png"
+                              style="width: 41.72px; height: 41.72px"
+                              alt=""
+                            />
+                            <span class="ms-3">Bitcoin Transactions</span>
+                          </div>
+                        </td>
+                        <td class="text-truncate">Jan 16, 2020</td>
+                        <td class="text-truncate">*****45246</td>
+                        <td class="text-truncate">-$853.00</td>
+                        <td>
+                          <span class="badge text-bg-success">Success</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-truncate">
+                          <div class="d-flex align-items-center">
+                            <img
+                              src="img/icon-danger.png"
+                              style="width: 41.72px; height: 41.72px"
+                              alt=""
+                            />
+                            <span class="ms-3">Sent to Antonia</span>
+                          </div>
+                        </td>
+                        <td class="text-truncate">Jan 16, 2020</td>
+                        <td class="text-truncate">*****172654</td>
+                        <td class="text-truncate">-$153.00</td>
+                        <td>
+                          <span class="badge text-bg-warning">Pending</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-truncate">
+                          <div class="d-flex align-items-center">
+                            <img
+                              src="img/icon-success.png"
+                              style="width: 41.72px; height: 41.72px"
+                              alt=""
+                            />
+                            <span class="ms-3">Withdraw to Paypal</span>
+                          </div>
+                        </td>
+                        <td class="text-truncate">Jan 16, 2020</td>
+                        <td class="text-truncate">*****23453</td>
+                        <td class="text-truncate">+$223.00</td>
+                        <td>
+                          <span class="badge text-bg-success">Success</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="col-12 mt-3" id="accountSummary">
+          <div class="card theme-rounded card-dark-theme p-2 p-md-4">
+            <h5 class="mb-5">Account Summary</h5>
 
-            <div class="d-flex justify-content-between text-light">
-              <div class="d-flex flex-column align-items-center">
-                <div class="card theme-rounded card-dark-theme">
-                  <div class="card-body p-2 px-3">
-                    <mat-icon class="text-purple">price_change</mat-icon>
+            <div class="row">
+              <div class="col-6 col-md-3 mt-4 mt-md-0">
+                <div
+                  class="card theme-rounded card-dark-theme border-linear-accent"
+                >
+                  <div class="d-flex p-2 px-md-3">
+                    <img
+                      src="img/icon-loan.png"
+                      style="width: 27.49px; height: 27.49px"
+                      alt=""
+                    />
+                    <div class="ms-md-4">
+                      <p class="m-1 text-secondary fs-12">Loan</p>
+                      <h6>$2,700</h6>
+                    </div>
                   </div>
                 </div>
-                <p class="fs-10 mt-2">Send</p>
               </div>
-              <div class="d-flex flex-column align-items-center">
-                <div class="card theme-rounded card-dark-theme">
-                  <div class="card-body p-2 px-3">
-                    <mat-icon class="text-lemon">price_change</mat-icon>
+              <div class="col-6 col-md-3 mt-4 mt-md-0">
+                <div
+                  class="card theme-rounded card-dark-theme border-linear-accent"
+                >
+                  <div class="d-flex p-2 px-md-3">
+                    <img
+                      src="img/icon-income.png"
+                      style="width: 27.49px; height: 27.49px"
+                      alt=""
+                    />
+                    <div class="ms-md-4">
+                      <p class="m-1 text-secondary fs-12">Income</p>
+                      <h6>$7,500</h6>
+                    </div>
                   </div>
                 </div>
-                <p class="fs-10 mt-2">Receive</p>
               </div>
-              <div class="d-flex flex-column align-items-center">
-                <div class="card theme-rounded card-dark-theme">
-                  <div class="card-body p-2 px-3">
-                    <mat-icon class="text-lemon">receipt_long</mat-icon>
+              <div class="col-6 col-md-3 mt-4 mt-md-0">
+                <div
+                  class="card theme-rounded card-dark-theme border-linear-accent"
+                >
+                  <div class="d-flex p-2 px-md-3">
+                    <img
+                      src="img/icon-expenses.png"
+                      style="width: 27.49px; height: 27.49px"
+                      alt=""
+                    />
+                    <div class="ms-md-4">
+                      <p class="m-1 text-secondary fs-12">Expenses</p>
+                      <h6>$20,000</h6>
+                    </div>
                   </div>
                 </div>
-                <p class="fs-10 mt-2">Invoicing</p>
               </div>
-              <div class="d-flex flex-column align-items-center">
-                <div class="card theme-rounded card-dark-theme">
-                  <div class="card-body p-2 px-3">
-                    <mat-icon class="text-lemon">widgets</mat-icon>
+              <div class="col-6 col-md-3 mt-4 mt-md-0">
+                <div
+                  class="card theme-rounded card-dark-theme border-linear-accent"
+                >
+                  <div class="d-flex p-2 px-md-3">
+                    <img
+                      src="img/icon-savings.png"
+                      style="width: 27.49px; height: 27.49px"
+                      alt=""
+                    />
+                    <div class="ms-md-4">
+                      <p class="m-1 text-secondary fs-12">Total Savings</p>
+                      <h6>$27,785</h6>
+                    </div>
                   </div>
                 </div>
-                <p class="fs-10 mt-2">More</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-6"></div>
-    <div class="col-3"></div>
+    <div class="col-12 col-md-3">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <h5 class="mb-4">Invoices Sent</h5>
+          <div class="card theme-rounded card-dark-theme">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center px-4 my-4"
+              >
+                <img src="img/icon-success.png" alt="" />
+                <div>
+                  <span class="d-block fs-14">Apple Store</span>
+                  <span class="d-block fs-12">5h Ago</span>
+                </div>
+                <div>$450</div>
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center px-4 my-4"
+              >
+                <img src="img/icon-warning.png" alt="" />
+                <div>
+                  <span class="d-block fs-14">Micheal</span>
+                  <span class="d-block fs-12">2 days Ago</span>
+                </div>
+                <div>$160</div>
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center px-4 my-4"
+              >
+                <img src="img/icon-danger.png" alt="" />
+                <div>
+                  <span class="d-block fs-14">William</span>
+                  <span class="d-block fs-12">10 days Ago</span>
+                </div>
+                <div>$90</div>
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center px-4 my-4"
+              >
+                <img src="img/icon-danger.png" alt="" />
+                <div>
+                  <span class="d-block fs-14">William</span>
+                  <span class="d-block fs-12">10 days Ago</span>
+                </div>
+                <div>$90</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mt-5">
+          <h5>Recent Contact</h5>
+          <p class="m-0 fs-12">18 Recipients</p>
+          <div class="card theme-rounded card-dark-theme">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center p-2 my-3 bg-secondary-dark theme-rounded"
+              >
+                <img
+                  src="img/icon-success.png"
+                  style="width: 41.72px; height: 41.72px"
+                  alt=""
+                />
+                <div class="text-dark">
+                  <span class="d-block fs-12">Alisha Cara</span>
+                  <span class="d-block fs-10">$420.00</span>
+                </div>
+                <div>
+                  <button class="btn btn-gradient-primary fs-10 d-inline w-100">
+                    Repeat Transaction
+                  </button>
+                </div>
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center p-2 my-3 bg-secondary-dark theme-rounded"
+              >
+                <img
+                  src="img/icon-warning.png"
+                  style="width: 41.72px; height: 41.72px"
+                  alt=""
+                />
+                <div class="text-dark">
+                  <span class="d-block fs-12">Austin Blake</span>
+                  <span class="d-block fs-10">$920.00</span>
+                </div>
+                <div>
+                  <button class="btn btn-gradient-primary fs-10 d-inline w-100">
+                    Repeat Transaction
+                  </button>
+                </div>
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center p-2 my-3 bg-secondary-dark theme-rounded"
+              >
+                <img
+                  src="img/icon-danger.png"
+                  style="width: 41.72px; height: 41.72px"
+                  alt=""
+                />
+                <div class="text-dark">
+                  <span class="d-block fs-12">Austin Blake</span>
+                  <span class="d-block fs-10">$920.00</span>
+                </div>
+                <div>
+                  <button class="btn btn-gradient-primary fs-10 d-inline w-100">
+                    Repeat Transaction
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

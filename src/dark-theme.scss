@@ -154,8 +154,8 @@ $dark-theme: mat.define-theme(
 
   color: #fff !important; // Ensures white text across all child elements
 
-  .text-dark-varient {
-    color: var(--bg-primary); // Uses a CSS variable for color
+  .text-dark-responsive {
+    color: #fff; // Uses a CSS variable for color
   }
 
   .sidenav-dark-gradient {
@@ -179,6 +179,7 @@ $dark-theme: mat.define-theme(
     ); /* Gradient with transparency */
     opacity: 0.9;
     border: 1px solid var(--bg-accent);
+    color: #fff;
   }
 
   .border-dark-linear-accent {
@@ -191,7 +192,13 @@ $dark-theme: mat.define-theme(
       1;
   }
 
-  .border-dark-linear-accent.theme-rounded {
-    border-radius: 10px;
+  .table > :not(caption) > * > * {
+    background-color: transparent !important;
+    color: #fff;
+    border: none;
+  }
+
+  .border-linear-accent {
+    border: 1px solid var(--bg-linear-accent2);
   }
 }

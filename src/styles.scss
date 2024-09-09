@@ -9,6 +9,7 @@
   --bg-dark: #1a191e;
   --bg-secondary: #a4b4cb;
   --bg-success: #2f9f93;
+  --bg-success2: #61bb84;
   --bg-white: #fff;
   --bg-light: #f5f7fa;
   --bg-aches: #718ebf;
@@ -22,6 +23,12 @@
   --bg-purple: #a789ff;
 
   --bg-lemon: #83dea4;
+  --bg-lemon-light: #ebfff3;
+
+  --bg-warning: #ffaa90;
+  --bg-warning-light: #fff1ed;
+
+  --bg-secondary-dark: #d3e1f5;
 }
 
 html,
@@ -65,8 +72,11 @@ body {
   background: linear-gradient(to right, #1565d8, #b559e9) !important;
   border: none;
   color: #fff !important;
-  padding: 15px 50px !important; /* Adjust padding as needed */
   transition: background-color 0.3s ease; /* Optional: smooth transition for background color change */
+}
+
+.btn-gradient-padding {
+  padding: 15px 50px !important; /* Adjust padding as needed */
 }
 
 .btn-gradient-primary:hover {
@@ -133,9 +143,8 @@ body {
   font-size: 12px;
 }
 
-.gradient-border {
-  border: 5px solid; /* Set border width */
-  border-image: linear-gradient(45deg, red, blue) 1;
+.fs-14 {
+  font-size: 14px;
 }
 
 .theme-rounded {
@@ -148,4 +157,30 @@ body {
 
 .text-lemon {
   color: var(--bg-lemon);
+}
+
+.badge.text-bg-success {
+  background-color: var(--bg-lemon-light) !important;
+  color: var(--bg-success2) !important;
+  font-weight: normal !important;
+}
+
+.badge.text-bg-warning {
+  background-color: var(--bg-warning-light) !important;
+  color: var(--bg-warning) !important;
+  font-weight: normal !important;
+}
+
+.bg-secondary-dark {
+  background-color: var(--bg-secondary-dark);
+}
+
+.table > :not(caption) > * > * {
+  padding-block: 10px;
+  border: none;
+  font-size: 14px;
+}
+
+.border-linear-accent {
+  border: 1px solid var(--bg-linear-accent2);
 }

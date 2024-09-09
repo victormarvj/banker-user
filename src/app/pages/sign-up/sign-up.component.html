@@ -1,9 +1,13 @@
 <section>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 col-md-6 signup-bg p-5 d-none d-md-block">
-        <a href="#" class="navbar-brand d-md-block">
+      <div class="col-12 col-md-6 signup-bg p-5 d-none d-md-block text-dark">
+        <!-- <a href="#" class="navbar-brand d-md-block">
           <img src="img/logo.png" class="logo" alt="" />
+        </a> -->
+
+        <a class="navbar-brand" href="#">
+          <h2 class="logo-text"><i>Banker.com</i></h2>
         </a>
 
         <h1 class="banking-text">Banking starts here.</h1>
@@ -149,7 +153,7 @@
                     </div>
                     <button
                       type="button"
-                      class="col-12 btn btn-gradient-primary mt-3"
+                      class="col-12 btn btn-gradient-primary btn-gradient-padding mt-3"
                       (click)="
                         goToNextPage(
                           'country',
@@ -209,7 +213,7 @@
                       </mat-form-field>
                     </div>
 
-                    <small class="text-muted">
+                    <small class="text-secondary">
                       *Password should contain atleast one uppercase, lowercase,
                       digit, symbol and minimum of 8 characters*
                     </small>
@@ -249,7 +253,7 @@
                       <div class="col-6">
                         <button
                           type="button"
-                          class="col-12 btn btn-gradient-primary"
+                          class="col-12 btn btn-gradient-primary btn-gradient-padding"
                           (click)="
                             goToNextPage(
                               'phone',
@@ -323,9 +327,11 @@
                         </p>
 
                         <ul class="condition-list">
-                          <li class="text-muted">Valid (has not expired)</li>
-                          <li class="text-muted">Clear and easy to read</li>
-                          <li class="text-muted">Can be fully captured</li>
+                          <li class="text-secondary">
+                            Valid (has not expired)
+                          </li>
+                          <li class="text-secondary">Clear and easy to read</li>
+                          <li class="text-secondary">Can be fully captured</li>
                         </ul>
 
                         <p class="text-secondary">
@@ -351,7 +357,7 @@
                         @if(isDocPreload) {
                         <button
                           type="button"
-                          class="col-12 btn btn-gradient-primary"
+                          class="col-12 btn btn-gradient-primary btn-gradient-padding"
                           (click)="toggleDocUpload()"
                           [disabled]="isLoading"
                         >
@@ -360,7 +366,7 @@
                         } @else {
                         <button
                           type="submit"
-                          class="col-12 btn btn-gradient-primary"
+                          class="col-12 btn btn-gradient-primary btn-gradient-padding"
                         >
                           Register
                         </button>

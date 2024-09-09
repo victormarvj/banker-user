@@ -8,9 +8,16 @@
       aria-labelledby="sideNavOffCanvasLabel"
     >
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sideNavOffCanvasLabel">
-          <a class="navbar-brand" href="#">
+        <h5
+          class="offcanvas-title text-dark-responsive"
+          id="sideNavOffCanvasLabel"
+        >
+          <!-- <a class="navbar-brand" href="#">
             <img src="img/logo.png" class="logo" alt="" />
+          </a> -->
+
+          <a class="navbar-brand" href="#">
+            <h2 class="logo-text"><i>Banker.com</i></h2>
           </a>
         </h5>
         <button
@@ -193,9 +200,12 @@
       class="sidebar"
       [ngClass]="{ 'sidenav-dark-gradient': theme === 'dark' }"
     >
-      <div class="py-2">
-        <a class="navbar-brand d-none d-md-inline px-4" href="#">
+      <div class="mt-4 text-center">
+        <!-- <a class="navbar-brand d-none d-md-inline px-4" href="#">
           <img src="img/logo.png" class="logo" alt="" />
+        </a> -->
+        <a class="navbar-brand d-none d-md-inline" href="#">
+          <h2 class="logo-text"><i>Banker.com</i></h2>
         </a>
       </div>
       <div
