@@ -1,0 +1,324 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt=""
+  />
+</div>
+}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12 col-md-4" id="quickTransfer">
+          <div class="row mb-4">
+            <div class="col-12">
+              <h6>My Cards</h6>
+            </div>
+          </div>
+          <div class="card-div">
+            <img
+              src="img/master-card-bg.png"
+              class="w-100 theme-rounded"
+              alt=""
+            />
+            <div class="content-text w-100 p-3">
+              <span class="balance-text text-light">Balance</span>
+              <div class="d-flex justify-content-between">
+                <h5 class="text-light">$5,756</h5>
+                <mat-icon class="text-light">contactless</mat-icon>
+              </div>
+
+              <div class="d-flex justify-content-between px-2 mt-md-3">
+                <div class="d-flex flex-column text-light">
+                  <span class="fw-light fs-12">CARD HOLDER</span>
+                  <span class="fs-12">Richard Austin</span>
+                </div>
+                <div>
+                  <div class="d-flex flex-column text-light me-3">
+                    <span class="fw-light fs-12">VALID THRU</span>
+                    <span class="fs-12">12/22</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between px-2 mt-md-3">
+                <div class="d-flex flex-column text-light">
+                  <p class="mt-2">3778 **** **** 1234</p>
+                </div>
+                <div>
+                  <img src="img/master-card-type.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-div mt-4">
+            <img
+              src="img/visa-card-bg.png"
+              class="w-100 theme-rounded"
+              alt=""
+            />
+            <div class="content-text w-100 p-3">
+              <span class="balance-text text-light">Balance</span>
+              <div class="d-flex justify-content-between">
+                <h5 class="text-light">$5,756</h5>
+                <mat-icon class="text-light">contactless</mat-icon>
+              </div>
+
+              <div class="d-flex justify-content-between px-2 mt-md-3">
+                <div class="d-flex flex-column text-light">
+                  <span class="fw-light fs-12">CARD HOLDER</span>
+                  <span class="fs-12">Richard Austin</span>
+                </div>
+                <div>
+                  <div class="d-flex flex-column text-light me-3">
+                    <span class="fw-light fs-12">VALID THRU</span>
+                    <span class="fs-12">12/22</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between px-2 mt-md-3">
+                <div class="d-flex flex-column text-light">
+                  <p class="mt-2">3778 **** **** 1234</p>
+                </div>
+                <div>
+                  <img src="img/visa-card-type.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mt-4">
+          <div class="billing-details-div mt-4">
+            <div class="card theme-rounded card-dark-theme">
+              <div class="card-body">
+                <h4>Billing Information</h4>
+
+                <div class="p-1 p-md-2 mb-3">
+                  <h5>Alisa Cara Black</h5>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <p class="fs-12">Email Address:</p>
+                      <p class="fs-12">VAT Number:</p>
+                      <p class="fs-12">Account Number:</p>
+                    </div>
+                    <div>
+                      <p class="fs-12">{{ "alisacara@gmail.com" }}</p>
+                      <p class="fs-12">FRB67389276</p>
+                      <p class="fs-12">5837465937</p>
+                    </div>
+                    <div class="d-block d-md-flex">
+                      <a
+                        routerLink="/dashboard/edit"
+                        class="fs-10 text-danger text-decoration-none fw-bold d-flex align-items-center"
+                      >
+                        <mat-icon>delete_forever</mat-icon>
+                        <span>DELETE</span>
+                      </a>
+                      <a
+                        routerLink="/dashboard/edit"
+                        class="fs-10 text-decoration-none fw-bold d-flex align-items-center ms-3 text-secondary"
+                      >
+                        <mat-icon>edit</mat-icon>
+                        <span>EDIT</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-2 mb-3">
+                  <h5>Alisa Cara Black</h5>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <p class="fs-12">Email Address:</p>
+                      <p class="fs-12">VAT Number:</p>
+                      <p class="fs-12">Account Number:</p>
+                    </div>
+                    <div>
+                      <p class="fs-12">{{ "alisacara@gmail.com" }}</p>
+                      <p class="fs-12">FRB67389276</p>
+                      <p class="fs-12">5837465937</p>
+                    </div>
+                    <div class="d-block d-md-flex">
+                      <a
+                        routerLink="/dashboard/edit"
+                        class="fs-10 text-danger text-decoration-none fw-bold d-flex align-items-center"
+                      >
+                        <mat-icon>delete_forever</mat-icon>
+                        <span>DELETE</span>
+                      </a>
+                      <a
+                        routerLink="/dashboard/edit"
+                        class="fs-10 text-decoration-none fw-bold d-flex align-items-center ms-3 text-secondary"
+                      >
+                        <mat-icon>edit</mat-icon>
+                        <span>EDIT</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mt-4 mt-md-0" id="requestCard">
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="col-12 d-flex justify-content-between">
+                <h6>Wire Transfer</h6>
+                <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center">
+                    <img src="img/master-card-type.png" alt="" />
+                    <span class="ms-2">Debit</span>
+                  </div>
+                  <div class="ms-5">
+                    <div class="d-flex align-items-center">
+                      <span>$5,756</span>
+                      <mat-icon>keyboard_arrow_down</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <div class="card theme-rounded card-dark-theme">
+                <div class="card-body">
+                  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Account Number</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          formControlName="account_number"
+                        />
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Account Name</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          formControlName="account_name"
+                        />
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Bank Name</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          formControlName="bank_name"
+                        />
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Amount</mat-label>
+                        <input
+                          matInput
+                          type="number"
+                          placeholder=""
+                          formControlName="amount"
+                        />
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Description (Optional)</mat-label>
+
+                        <textarea
+                          matInput
+                          formControlName="description"
+                        ></textarea>
+                      </mat-form-field>
+
+                      <mat-slide-toggle class="mb-3"
+                        >Save Beneficiary</mat-slide-toggle
+                      >
+                    </div>
+
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="pinModal"
+                      tabindex="-1"
+                      aria-labelledby="pinModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="pinModalLabel">
+                              Enter Transaction Pin
+                            </h1>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <div
+                              formArrayName="digits"
+                              class="code-input-container"
+                            >
+                              @for (digiti of digitsArray.controls; track
+                              $index) {
+                              <mat-form-field appearance="outline">
+                                <input
+                                  id="digit{{ $index }}"
+                                  class="code-input"
+                                  type="text"
+                                  maxlength="1"
+                                  [formControlName]="$index"
+                                  (input)="moveToNext($index, $event)"
+                                  (keydown)="moveToNext($index, $event)"
+                                  matInput
+                                />
+                              </mat-form-field>
+                              }
+                            </div>
+
+                            <button
+                              type="submit"
+                              [disabled]="isLoading || pin.length < 4"
+                              class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                              data-bs-dismiss="modal"
+                            >
+                              Confirm
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                      <div class="col-12">
+                        <button
+                          type="button"
+                          (click)="enterPin()"
+                          [disabled]="isLoading || transferForm.invalid"
+                          data-bs-toggle="modal"
+                          data-bs-target="#pinModal"
+                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                        >
+                          Transfer
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

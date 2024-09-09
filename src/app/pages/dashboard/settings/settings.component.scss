@@ -1,0 +1,14 @@
+.profile-card-div {
+  position: relative;
+
+  .edit-icon-div {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: var(--bg-accent);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+}

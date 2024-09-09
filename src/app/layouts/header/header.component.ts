@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
 import { AngularFontawesomeModule } from '../../shared/angular-fontawesome/angular-fontawesome.module';
 
@@ -24,4 +30,5 @@ export class HeaderComponent {
   faBell = faBell;
 
   @Input() theme: string = '';
+  @Input() title: string = '';
 }

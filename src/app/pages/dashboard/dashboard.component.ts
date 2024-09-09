@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AngularFontawesomeModule } from '../../shared/angular-fontawesome/angular-fontawesome.module';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
 
@@ -29,7 +29,11 @@ export class DashboardComponent implements OnInit {
 
   theme: string = '';
 
-  constructor(private router: Router, private themeService: ThemesService) {
+  constructor(
+    private router: Router,
+    private themeService: ThemesService,
+    private route: ActivatedRoute
+  ) {
     if (!this.isVerified) {
       this.router.navigate(['/identity-verification']);
     } else if (!this.isEmailVerified) {
@@ -40,6 +44,28 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.themeService.initTheme();
     this.applyTheme();
+
+    this.activeLink = this.router.url;
+    this.title = this.formatUrl(this.activeLink);
+
+    // Alternatively, if you want to listen to changes:
+    this.router.events.subscribe(() => {
+      this.activeLink = this.router.url;
+      this.title = this.formatUrl(this.activeLink);
+    });
+  }
+
+  // Function to format the URL
+  formatUrl(url: string): string {
+    // Extract the last segment of the URL
+    const segments = url.split('/');
+    const lastSegment = segments[segments.length - 1];
+
+    // Capitalize each word
+    return lastSegment
+      .split('-') // Split by hyphen or dash if present
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+      .join(' '); // Join the words with space
   }
 
   faInfoCircle = faInfoCircle;
@@ -49,16 +75,14 @@ export class DashboardComponent implements OnInit {
   isVerified: boolean = true;
   isEmailVerified = true;
 
-  activeLink: string = 'dashboard';
+  activeLink: string = '';
 
   isDarkTheme: boolean = false;
 
+  title: string = '';
+
   toggleMatSideNav() {
     this.sideNav.toggle();
-  }
-
-  setActiveLink(link: string) {
-    this.activeLink = link;
   }
 
   toggleTheme(event: any) {

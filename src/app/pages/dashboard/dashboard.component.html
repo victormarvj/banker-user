@@ -36,31 +36,69 @@
             <mat-list-item
               class="my-3"
               data-bs-dismiss="offcanvas"
-              [activated]="activeLink === 'dashboard'"
+              [activated]="activeLink === '/dashboard/home'"
             >
               <a
                 matListItemTitle
-                routerLink="/dashboard"
-                (click)="setActiveLink('dashboard')"
+                routerLink="/dashboard/home"
                 class="d-flex align-items-center nav-link nav-color"
-                [class.active]="activeLink == 'dashboard'"
+                [class.active]="activeLink == '/dashboard/home'"
               >
                 <mat-icon>home</mat-icon>
                 <span class="ms-2">Dashboard</span>
               </a>
             </mat-list-item>
 
+            <div class="dark-theme-bottom-divider">
+              <span class="ms-3 text-dark-responsive">Transfers</span>
+            </div>
+
             <mat-list-item
               class="my-3"
               data-bs-dismiss="offcanvas"
-              [activated]="activeLink === 'transactions'"
+              [activated]="activeLink === '/dashboard/domestic'"
             >
               <a
                 matListItemTitle
-                routerLink="/transactions"
-                (click)="setActiveLink('transactions')"
+                routerLink="/dashboard/domestic"
                 class="d-flex align-items-center nav-link nav-color"
-                [class.active]="activeLink == 'transactions'"
+                [class.active]="activeLink == '/dashboard/domestic'"
+              >
+                <mat-icon>assured_workload</mat-icon>
+                <span class="ms-2">Domestic</span>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item
+              class="my-3"
+              data-bs-dismiss="offcanvas"
+              [activated]="activeLink === '/dashboard/international'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/international"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/international'"
+              >
+                <mat-icon>currency_exchange</mat-icon>
+                <span class="ms-2">International</span>
+              </a>
+            </mat-list-item>
+
+            <div class="dark-theme-bottom-divider">
+              <span class="ms-3 text-dark-responsive">Extras</span>
+            </div>
+
+            <mat-list-item
+              class="my-3"
+              data-bs-dismiss="offcanvas"
+              [activated]="activeLink === '/dashboard/transactions'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/transactions"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/transactions'"
               >
                 <mat-icon>point_of_sale</mat-icon>
                 <span class="ms-2">Transactions</span>
@@ -70,16 +108,15 @@
             <mat-list-item
               class="my-3"
               data-bs-dismiss="offcanvas"
-              [activated]="activeLink === 'investments'"
+              [activated]="activeLink === '/dashboard/investments'"
             >
               <a
                 matListItemTitle
-                routerLink="/investments"
-                (click)="setActiveLink('investments')"
+                routerLink="/dashboard/investments"
                 class="d-flex align-items-center nav-link nav-color"
-                [class.active]="activeLink == 'investments'"
+                [class.active]="activeLink == '/dashboard/investments'"
               >
-                <mat-icon>currency_exchange</mat-icon>
+                <mat-icon>savings</mat-icon>
                 <span class="ms-2">Investments</span>
               </a>
             </mat-list-item>
@@ -87,14 +124,13 @@
             <mat-list-item
               class="my-3"
               data-bs-dismiss="offcanvas"
-              [activated]="activeLink === 'credit-cards'"
+              [activated]="activeLink === '/dashboard/credit-cards'"
             >
               <a
                 matListItemTitle
-                routerLink="/credit-cards"
-                (click)="setActiveLink('credit-cards')"
+                routerLink="/dashboard/credit-cards"
                 class="d-flex align-items-center nav-link nav-color"
-                [class.active]="activeLink == 'credit-cards'"
+                [class.active]="activeLink == '/dashboard/credit-cards'"
               >
                 <mat-icon>add_card</mat-icon>
                 <span class="ms-2">Credit Cards</span>
@@ -104,14 +140,13 @@
             <mat-list-item
               data-bs-dismiss="offcanvas"
               class="my-3"
-              [activated]="activeLink === 'loans'"
+              [activated]="activeLink === '/dashboard/loans'"
             >
               <a
                 matListItemTitle
-                routerLink="/loans"
-                (click)="setActiveLink('loans')"
+                routerLink="/dashboard/loans"
                 class="d-flex align-items-center nav-link nav-color"
-                [class.active]="activeLink == 'loans'"
+                [class.active]="activeLink == '/dashboard/loans'"
               >
                 <mat-icon>local_atm</mat-icon>
                 <span class="ms-2">Loans</span>
@@ -121,16 +156,31 @@
             <mat-list-item
               data-bs-dismiss="offcanvas"
               class="my-3"
-              [activated]="activeLink === 'services'"
+              [activated]="activeLink === '/dashboard/support'"
             >
               <a
                 matListItemTitle
-                routerLink="/services"
-                (click)="setActiveLink('services')"
+                routerLink="/dashboard/support"
                 class="d-flex align-items-center nav-link nav-color"
-                [class.active]="activeLink == 'services'"
+                [class.active]="activeLink == '/dashboard/support'"
               >
-                <mat-icon>handyman</mat-icon>
+                <mat-icon>support_agent</mat-icon>
+                <span class="ms-2">Support</span>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item
+              data-bs-dismiss="offcanvas"
+              class="my-3"
+              [activated]="activeLink === '/dashboard/services'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/services"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/services'"
+              >
+                <!-- <mat-icon>handyman</mat-icon> -->
                 <span class="ms-2">Services</span>
               </a>
             </mat-list-item>
@@ -138,14 +188,13 @@
             <mat-list-item
               class="my-3"
               data-bs-dismiss="offcanvas"
-              [activated]="activeLink === 'privileges'"
+              [activated]="activeLink === '/dashboard/privileges'"
             >
               <a
                 matListItemTitle
-                routerLink="/privileges"
-                (click)="setActiveLink('privileges')"
+                routerLink="/dashboard/privileges"
                 class="d-flex align-items-center nav-link nav-color"
-                [class.active]="activeLink == 'privileges'"
+                [class.active]="activeLink == '/dashboard/privileges'"
               >
                 <mat-icon>tips_and_updates</mat-icon>
                 <span class="ms-2">My Privileges</span>
@@ -155,14 +204,13 @@
             <mat-list-item
               data-bs-dismiss="offcanvas"
               class="my-3"
-              [activated]="activeLink === 'settings'"
+              [activated]="activeLink === '/dashboard/settings'"
             >
               <a
                 matListItemTitle
                 routerLink="/dashboard/settings"
-                (click)="setActiveLink('settings')"
                 class="d-flex align-items-center nav-link nav-color"
-                [class.active]="activeLink == 'settings'"
+                [class.active]="activeLink == '/dashboard/settings'"
               >
                 <mat-icon>settings</mat-icon>
                 <span class="ms-2">Settings</span>
@@ -216,26 +264,62 @@
           <mat-list-item class="my-3" [activated]="activeLink === 'dashboard'">
             <a
               matListItemTitle
-              routerLink="/dashboard"
-              (click)="setActiveLink('dashboard')"
+              routerLink="/dashboard/home"
               class="d-flex align-items-center nav-link nav-color"
-              [class.active]="activeLink == 'dashboard'"
+              [class.active]="activeLink == '/dashboard/home'"
             >
               <mat-icon>home</mat-icon>
               <span class="ms-2">Dashboard</span>
             </a>
           </mat-list-item>
 
+          <div class="dark-theme-bottom-divider">
+            <span class="ms-3">Transfers</span>
+          </div>
+
           <mat-list-item
             class="my-3"
-            [activated]="activeLink === 'transactions'"
+            [activated]="activeLink === '/dashboard/domestic'"
           >
             <a
               matListItemTitle
-              routerLink="/transactions"
-              (click)="setActiveLink('transactions')"
+              routerLink="/dashboard/domestic"
               class="d-flex align-items-center nav-link nav-color"
-              [class.active]="activeLink == 'transactions'"
+              [class.active]="activeLink == '/dashboard/domestic'"
+            >
+              <mat-icon>assured_workload</mat-icon>
+              <span class="ms-2">Domestic</span>
+            </a>
+          </mat-list-item>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/international'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/international"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/international'"
+            >
+              <mat-icon>currency_exchange</mat-icon>
+              <span class="ms-2">International</span>
+            </a>
+          </mat-list-item>
+
+          <div class="dark-theme-bottom-divider">
+            <span class="ms-3">Extras</span>
+          </div>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/transactions'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/transactions"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/transactions'"
             >
               <mat-icon>point_of_sale</mat-icon>
               <span class="ms-2">Transactions</span>
@@ -244,82 +328,103 @@
 
           <mat-list-item
             class="my-3"
-            [activated]="activeLink === 'investments'"
+            [activated]="activeLink === '/dashboard/investments'"
           >
             <a
               matListItemTitle
-              routerLink="/investments"
-              (click)="setActiveLink('investments')"
+              routerLink="/dashboard/investments"
               class="d-flex align-items-center nav-link nav-color"
-              [class.active]="activeLink == 'investments'"
+              [class.active]="activeLink == '/dashboard/investments'"
             >
-              <mat-icon>currency_exchange</mat-icon>
+              <mat-icon>savings</mat-icon>
               <span class="ms-2">Investments</span>
             </a>
           </mat-list-item>
 
           <mat-list-item
             class="my-3"
-            [activated]="activeLink === 'credit-cards'"
+            [activated]="activeLink === '/dashboard/credit-cards'"
           >
             <a
               matListItemTitle
-              routerLink="/credit-cards"
-              (click)="setActiveLink('credit-cards')"
+              routerLink="/dashboard/credit-cards"
               class="d-flex align-items-center nav-link nav-color"
-              [class.active]="activeLink == 'credit-cards'"
+              [class.active]="activeLink == '/dashboard/credit-cards'"
             >
               <mat-icon>add_card</mat-icon>
               <span class="ms-2">Credit Cards</span>
             </a>
           </mat-list-item>
 
-          <mat-list-item class="my-3" [activated]="activeLink === 'loans'">
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/loans'"
+          >
             <a
               matListItemTitle
-              routerLink="/loans"
-              (click)="setActiveLink('loans')"
+              routerLink="/dashboard/loans"
               class="d-flex align-items-center nav-link nav-color"
-              [class.active]="activeLink == 'loans'"
+              [class.active]="activeLink == '/dashboard/loans'"
             >
               <mat-icon>local_atm</mat-icon>
               <span class="ms-2">Loans</span>
             </a>
           </mat-list-item>
 
-          <mat-list-item class="my-3" [activated]="activeLink === 'services'">
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/support'"
+          >
             <a
               matListItemTitle
-              routerLink="/services"
-              (click)="setActiveLink('services')"
+              routerLink="/dashboard/support"
               class="d-flex align-items-center nav-link nav-color"
-              [class.active]="activeLink == 'services'"
+              [class.active]="activeLink == '/dashboard/support'"
+            >
+              <mat-icon>support_agent</mat-icon>
+              <span class="ms-2">Support</span>
+            </a>
+          </mat-list-item>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/services'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/services"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/services'"
             >
               <mat-icon>handyman</mat-icon>
               <span class="ms-2">Services</span>
             </a>
           </mat-list-item>
 
-          <mat-list-item class="my-3" [activated]="activeLink === 'privileges'">
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/privileges'"
+          >
             <a
               matListItemTitle
-              routerLink="/privileges"
-              (click)="setActiveLink('privileges')"
+              routerLink="/dashboard/privileges"
               class="d-flex align-items-center nav-link nav-color"
-              [class.active]="activeLink == 'privileges'"
+              [class.active]="activeLink == '/dashboard/privileges'"
             >
               <mat-icon>tips_and_updates</mat-icon>
               <span class="ms-2">My Privileges</span>
             </a>
           </mat-list-item>
 
-          <mat-list-item class="my-3" [activated]="activeLink === 'settings'">
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/settings'"
+          >
             <a
               matListItemTitle
               routerLink="/dashboard/settings"
-              (click)="setActiveLink('settings')"
               class="d-flex align-items-center nav-link nav-color"
-              [class.active]="activeLink == 'settings'"
+              [class.active]="activeLink == '/dashboard/settings'"
             >
               <mat-icon>settings</mat-icon>
               <span class="ms-2">Settings</span>
@@ -353,7 +458,7 @@
     <!-- Content Area -->
     <div class="content w-100">
       <div class="sticky-top">
-        <app-header [theme]="theme"></app-header>
+        <app-header [theme]="theme" [title]="title"></app-header>
       </div>
 
       <div class="views px-3 mt-3">

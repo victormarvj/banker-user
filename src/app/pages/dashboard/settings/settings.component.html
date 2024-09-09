@@ -1,120 +1,209 @@
-<section>
-  <div class="example-label">Basic</div>
-  <div class="example-button-row">
-    <button mat-button>Basic</button>
-    <button mat-button disabled>Disabled</button>
-    <a mat-button href="https://www.google.com/" target="_blank">Link</a>
-  </div>
-</section>
-<section>
-  <div class="example-label">Raised</div>
-  <div class="example-button-row">
-    <button mat-raised-button>Basic</button>
-    <button mat-raised-button disabled>Disabled</button>
-    <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
-  </div>
-</section>
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+  <mat-tab label="Edit Profile">
+    <ng-template matTabContent>
+      <div class="card theme-rounded card-dark-theme mt-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <div>
+                <div class="d-flex justify-content-center">
+                  <div class="profile-card-div">
+                    <img
+                      src="img/avatar-profile.png"
+                      style="width: 130px; height: 130px; border-radius: 50%"
+                      alt=""
+                    />
+                    <a class="edit-icon-div">
+                      <mat-icon class="text-light">edit</mat-icon>
+                    </a>
+                  </div>
+                </div>
+                <h5 class="text-center mt-3">Alisha Cara</h5>
+                <div class="d-flex justify-content-center">
+                  <p
+                    class="d-flex align-items-center badge bg-success px-3 py-1 rounded-pill"
+                  >
+                    <mat-icon class="text-light me-2">verified</mat-icon>
+                    <span class="fw-bold">Pro User</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-9">
+              <form action="">
+                <div class="row">
+                  <mat-form-field class="col-12 col-md-6" appearance="outline">
+                    <mat-label>Fullname</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="fullname"
+                    />
+                  </mat-form-field>
 
-<p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima qui quia, aut
-  iusto odit laboriosam ipsum voluptates molestiae voluptatibus. Architecto hic,
-  aut animi voluptates obcaecati magni dolores cupiditate tempora officiis
-  sapiente mollitia molestias asperiores pariatur nemo magnam ipsam. Quod magnam
-  debitis nihil voluptatem vitae cupiditate eaque molestiae. Error nostrum
-  veritatis, ab, dolor provident distinctio maxime illo earum adipisci tempore
-  similique? Itaque sit molestiae impedit distinctio saepe ad, libero eaque modi
-  nostrum beatae autem quia enim praesentium asperiores possimus. Atque cum
-  officia consequuntur. Perspiciatis, quisquam placeat? Doloribus, deleniti
-  pariatur reiciendis, accusantium cupiditate earum nemo laudantium, eos
-  recusandae vel ipsum? Id et a, corrupti quas atque provident! Numquam
-  repudiandae distinctio id ipsa temporibus itaque facilis, eius ducimus harum
-  modi aliquam eum odio ullam pariatur est quo deleniti tenetur. Officiis
-  laboriosam expedita neque qui ipsam fugit atque impedit enim, ipsa consequatur
-  dolor corporis saepe voluptates. Facilis explicabo provident, id possimus quae
-  voluptatum corporis impedit alias quasi exercitationem ad blanditiis amet
-  nobis vel, recusandae fugiat quam? Assumenda praesentium nobis enim, laborum
-  reiciendis sapiente. In consequuntur neque ab, suscipit cupiditate reiciendis
-  impedit aspernatur nam quis perspiciatis ad vel labore, eveniet, consequatur
-  incidunt excepturi omnis aliquam. Cupiditate voluptatibus dicta ad ex ipsum
-  vitae vel, voluptates, omnis officia odio vero et velit soluta corrupti,
-  quisquam cum quae! Doloribus at repellendus et eos, voluptates ea beatae
-  dolorem accusamus? Est suscipit fugiat aliquid. Accusantium, qui? Molestiae,
-  sapiente quaerat harum optio reprehenderit cum aut asperiores. Voluptatum
-  eveniet accusamus porro sed nihil ad asperiores cumque eum doloribus ut itaque
-  fugiat alias in, sapiente quis, a aperiam esse nisi magnam quo tempore
-  molestiae. Ut architecto non, excepturi distinctio culpa ea assumenda voluptas
-  delectus, atque nisi, doloribus voluptates laborum officiis eaque qui dolorum
-  fugiat alias exercitationem. Voluptatem perferendis, sapiente in, cupiditate
-  dolores animi quidem sed commodi ex sequi voluptas! Suscipit, alias ea? Totam
-  voluptatum minus quidem vel, minima ad aliquid maxime, molestiae quo et nulla
-  voluptatibus laudantium voluptates repellat aperiam delectus doloremque nihil
-  fugiat vitae similique officia molestias praesentium. Labore, voluptates
-  aliquam voluptatem inventore ab molestias ipsum alias nulla quae hic, animi
-  ut, libero consequatur quaerat nihil dignissimos. Praesentium ullam sequi eos
-  neque quasi error eveniet quis sunt vero quo omnis officiis dolor doloremque
-  temporibus laborum, dignissimos cum provident repellat maxime rerum accusamus!
-  Dicta optio corporis quod iusto quibusdam dolorem harum culpa temporibus alias
-  veniam nesciunt, tempore maiores? Molestiae quibusdam dolor tenetur facere,
-  quos aliquid at natus asperiores quod placeat consectetur velit? Corrupti, eum
-  accusantium! Magnam voluptatibus sed facilis aperiam ipsum expedita error
-  corrupti odio soluta corporis ullam incidunt illo totam commodi ducimus ad
-  sequi placeat eaque velit sit, dignissimos rerum vero hic architecto. Nesciunt
-  excepturi et minima in modi, assumenda culpa ex porro ipsam natus perspiciatis
-  delectus odio, recusandae fugiat ad cum blanditiis nam adipisci magni aut
-  laboriosam nisi consectetur voluptatem architecto! Repellat autem, expedita,
-  fugit veritatis et at quasi architecto pariatur corrupti cum ratione alias.
-  Sapiente eveniet rerum sequi odio dolor et dicta iure molestias, nulla id
-  numquam modi architecto harum excepturi quidem earum sed soluta alias itaque
-  assumenda cumque error nostrum iste. Veniam voluptate debitis maiores placeat
-  tempore, sequi rerum corrupti, minus esse consequuntur accusamus ducimus
-  velit? Ea, quis minus accusamus corrupti, explicabo suscipit praesentium dicta
-  facere animi quisquam vel! Quod nesciunt odit quis adipisci quibusdam minus
-  provident ex. Explicabo tenetur cum porro eaque nobis tempore iste alias ex
-  doloribus iusto obcaecati consectetur eos officia odit, neque ab qui in
-  molestias quibusdam quis. Animi optio pariatur quo! Placeat asperiores
-  mollitia error, autem rem sit molestias distinctio perferendis, quod vel
-  impedit. Adipisci cupiditate ut velit quis voluptatem corporis dicta totam
-  odio qui neque ipsum ducimus, atque veniam necessitatibus suscipit, eveniet
-  quod unde facilis sequi quia quisquam labore! Rerum, quos. Doloremque
-  perspiciatis, impedit, similique, facere quaerat a magni sit obcaecati atque
-  corporis iure et totam incidunt repudiandae. Eaque voluptatibus sapiente optio
-  veritatis minus, alias vero porro deserunt. Quos, mollitia blanditiis!
-  Laudantium quos iste ipsa, accusantium nam sequi incidunt similique obcaecati.
-  Rem hic sapiente quasi quaerat doloribus aspernatur sint deleniti enim,
-  necessitatibus sunt eveniet labore, quo iste quia porro adipisci ducimus a
-  quibusdam tenetur aliquid perferendis libero, velit est! Possimus esse tempore
-  commodi modi alias inventore corrupti dolorem ex, quod labore dignissimos fuga
-  soluta distinctio, dolore repellat. Exercitationem tempora corporis vero! Quae
-  provident earum minus consequuntur animi, nemo officiis porro modi, temporibus
-  natus adipisci corrupti iste itaque eum. Odio dignissimos alias vel debitis
-  nulla sint adipisci voluptates fugiat porro maxime laboriosam deleniti
-  possimus numquam itaque perspiciatis non, autem saepe iusto. Voluptate vitae
-  sit illum molestias, ex consectetur, voluptatem, quo blanditiis sint assumenda
-  recusandae officia optio hic quaerat. Sint animi quaerat voluptatem placeat
-  molestiae porro, reprehenderit necessitatibus. Eligendi sunt dolores mollitia
-  minus dolorum, quis perferendis eaque laborum eius soluta eum quo totam
-  reprehenderit impedit ipsam labore fuga, fugiat possimus ex corrupti.
-  Quibusdam reiciendis neque quaerat consequatur molestiae, sequi dolorum illo
-  adipisci quam? Sint, distinctio eligendi vel necessitatibus maxime et illo
-  corporis, voluptas, dolorum vitae quidem tenetur? Ex labore quo iste nam iusto
-  libero eveniet esse, minus asperiores magni excepturi autem distinctio sint,
-  nesciunt dolor quae ratione quam atque voluptates itaque quis aperiam
-  accusamus? Nesciunt autem minima eligendi minus enim laudantium recusandae?
-  Inventore exercitationem, excepturi debitis nam fugit laudantium quia.
-  Voluptatum sunt consequatur accusamus voluptas possimus dignissimos
-  perferendis enim tempore, id molestias doloremque magni, amet a. Ea, et! Amet
-  perferendis eligendi quod necessitatibus blanditiis nihil omnis impedit!
-  Impedit ad officia quibusdam! Eius eaque praesentium dolorum nesciunt incidunt
-  numquam error et, illum repudiandae explicabo porro libero eligendi officia
-  soluta magnam, perspiciatis tempore commodi reprehenderit nostrum rerum iste
-  iusto laboriosam aliquam amet. Dignissimos nam explicabo corporis, pariatur
-  suscipit illum reiciendis dolorem cum dolor temporibus. Vitae officia neque
-  doloribus laborum aliquam sit natus voluptates incidunt qui modi commodi,
-  obcaecati atque distinctio deserunt cupiditate non, aperiam animi ducimus
-  nihil accusamus in harum autem est repellat. Placeat, similique voluptates
-  perferendis, reiciendis voluptatem dolorum mollitia adipisci autem rem
-  architecto error facere eveniet tempora! Recusandae eos, vitae consequatur,
-  sint voluptates omnis aut non sunt et assumenda quos accusamus debitis tempora
-  molestias cupiditate accusantium esse nihil ea, quo maiores pariatur dolorum
-  placeat? Exercitationem.
-</p>
+                  <mat-form-field class="col-12 col-md-6" appearance="outline">
+                    <mat-label>Phone Number</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="number"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="col-12 col-md-6" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input
+                      matInput
+                      type="email"
+                      placeholder=""
+                      formControlName="email"
+                      readonly=""
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="col-12 col-md-6" appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="city"
+                      readonly=""
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="col-12 col-md-6" appearance="outline">
+                    <mat-label>Date of Birht</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="dob"
+                      readonly=""
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="col-12 col-md-6" appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="country"
+                      readonly=""
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="col-12 col-md-6" appearance="outline">
+                    <mat-label>Permanent Address</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="address"
+                      readonly=""
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="col-12 col-md-6" appearance="outline">
+                    <mat-label>Postal Code</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder=""
+                      formControlName="postal_code"
+                      readonly=""
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="row justify-content-end">
+                  <div class="col-3">
+                    <button
+                      class="btn btn-gradient-primary w-100 btn-gradient-padding"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Preferences">
+    <ng-template matTabContent>
+      <div class="card theme-rounded card-dark-theme mt-4">
+        <div class="card-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <mat-progress-bar mode="buffer" class="mb-3"></mat-progress-bar>
+              </div>
+              <div class="col-12 col-md-6">
+                <img
+                  src="img/coming-soon3.png"
+                  style="width: 300px; height: 300px"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Security">
+    <ng-template matTabContent>
+      <div class="card theme-rounded card-dark-theme mt-4">
+        <div class="card-body">
+          <form action="">
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field class="col-12" appearance="outline">
+                  <mat-label>Current Password</mat-label>
+                  <input
+                    matInput
+                    type="password"
+                    placeholder=""
+                    formControlName="old_password"
+                  />
+                </mat-form-field>
+
+                <mat-form-field class="col-12" appearance="outline">
+                  <mat-label>New Password</mat-label>
+                  <input
+                    matInput
+                    type="password"
+                    placeholder=""
+                    formControlName="password"
+                  />
+                </mat-form-field>
+
+                <mat-form-field class="col-12" appearance="outline">
+                  <mat-label>Confirm Password</mat-label>
+                  <input
+                    matInput
+                    type="password"
+                    placeholder=""
+                    formControlName="password_confirmation"
+                  />
+                </mat-form-field>
+
+                <button
+                  class="btn btn-gradient-primary w-100 btn-gradient-padding"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

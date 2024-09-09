@@ -165,6 +165,12 @@ body {
   font-weight: normal !important;
 }
 
+.badge.bg-success {
+  background-color: var(--bg-success) !important;
+  color: var(--bg-light) !important;
+  font-weight: normal !important;
+}
+
 .badge.text-bg-warning {
   background-color: var(--bg-warning-light) !important;
   color: var(--bg-warning) !important;
@@ -183,4 +189,8 @@ body {
 
 .border-linear-accent {
   border: 1px solid var(--bg-linear-accent2);
+}
+
+.hover:hover {
+  background-color: var(--bg-secondary-dark);
 }
