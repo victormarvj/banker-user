@@ -1,7 +1,7 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CountriesService } from '../../services/countries.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SnackBarComponent } from '../../components/snack-bar/snack-bar.component';
 import {
   FormControl,
@@ -10,17 +10,28 @@ import {
   Validators,
 } from '@angular/forms';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
-import { FileUploadComponent } from '../../components/file-upload/file-upload.component';
 import { PageNumberComponent } from './page-number/page-number.component';
+import { FrontImageUploadComponent } from '../../components/front-image-upload/front-image-upload.component';
+import { BackImageUploadComponent } from '../../components/back-image-upload/back-image-upload.component';
+import { FileUploadComponent } from '../../components/file-upload/file-upload.component';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
+import { SnackBarService } from '../../services/snack-bar.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
   imports: [
     AngularMaterialModule,
-    FileUploadComponent,
     ReactiveFormsModule,
     PageNumberComponent,
+    FrontImageUploadComponent,
+    BackImageUploadComponent,
+    FileUploadComponent,
+    AsyncPipe,
+    RouterModule,
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
@@ -29,8 +40,6 @@ export class SignUpComponent {
   @ViewChild('pageMenu') pageMenu!: ElementRef;
   @ViewChild('passwordInput') passwordInput!: ElementRef;
   @ViewChild('confirmPasswordInput') confirmPasswordInput!: ElementRef;
-
-  _snackBar = inject(MatSnackBar);
 
   signupHeading: string = 'Register Individual Account';
   signupSubHeading: string =
@@ -43,6 +52,9 @@ export class SignUpComponent {
   active: number = 1;
 
   countries: any[] = [];
+  currencies: any[] = [];
+  filteredCountries!: Observable<any[]>;
+  filteredCurrencies!: Observable<any[]>;
 
   passwordVisible: boolean = false;
 
@@ -52,6 +64,8 @@ export class SignUpComponent {
 
   constructor(
     private countryService: CountriesService,
+    private userService: UserService,
+    private snackBarService: SnackBarService,
     private router: Router
   ) {}
 
@@ -64,19 +78,71 @@ export class SignUpComponent {
     this.countryService.getCountries().subscribe({
       next: (data) => {
         this.countries = data;
+
+        // Extract a list of currencies from the country data
+        this.currencies = this.extractCurrencies(data);
+
         this.preloader = false;
+
+        // Setup the filter logic after countries are loaded
+        this.filteredCountries = this.signupForm
+          .get('country')!
+          .valueChanges.pipe(
+            startWith(''),
+            map((value: any) => this._filterCountries(value || ''))
+          );
+
+        // Setup the filter logic after countries are loaded
+        this.filteredCurrencies = this.signupForm
+          .get('currency')!
+          .valueChanges.pipe(
+            startWith(''),
+            map((value: any) => this._filterCountriesCurrency(value || ''))
+          );
       },
-      error: (error) => {
-        console.log(error);
-        this._snackBar.openFromComponent(SnackBarComponent, {
-          data: {
-            message: error.error.message,
-            color: 'danger',
-          },
-          duration: 5000,
-        });
+      error: (err) => {
+        this.snackBarService.error('failed to load countries');
       },
     });
+  }
+
+  private _filterCountries(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.countries.filter((country) =>
+      country.name.common.toLowerCase().includes(filterValue)
+    );
+  }
+
+  private _filterCountriesCurrency(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.currencies.filter(
+      (currency) =>
+        currency.name.toLowerCase().includes(filterValue) ||
+        currency.symbol.toLowerCase().includes(filterValue)
+    );
+  }
+
+  private extractCurrencies(countries: any[]): any[] {
+    let currenciesArray: any[] = [];
+    countries.forEach((country) => {
+      if (country.currencies) {
+        Object.keys(country.currencies).forEach((currencyKey) => {
+          currenciesArray.push({
+            name: country.currencies[currencyKey].name,
+            symbol: country.currencies[currencyKey].symbol,
+            code: currencyKey,
+            country: country.name.common,
+            flag: country.flags.svg,
+          });
+        });
+      }
+    });
+    return currenciesArray;
+  }
+
+  // Function to get the keys of the currencies object for each country
+  getCurrencyKeys(country: any): string[] {
+    return Object.keys(country.currencies || {});
   }
 
   togglePasswordVisibility() {
@@ -104,22 +170,14 @@ export class SignUpComponent {
             this.confirmPasswordInput.nativeElement.value
           ) {
             isValid = false;
-            this._snackBar.openFromComponent(SnackBarComponent, {
-              duration: 5 * 1000,
-              data: {
-                message: 'Password do not match. Please confirm password!',
-                color: 'danger',
-              },
-            });
+            this.snackBarService.error(
+              'Password do not match. Please confirm password!'
+            );
           } else if (this.passwordInput.nativeElement.value.length < 8) {
             isValid = false;
-            this._snackBar.openFromComponent(SnackBarComponent, {
-              duration: 5 * 1000,
-              data: {
-                message: 'Password must be at least 8 characters',
-                color: 'danger',
-              },
-            });
+            this.snackBarService.error(
+              'Password must be at least 8 characters'
+            );
           }
         }
 
@@ -198,15 +256,36 @@ export class SignUpComponent {
     password: new FormControl([], Validators.required),
     password_confirmation: new FormControl(''),
     doc_type: new FormControl([], Validators.required),
-    image: new FormControl([], Validators.required),
-    video: new FormControl([], Validators.required),
+    front_doc: new FormControl([], Validators.required),
+    back_doc: new FormControl([], Validators.required),
   });
 
-  areControlsValid(...controls: []) {
-    console.log(controls);
+  submitForm() {
+    if (this.signupForm.valid) {
+      this.isLoading = true;
+      const formData = this.signupForm.value;
+      this.userService.registerUser(formData).subscribe({
+        next: (res) => {
+          this.isLoading = false;
+          this.snackBarService.success(res.message);
+          this.router.navigate(['/signin']);
+        },
+        error: (err) => {
+          console.log(err);
+          this.isLoading = false;
+          this.snackBarService.error(err.error.error);
+        },
+      });
+    } else {
+      this.snackBarService.error('Invalid form inputs');
+    }
   }
 
-  submitForm() {
-    this.router.navigate(['/verify-email']);
+  onImageUpload(imageType: string, url: any) {
+    if (imageType === 'front') {
+      this.signupForm.patchValue({ front_doc: url });
+    } else if (imageType === 'back') {
+      this.signupForm.patchValue({ back_doc: url });
+    }
   }
 }

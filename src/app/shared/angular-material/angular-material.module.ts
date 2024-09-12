@@ -15,6 +15,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [],
@@ -34,6 +35,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatMenuModule,
     MatCardModule,
     MatTabsModule,
+    MatAutocompleteModule,
   ],
 })
 export class AngularMaterialModule {}

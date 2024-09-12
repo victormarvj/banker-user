@@ -1,0 +1,26 @@
+<div class="file-upload">
+  <!-- Image Upload -->
+  <div class="image-upload">
+    <label for="frontImageInput" class="image-upload-label">
+      <input
+        name="front_img"
+        type="file"
+        id="frontImageInput"
+        accept="image/*"
+        (change)="frontImageSelected($event)"
+        hidden
+      />
+      @if(frontImagePreview) {
+      <div class="image-preview">
+        <img [src]="frontImagePreview" alt="Image Preview" />
+      </div>
+      }@else {
+
+      <div class="upload-button">
+        <mat-icon>cloud_upload</mat-icon>
+        <span>Upload Image</span>
+      </div>
+      }
+    </label>
+  </div>
+</div>

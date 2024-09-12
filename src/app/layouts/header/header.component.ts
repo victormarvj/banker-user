@@ -10,7 +10,9 @@ import { AngularFontawesomeModule } from '../../shared/angular-fontawesome/angul
 
 import { faBell, faCog, faBars } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 @Component({
   selector: 'app-header',
@@ -24,11 +26,29 @@ import { RouterModule } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   faBars = faBars;
   faCog = faCog;
   faBell = faBell;
 
   @Input() theme: string = '';
   @Input() title: string = '';
+
+  userData: any;
+
+  constructor(
+    private userService: UserService,
+    private snackBarService: SnackBarService
+  ) {}
+
+  ngOnInit(): void {
+    this.userData = this.userService.getAuthenticatedUserStorage;
+  }
+
+  logOut() {
+    this.userService.logOut().subscribe((res) => {
+      this.userService.revokeAuthStorage();
+      this.snackBarService.success(res.message);
+    });
+  }
 }

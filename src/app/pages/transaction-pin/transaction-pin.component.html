@@ -1,0 +1,52 @@
+<section>
+  <div class="container mt-5 p-3">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-4">
+        <h4>Create a Transaction Pin</h4>
+
+        <p class="text-secondary">
+          Please enter a transaction pin for authorizing your transactions.
+        </p>
+
+        <div class="mt-5">
+          <p>{{ titleText }}</p>
+
+          <form #otpForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="code-input-container">
+              @for (digit of digits; track $index){
+              <mat-form-field appearance="outline">
+                <input
+                  id="digit{{ $index }}"
+                  class="code-input"
+                  type="password"
+                  maxlength="1"
+                  name="otp{{ $index }}"
+                  [(ngModel)]="digits[$index]"
+                  (input)="moveToNext($index, $event)"
+                  (keydown)="moveToNext($index, $event)"
+                  matInput
+                />
+              </mat-form-field>
+              }
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <p>
+                <a routerLink="/signin" class="text-primary">Logout</a>
+              </p>
+            </div>
+
+            <button
+              #submitBtn
+              class="btn btn-gradient-primary btn-gradient-padding mt-5 col-12"
+              type="submit"
+              [disabled]="transactionPinForm.invalid"
+            >
+              {{ buttonText }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

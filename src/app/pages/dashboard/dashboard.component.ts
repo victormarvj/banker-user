@@ -9,6 +9,8 @@ import { HeaderComponent } from '../../layouts/header/header.component';
 import { FooterComponent } from '../../layouts/footer/footer.component';
 import { ThemesService } from '../../services/themes.service';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,17 +31,15 @@ export class DashboardComponent implements OnInit {
 
   theme: string = '';
 
+  userData: any;
+  isLoading = false;
+
   constructor(
     private router: Router,
     private themeService: ThemesService,
-    private route: ActivatedRoute
-  ) {
-    if (!this.isVerified) {
-      this.router.navigate(['/identity-verification']);
-    } else if (!this.isEmailVerified) {
-      this.router.navigate(['/verify-email']);
-    }
-  }
+    private userService: UserService,
+    private snackBarService: SnackBarService
+  ) {}
 
   ngOnInit(): void {
     this.themeService.initTheme();
@@ -47,6 +47,25 @@ export class DashboardComponent implements OnInit {
 
     this.activeLink = this.router.url;
     this.title = this.formatUrl(this.activeLink);
+
+    this.userService.getUserDetails().subscribe({
+      next: (res) => {
+        this.userService.updateUserSignal(res.user);
+        this.userData = this.userService.getAuthenticatedUserStorage;
+      },
+      error: (err) => {
+        console.log(err);
+        this.snackBarService.error(err.error);
+      },
+    });
+
+    if (!this.isVerified) {
+      this.router.navigate(['/identity-verification']);
+    } else if (!this.isEmailVerified) {
+      this.router.navigate(['/verify-email']);
+    } else if (!this.isPinCreated) {
+      this.router.navigate(['/transaction-pin']);
+    }
 
     // Alternatively, if you want to listen to changes:
     this.router.events.subscribe(() => {
@@ -74,6 +93,7 @@ export class DashboardComponent implements OnInit {
 
   isVerified: boolean = true;
   isEmailVerified = true;
+  isPinCreated = true;
 
   activeLink: string = '';
 

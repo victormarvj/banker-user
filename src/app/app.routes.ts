@@ -16,6 +16,7 @@ import { PrivilegesComponent } from './pages/dashboard/privileges/privileges.com
 import { DomesticComponent } from './pages/dashboard/domestic/domestic.component';
 import { InternationalComponent } from './pages/dashboard/international/international.component';
 import { SupportComponent } from './pages/dashboard/support/support.component';
+import { TransactionPinComponent } from './pages/transaction-pin/transaction-pin.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,11 @@ export const routes: Routes = [
     path: 'verify-email',
     component: VerifyEmailComponent,
     title: 'Verify Email | Banker.com',
+  },
+  {
+    path: 'transaction-pin',
+    component: TransactionPinComponent,
+    title: 'Transaction Pin | Banker.com',
   },
   {
     path: 'identity-verification',

@@ -1,3 +1,14 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt=""
+  />
+</div>
+}
+
 <section>
   <div class="container-fluid">
     <div class="row">
@@ -81,8 +92,15 @@
                     <div class="row">
                       <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Country</mat-label>
-                        <mat-select formControlName="country">
-                          @for (country of countries; track $index) {
+                        <input
+                          type="text"
+                          matInput
+                          formControlName="country"
+                          [matAutocomplete]="auto"
+                        />
+                        <mat-autocomplete #auto="matAutocomplete">
+                          @for (country of filteredCountries | async; track
+                          $index) {
                           <mat-option [value]="country.name.common"
                             ><img
                               src="{{ country.flags.svg }}"
@@ -91,7 +109,7 @@
                             />{{ country.name.common }}</mat-option
                           >
                           }
-                        </mat-select>
+                        </mat-autocomplete>
                       </mat-form-field>
                     </div>
                     <div class="row">
@@ -154,16 +172,7 @@
                     <button
                       type="button"
                       class="col-12 btn btn-gradient-primary btn-gradient-padding mt-3"
-                      (click)="
-                        goToNextPage(
-                          'country',
-                          'firstname',
-                          'lastname',
-                          'gender',
-                          'dob',
-                          'email'
-                        )
-                      "
+                      (click)="goToNextPage()"
                     >
                       Next
                     </button>
@@ -183,13 +192,29 @@
                     </div>
 
                     <div class="row">
+                      <!-- Currency Autocomplete -->
                       <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Currency</mat-label>
-                        <mat-select formControlName="currency">
-                          <mat-option value="usd">USD</mat-option>
-                          <mat-option value="eur">EUR</mat-option>
-                          <mat-option value="pound">POUND</mat-option>
-                        </mat-select>
+                        <input
+                          type="text"
+                          matInput
+                          formControlName="currency"
+                          [matAutocomplete]="currencyAuto"
+                        />
+                        <mat-autocomplete #currencyAuto="matAutocomplete">
+                          @for (currency of filteredCurrencies | async; track
+                          $index) {
+                          <mat-option [value]="currency.symbol">
+                            <img
+                              src="{{ currency.flag }}"
+                              class="icon-good me-2"
+                              alt="{{ currency.country }} flag image"
+                            />
+                            {{ currency.name }} ({{ currency.code }} -
+                            {{ currency.symbol }})
+                          </mat-option>
+                          }
+                        </mat-autocomplete>
                       </mat-form-field>
                     </div>
                     <div class="row">
@@ -254,14 +279,7 @@
                         <button
                           type="button"
                           class="col-12 btn btn-gradient-primary btn-gradient-padding"
-                          (click)="
-                            goToNextPage(
-                              'phone',
-                              'currency',
-                              'password',
-                              'password_confirmation'
-                            )
-                          "
+                          (click)="goToNextPage()"
                           [disabled]="currentPage === pageCount"
                         >
                           Next
@@ -287,9 +305,14 @@
                             class="me-5"
                             alt=""
                           />
-                          <span
+                          <!-- <span
                             >Record a short video of your face. We use this to
                             match to your photo ID.</span
+                          > -->
+                          <span
+                            >Take a picture of the back of the photo ID. We
+                            might need informations present for furthor
+                            verification</span
                           >
                         </div>
 
@@ -316,7 +339,25 @@
 
                         <div class="row">
                           <div class="col-12">
-                            <app-file-upload></app-file-upload>
+                            <span>Front Document</span>
+                            <app-front-image-upload
+                              [imageType]="'front'"
+                              (onFrontImageUpload)="
+                                onImageUpload('front', $event)
+                              "
+                            ></app-front-image-upload>
+                          </div>
+                        </div>
+
+                        <div class="row mt-4">
+                          <div class="col-12">
+                            <span>Back Document</span>
+                            <app-back-image-upload
+                              [imageType]="'back'"
+                              (onBackImageUpload)="
+                                onImageUpload('back', $event)
+                              "
+                            ></app-back-image-upload>
                           </div>
                         </div>
 
@@ -378,6 +419,13 @@
               </div>
               }
             </form>
+
+            <div class="text-center mt-3">
+              <p>
+                Already have an Account?
+                <a routerLink="/signin" class="text-decoration-none">Sign In</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
