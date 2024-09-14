@@ -52,20 +52,20 @@ export class DashboardComponent implements OnInit {
       next: (res) => {
         this.userService.updateUserSignal(res.user);
         this.userData = this.userService.getAuthenticatedUserStorage;
+
+        if (this.userData.email_verified_at === null) {
+          this.router.navigate(['/verify-email']);
+        } else if (this.userData.pin === null) {
+          this.router.navigate(['/transaction-pin']);
+        } else if (this.userData.is_verified === 0) {
+          this.router.navigate(['/identity-verification']);
+        }
       },
       error: (err) => {
         console.log(err);
         this.snackBarService.error(err.error);
       },
     });
-
-    if (!this.isVerified) {
-      this.router.navigate(['/identity-verification']);
-    } else if (!this.isEmailVerified) {
-      this.router.navigate(['/verify-email']);
-    } else if (!this.isPinCreated) {
-      this.router.navigate(['/transaction-pin']);
-    }
 
     // Alternatively, if you want to listen to changes:
     this.router.events.subscribe(() => {
@@ -90,10 +90,6 @@ export class DashboardComponent implements OnInit {
   faInfoCircle = faInfoCircle;
 
   sideNavOpened: boolean = true;
-
-  isVerified: boolean = true;
-  isEmailVerified = true;
-  isPinCreated = true;
 
   activeLink: string = '';
 

@@ -21,12 +21,14 @@
           <p>This should only take a few minutes...</p>
         </div>
 
-        <a
-          routerLink="/signin"
+        <a routerLink="/dashboard">Confirm Verification</a>
+
+        <button
+          (click)="logOut()"
           class="btn btn-gradient-primary btn-gradient-padding mt-5 col-12"
         >
           Log Out
-        </a>
+        </button>
       </div>
     </div>
   </div>

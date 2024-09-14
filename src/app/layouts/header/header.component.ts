@@ -47,8 +47,8 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.userService.logOut().subscribe((res) => {
-      this.userService.revokeAuthStorage();
       this.snackBarService.success(res.message);
     });
+    this.userService.revokeAuthStorage();
   }
 }

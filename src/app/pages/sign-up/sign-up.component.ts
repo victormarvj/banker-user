@@ -268,7 +268,10 @@ export class SignUpComponent {
         next: (res) => {
           this.isLoading = false;
           this.snackBarService.success(res.message);
-          this.router.navigate(['/signin']);
+          this.userService.revokeAuthStorage();
+          setTimeout(() => {
+            this.router.navigate(['/signin']);
+          }, 1000);
         },
         error: (err) => {
           console.log(err);

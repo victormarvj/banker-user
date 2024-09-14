@@ -3,6 +3,8 @@ import { AngularMaterialModule } from '../../../shared/angular-material/angular-
 import { AngularChartsModule } from '../../../shared/angular-charts/angular-charts.module';
 import { ThemesService } from '../../../services/themes.service';
 import { text } from 'stream/consumers';
+import { UserService } from '../../../services/user.service';
+import { SnackBarService } from '../../../services/snack-bar.service';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +17,36 @@ export class HomeComponent implements OnInit {
   theme: string = '';
   color: string = '';
 
-  constructor(private themeService: ThemesService) {}
+  userData: any;
+  masterCardNo: string = '';
+  masterCardExpiry: string = '';
+
+  isLoading: boolean = false;
+
+  constructor(
+    private themeService: ThemesService,
+    private userService: UserService,
+    private snackBarService: SnackBarService
+  ) {}
 
   ngOnInit(): void {
     this.themeService.initTheme();
     this.applyTheme();
+
+    this.isLoading = true;
+    this.userService.getUserDetails().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        console.log(res.user);
+        this.userService.updateUserSignal(res.user);
+        this.userData = this.userService.getAuthenticatedUserStorage;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error);
+      },
+    });
   }
 
   applyTheme() {

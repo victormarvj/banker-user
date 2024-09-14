@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 @Component({
   selector: 'app-transaction-pin',
@@ -15,7 +17,7 @@ import { Router } from '@angular/router';
   templateUrl: './transaction-pin.component.html',
   styleUrl: './transaction-pin.component.scss',
 })
-export class TransactionPinComponent {
+export class TransactionPinComponent implements OnInit {
   @ViewChild('submitBtn') submitBtn!: ElementRef<HTMLButtonElement>;
 
   transactionPinForm: FormGroup;
@@ -28,7 +30,14 @@ export class TransactionPinComponent {
   pin1: string = ''; // First PIN entered by the user
   pin2: string = ''; // Second PIN entered by the user (confirmation)
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  isLoading = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private userService: UserService,
+    private snackBarService: SnackBarService
+  ) {
     // Initialize the form with a single control for the combined PIN code
     this.transactionPinForm = this.fb.group({
       pin: [
@@ -120,7 +129,7 @@ export class TransactionPinComponent {
       if (this.pin2.length === 4) {
         if (this.pin1 !== this.pin2) {
           // PINs don't match, reset and start over
-          alert('PINs do not match. Please try again.');
+          this.snackBarService.error('PINs do not match. Please try again.');
           this.transactionPinForm.reset();
           this.pin1 = '';
           this.pin2 = '';
@@ -143,13 +152,38 @@ export class TransactionPinComponent {
   onSubmit() {
     if (this.transactionPinForm.valid) {
       // Handle successful form submission
-      console.log(
-        'Form submitted with PIN:',
-        this.transactionPinForm.get('pin')?.value
-      );
-      this.router.navigate(['/dashboard']);
+
+      const formData = this.transactionPinForm.value;
+      this.isLoading = true;
+      this.userService.setTransactionPin(formData).subscribe({
+        next: (res) => {
+          this.isLoading = false;
+          this.snackBarService.success(res.message);
+
+          this.userService.updateUserSignal(res.user);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log(err);
+          this.snackBarService.error(err.error.error);
+        },
+      });
     } else {
       console.log('Invalid form');
     }
+  }
+
+  userData: any;
+
+  ngOnInit(): void {
+    this.userData = this.userService.getAuthenticatedUserStorage;
+  }
+
+  logOut() {
+    this.userService.logOut().subscribe((res) => {
+      this.snackBarService.success(res.message);
+    });
+    this.userService.revokeAuthStorage();
   }
 }

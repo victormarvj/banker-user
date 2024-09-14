@@ -5,8 +5,8 @@
         <h4>Confirm your Email Address</h4>
 
         <p class="text-secondary">
-          We sent a verification code to {{ "name@domain.com" }}. Please enter
-          the code below within the next 10 min.
+          We sent a verification code to {{ email || "name@domain.com" }}.
+          Please enter the code below within the next 10 min.
         </p>
 
         <div class="mt-5">

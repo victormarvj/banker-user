@@ -46,9 +46,9 @@ export class SignInComponent implements OnInit {
         this.userService.login(formData).subscribe({
           next: (res) => {
             // console.log(res);
-            this.userService.setUserSignal(res).subscribe(() => {
-              this.userService.isAuthUserSignal();
-            });
+            this.userService.setUserSignal(res);
+
+            this.userService.isAuthUserSignal();
             this.router.navigate(['/dashboard']);
           },
           error: (err) => {

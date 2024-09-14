@@ -35,6 +35,24 @@ export class UserService {
     return this.http.get(`${this.apiUrl}/user`, { withCredentials: true });
   }
 
+  verifyEmail(formData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/verify-email`, formData, {
+      withCredentials: true,
+    });
+  }
+
+  resendVerificationEmail(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/resend-verify-email`, {
+      withCredentials: true,
+    });
+  }
+
+  setTransactionPin(formData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/set-transaction-pin`, formData, {
+      withCredentials: true,
+    });
+  }
+
   logOut(): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/user/logout`, {
       withCredentials: true,
@@ -58,7 +76,7 @@ export class UserService {
   }
 
   // Set user details with expiry (1 day)
-  setUserSignal(response: any): Observable<any> {
+  setUserSignal(response: any) {
     const expiryDate = new Date().getTime() + 24 * 60 * 60 * 1000; // 1 day in milliseconds
     let user = response.user;
 
@@ -98,8 +116,24 @@ export class UserService {
     }
   }
 
-  updateUserSignal(user: any) {
-    this.$userSignal.set(user);
+  updateUserSignal(updatedUser: any) {
+    if (this.isBrowser()) {
+      const storedUser = localStorage.getItem('bankerUser');
+
+      if (storedUser) {
+        // Parse the stored object from localStorage
+        let userDetails = JSON.parse(storedUser);
+
+        // Update the user data without affecting token and expiry
+        userDetails.user = updatedUser;
+
+        // Save the updated object back to localStorage
+        localStorage.setItem('bankerUser', JSON.stringify(userDetails));
+
+        // Update the signal with the new user data
+        this.$userSignal.set(updatedUser);
+      }
+    }
   }
 
   // Get user details and check for expiry

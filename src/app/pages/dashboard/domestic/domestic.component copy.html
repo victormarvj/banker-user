@@ -43,9 +43,9 @@
                   <div class="d-flex flex-column text-light me-3">
                     <span class="fw-light fs-12">VALID THRU</span>
                     @if (userData?.master_card_expiry !== null) {
-                    <span class="fs-12">{{
-                      userData?.master_card_expiry
-                    }}</span>
+                    <span class="fs-12"
+                      >{{ userData?.master_card_expiry }}</span
+                    >
                     }@else {
                     <span class="fs-12">**/**</span>
                     }
@@ -56,11 +56,8 @@
                 <div class="d-flex flex-column text-light">
                   @if (userData?.master_card !== null) {
                   <p class="mt-2">
-                    {{
-                      userData?.master_card.substring(0, 4) +
-                        "**** ****" +
-                        userData?.master_card.substring(-4)
-                    }}
+                    {{ userData?.master_card.substring(0, 4) + "**** ****" +
+                    userData?.master_card.substring(-4) }}
                   </p>
                   }@else {
                   <p class="mt-2">**** **** **** ****</p>
@@ -108,11 +105,8 @@
                 <div class="d-flex flex-column text-light">
                   @if (userData?.visa_card !== null) {
                   <p class="mt-2">
-                    {{
-                      userData?.visa_card.substring(0, 4) +
-                        "**** ****" +
-                        userData?.visa_card.substring(-4)
-                    }}
+                    {{ userData?.visa_card.substring(0, 4) + "**** ****" +
+                    userData?.visa_card.substring(-4) }}
                   </p>
                   }@else {
                   <p class="mt-2">**** **** **** ****</p>
@@ -220,11 +214,7 @@
             <div class="col-12 mt-3">
               <div class="card theme-rounded card-dark-theme">
                 <div class="card-body">
-                  <form
-                    [formGroup]="transferForm"
-                    (ngSubmit)="onSubmit()"
-                    (keydown.enter)="$event.preventDefault()"
-                  >
+                  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
                     <div class="row">
                       <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Account Number</mat-label>
@@ -260,9 +250,9 @@
                           (optionSelected)="setSwiftCode($event)"
                         >
                           @for (bank of filteredBanks | async; track $index) {
-                          <mat-option [value]="bank">{{
-                            bank.bank_name
-                          }}</mat-option>
+                          <mat-option [value]="bank"
+                            >{{ bank.bank_name }}</mat-option
+                          >
                           }
                         </mat-autocomplete>
                       </mat-form-field>
@@ -349,7 +339,7 @@
                               type="button"
                               [disabled]="isLoading || pin.length < 4"
                               class="btn w-100 btn-gradient-primary btn-gradient-padding"
-                              (click)="checkPin()"
+                              data-bs-dismiss="modal"
                             >
                               Confirm
                             </button>
@@ -359,7 +349,6 @@
                     </div>
 
                     <button
-                      type="button"
                       #openModal
                       data-bs-toggle="modal"
                       data-bs-target="#otpModal"
@@ -396,6 +385,7 @@
                               An OTP has been sent to your enter. Please enter
                               OTP
                             </p>
+                            <p>Expires in: {{ this.counter }}</p>
                             <mat-form-field class="col-12" appearance="outline">
                               <mat-label>OTP Code</mat-label>
                               <input
@@ -412,6 +402,7 @@
                               type="submit"
                               [disabled]="isLoading"
                               class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                              data-bs-dismiss="modal"
                             >
                               Confirm
                             </button>

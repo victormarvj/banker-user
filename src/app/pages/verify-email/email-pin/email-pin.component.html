@@ -1,3 +1,14 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt=""
+  />
+</div>
+}
+
 <form #otpForm="ngForm" (ngSubmit)="onSubmit()">
   <div class="code-input-container">
     @for (digit of digits; track $index){
@@ -19,11 +30,23 @@
 
   <div class="d-flex justify-content-between">
     <p>
-      didn’t recieve any code? <a href="#" class="text-primary">Resend Code</a>
+      didn’t recieve any code? @if(canResend) {
+      <button
+        type="button"
+        mat-button
+        [disabled]="!canResend"
+        (click)="resendVerificationEmail()"
+        class="text-primary"
+      >
+        Resend Code
+      </button>
+      }@else {
+      <span class="ms-2">{{ counter }}</span>
+      }
     </p>
 
     <p>
-      <a routerLink="/signin" class="text-primary">Logout</a>
+      <a (click)="logOut()" class="text-primary">Logout</a>
     </p>
   </div>
 

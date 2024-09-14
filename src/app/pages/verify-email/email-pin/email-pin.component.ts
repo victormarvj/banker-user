@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material.module';
 import { Router } from '@angular/router';
+import { SnackBarService } from '../../../services/snack-bar.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-email-pin',
@@ -15,14 +17,18 @@ import { Router } from '@angular/router';
   templateUrl: './email-pin.component.html',
   styleUrl: './email-pin.component.scss',
 })
-export class EmailPinComponent {
+export class EmailPinComponent implements OnDestroy {
   verificationForm: FormGroup;
   digits: string[] = ['', '', '', '', '', ''];
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    // Initialize the form with a single control for the combined code
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private snackBarService: SnackBarService,
+    private userService: UserService
+  ) {
     this.verificationForm = this.fb.group({
-      verificationCode: [
+      email_pin: [
         '',
         [
           Validators.required,
@@ -34,7 +40,6 @@ export class EmailPinComponent {
     });
   }
 
-  // Move focus to the next input field after entering a digit or handle backspace
   moveToNext(index: number, event: KeyboardEvent | Event) {
     const input = event.target as HTMLInputElement;
 
@@ -76,19 +81,90 @@ export class EmailPinComponent {
     this.updateVerificationCode();
   }
 
-  // Update the combined verification code in the form control
   updateVerificationCode() {
     const code = this.digits.join('');
-    this.verificationForm.patchValue({ verificationCode: code });
+    this.verificationForm.patchValue({ email_pin: code });
   }
 
   onSubmit() {
     if (this.verificationForm.valid) {
-      const code = this.verificationForm.get('verificationCode')?.value;
+      // const code = this.verificationForm.get('verificationCode')?.value;
 
-      this.router.navigate(['/dashboard']);
+      const formData = this.verificationForm.value;
+
+      this.isLoading = true;
+      this.userService.verifyEmail(formData).subscribe({
+        next: (res) => {
+          this.isLoading = false;
+          this.snackBarService.success(res.message);
+
+          this.userService.updateUserSignal(res.user);
+
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          console.log(err);
+          this.snackBarService.error(err.error.error);
+          this.isLoading = false;
+        },
+      });
     } else {
       console.log('Invalid code');
+    }
+  }
+
+  canResend: boolean = true;
+  counter: number = 30;
+  interval: any;
+
+  isLoading = false;
+
+  setCanResend() {
+    this.canResend = false;
+    this.counter = 30;
+
+    this.interval = setInterval(() => {
+      if (this.counter > 0) {
+        this.counter--;
+      }
+
+      if (this.counter === 0) {
+        clearInterval(this.interval);
+        this.canResend = true;
+        console.log('Timer completed, you can resend now.');
+      }
+    }, 1000);
+  }
+
+  resendVerificationEmail() {
+    this.isLoading = true;
+    this.userService.resendVerificationEmail().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.snackBarService.success(
+          'Verification email sent. Please check your mail.'
+        );
+        this.setCanResend();
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.canResend = true;
+      },
+    });
+  }
+
+  logOut() {
+    this.userService.logOut().subscribe((res) => {
+      this.snackBarService.success(res.message);
+    });
+    this.userService.revokeAuthStorage();
+  }
+
+  ngOnDestroy(): void {
+    // Stop the resend timer if the component is destroyed
+    if (this.interval) {
+      clearInterval(this.interval);
     }
   }
 }

@@ -1,3 +1,14 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt=""
+  />
+</div>
+}
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-md-9">
@@ -17,25 +28,43 @@
             <div class="content-text w-100 p-3">
               <span class="balance-text text-light">Balance</span>
               <div class="d-flex justify-content-between">
-                <h5 class="text-light">$5,756</h5>
+                <h5 class="text-light">
+                  {{ userData?.currency }} {{ userData?.account_balance }}
+                </h5>
                 <mat-icon class="text-light">contactless</mat-icon>
               </div>
 
               <div class="d-flex justify-content-between px-2">
                 <div class="d-flex flex-column text-light">
                   <span class="fw-light fs-12">CARD HOLDER</span>
-                  <span class="fs-12">Richard Austin</span>
+                  <span class="fs-12">{{ userData?.fullname }}</span>
                 </div>
                 <div>
                   <div class="d-flex flex-column text-light me-3">
                     <span class="fw-light fs-12">VALID THRU</span>
-                    <span class="fs-12">12/22</span>
+                    @if (userData?.master_card_expiry !== null) {
+                    <span class="fs-12">{{
+                      userData?.master_card_expiry
+                    }}</span>
+                    }@else {
+                    <span class="fs-12">**/**</span>
+                    }
                   </div>
                 </div>
               </div>
               <div class="d-flex justify-content-between px-2">
                 <div class="d-flex flex-column text-light">
-                  <p class="mt-2">3778 **** **** 1234</p>
+                  @if (userData?.master_card !== null) {
+                  <p class="mt-2">
+                    {{
+                      userData?.master_card.substring(0, 4) +
+                        "**** ****" +
+                        userData?.master_card.substring(-4)
+                    }}
+                  </p>
+                  }@else {
+                  <p class="mt-2">**** **** **** ****</p>
+                  }
                 </div>
                 <div>
                   <img src="img/master-card-type.png" alt="" />
@@ -55,10 +84,14 @@
                     </span>
                     <mat-select value="1" class="py-3">
                       <mat-option value="1"
-                        >Debit &nbsp;&nbsp;10,438</mat-option
+                        >Debit &nbsp;&nbsp;{{
+                          userData?.currency + userData?.account_balance
+                        }}</mat-option
                       >
                       <mat-option value="2"
-                        >Credit &nbsp;&nbsp;$10,438</mat-option
+                        >Credit &nbsp;&nbsp;{{
+                          userData?.currency + userData?.account_balance
+                        }}</mat-option
                       >
                     </mat-select>
                   </mat-form-field>
@@ -67,7 +100,12 @@
                 <div class="my-3">
                   <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Enter Amount</mat-label>
-                    <input class="pt-5" matInput value="$1,24" />
+                    <input
+                      type="number"
+                      class="pt-5"
+                      matInput
+                      placeholder="0.00"
+                    />
                   </mat-form-field>
                 </div>
 
@@ -212,7 +250,7 @@
                     />
                     <div class="ms-md-4">
                       <p class="m-1 text-secondary fs-12">Loan</p>
-                      <h6>$2,700</h6>
+                      <h6>{{ userData?.currency }}0.00</h6>
                     </div>
                   </div>
                 </div>
@@ -229,7 +267,7 @@
                     />
                     <div class="ms-md-4">
                       <p class="m-1 text-secondary fs-12">Income</p>
-                      <h6>$7,500</h6>
+                      <h6>{{ userData?.currency }}0.00</h6>
                     </div>
                   </div>
                 </div>
@@ -246,7 +284,7 @@
                     />
                     <div class="ms-md-4">
                       <p class="m-1 text-secondary fs-12">Expenses</p>
-                      <h6>$20,000</h6>
+                      <h6>{{ userData?.currency }}0.00</h6>
                     </div>
                   </div>
                 </div>
@@ -263,7 +301,7 @@
                     />
                     <div class="ms-md-4">
                       <p class="m-1 text-secondary fs-12">Total Savings</p>
-                      <h6>$27,785</h6>
+                      <h6>{{ userData?.currency }}0.00</h6>
                     </div>
                   </div>
                 </div>

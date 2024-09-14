@@ -172,7 +172,16 @@
                     <button
                       type="button"
                       class="col-12 btn btn-gradient-primary btn-gradient-padding mt-3"
-                      (click)="goToNextPage()"
+                      (click)="
+                        goToNextPage(
+                          'country',
+                          'firstname',
+                          'lastname',
+                          'gender',
+                          'dob',
+                          'email'
+                        )
+                      "
                     >
                       Next
                     </button>
@@ -279,7 +288,14 @@
                         <button
                           type="button"
                           class="col-12 btn btn-gradient-primary btn-gradient-padding"
-                          (click)="goToNextPage()"
+                          (click)="
+                            goToNextPage(
+                              'phone',
+                              'curreny',
+                              'password',
+                              'password_confirmation'
+                            )
+                          "
                           [disabled]="currentPage === pageCount"
                         >
                           Next
