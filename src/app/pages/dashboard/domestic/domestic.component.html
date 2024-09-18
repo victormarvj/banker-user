@@ -29,7 +29,7 @@
               <span class="balance-text text-light">Balance</span>
               <div class="d-flex justify-content-between">
                 <h5 class="text-light">
-                  {{ userData?.currency }} {{ userData?.account_balance }}
+                  {{ userData?.currency }} {{ userData?.display_balance }}
                 </h5>
                 <mat-icon class="text-light">contactless</mat-icon>
               </div>
@@ -83,7 +83,7 @@
               <span class="balance-text text-light">Balance</span>
               <div class="d-flex justify-content-between">
                 <h5 class="text-light">
-                  {{ userData?.currency }} {{ userData?.account_balance }}
+                  {{ userData?.currency }} {{ userData?.display_balance }}
                 </h5>
                 <mat-icon class="text-light">contactless</mat-icon>
               </div>
@@ -233,8 +233,16 @@
                           type="text"
                           placeholder=""
                           formControlName="account_number"
+                          (input)="checkAccountNumber($event)"
                         />
                       </mat-form-field>
+                      @if (transferForm.get('account_number')?.touched &&
+                      transferForm.get('account_number')?.hasError('notDomestic'))
+                      {
+                      <small class="text-danger mb-2"
+                        >Account is not a domestic account</small
+                      >
+                      }
 
                       <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Account Name</mat-label>
@@ -243,6 +251,7 @@
                           type="text"
                           placeholder=""
                           formControlName="account_name"
+                          readonly=""
                         />
                       </mat-form-field>
 
@@ -252,41 +261,39 @@
                           type="text"
                           matInput
                           formControlName="bank_name"
-                          [matAutocomplete]="auto"
-                        />
-                        <mat-autocomplete
-                          #auto="matAutocomplete"
-                          [displayWith]="displayFn"
-                          (optionSelected)="setSwiftCode($event)"
-                        >
-                          @for (bank of filteredBanks | async; track $index) {
-                          <mat-option [value]="bank">{{
-                            bank.bank_name
-                          }}</mat-option>
-                          }
-                        </mat-autocomplete>
-                      </mat-form-field>
-
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>Swift Code</mat-label>
-                        <input
-                          matInput
-                          type="text"
-                          placeholder=""
                           readonly=""
-                          formControlName="swift_code"
                         />
                       </mat-form-field>
 
+                      <p>Available Balance: {{ userData?.display_balance }}</p>
                       <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Amount</mat-label>
                         <input
+                          min="0"
                           matInput
                           type="number"
                           placeholder=""
                           formControlName="amount"
+                          (input)="checkBalance($event)"
                         />
                       </mat-form-field>
+                      @if (transferForm.get('amount')?.touched &&
+                      transferForm.get('amount')?.hasError('insufficientBalance'))
+                      {
+                      <small class="text-danger mb-2"
+                        >Insufficient balance</small
+                      >
+                      } @if (transferForm.get('amount')?.touched &&
+                      transferForm.get('amount')?.hasError('transferLimit')) {
+                      <small class="text-danger mb-2"
+                        >Amount exceeds transfer limit</small
+                      >
+                      } @if (transferForm.get('amount')?.touched &&
+                      transferForm.get('amount')?.hasError('accountMinimum')) {
+                      <small class="text-danger mb-2"
+                        >Amount is below the minimum required</small
+                      >
+                      }
 
                       <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Description (Optional)</mat-label>
@@ -297,7 +304,9 @@
                         ></textarea>
                       </mat-form-field>
 
-                      <mat-slide-toggle class="mb-3"
+                      <mat-slide-toggle
+                        class="mb-3"
+                        formControlName="save_beneficiary"
                         >Save Beneficiary</mat-slide-toggle
                       >
                     </div>
@@ -409,11 +418,13 @@
                             </mat-form-field>
 
                             <button
-                              type="submit"
+                              (click)="checkOtp()"
+                              #otpBtn
+                              type="button"
                               [disabled]="isLoading"
                               class="btn w-100 btn-gradient-primary btn-gradient-padding"
                             >
-                              Confirm
+                              Confirm OTP
                             </button>
                           </div>
                         </div>
@@ -434,6 +445,8 @@
                         </button>
                       </div>
                     </div>
+
+                    {{ transferForm.value | json }}
                   </form>
                 </div>
               </div>

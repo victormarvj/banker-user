@@ -7,6 +7,7 @@ export const environment = {
 
 // export const environment = {
 //   production: true,
-//   apiUrl: 'http://localhost:8000/api',  // Example environment variable
-//   appVersion: '1.0.0'
+//   apiUrl: 'https://backend.novatrustcapital.com/api', // Example environment variable
+//   appVersion: '1.0.0',
+//   csrfUrl: 'https://backend.novatrustcapital.com/sanctum/csrf-cookie',
 // };

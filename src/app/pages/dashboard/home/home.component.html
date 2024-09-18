@@ -29,7 +29,7 @@
               <span class="balance-text text-light">Balance</span>
               <div class="d-flex justify-content-between">
                 <h5 class="text-light">
-                  {{ userData?.currency }} {{ userData?.account_balance }}
+                  {{ userData?.currency }} {{ userData?.display_balance }}
                 </h5>
                 <mat-icon class="text-light">contactless</mat-icon>
               </div>
@@ -85,12 +85,12 @@
                     <mat-select value="1" class="py-3">
                       <mat-option value="1"
                         >Debit &nbsp;&nbsp;{{
-                          userData?.currency + userData?.account_balance
+                          userData?.currency + userData?.display_balance
                         }}</mat-option
                       >
                       <mat-option value="2"
                         >Credit &nbsp;&nbsp;{{
-                          userData?.currency + userData?.account_balance
+                          userData?.currency + userData?.display_balance
                         }}</mat-option
                       >
                     </mat-select>

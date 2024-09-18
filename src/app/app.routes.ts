@@ -17,6 +17,7 @@ import { DomesticComponent } from './pages/dashboard/domestic/domestic.component
 import { InternationalComponent } from './pages/dashboard/international/international.component';
 import { SupportComponent } from './pages/dashboard/support/support.component';
 import { TransactionPinComponent } from './pages/transaction-pin/transaction-pin.component';
+import { TestComponent } from './pages/test/test.component';
 
 export const routes: Routes = [
   {
@@ -119,5 +120,9 @@ export const routes: Routes = [
         title: 'Settings | Banker.com',
       },
     ],
+  },
+  {
+    path: 'test',
+    component: TestComponent,
   },
 ];

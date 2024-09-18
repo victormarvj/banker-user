@@ -53,6 +53,18 @@ export class UserService {
     });
   }
 
+  updateProfile(formData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/update-profile`, formData, {
+      withCredentials: true,
+    });
+  }
+
+  changePassword(formData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/change-password`, formData, {
+      withCredentials: true,
+    });
+  }
+
   logOut(): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/user/logout`, {
       withCredentials: true,

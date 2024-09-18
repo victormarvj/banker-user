@@ -12,6 +12,8 @@ import { SnackBarService } from '../../services/snack-bar.service';
 })
 export class BackImageUploadComponent {
   backImagePreview: string | ArrayBuffer | null = null;
+  uploadProgress: number = 0;
+  interval: any;
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -31,18 +33,41 @@ export class BackImageUploadComponent {
       reader.readAsDataURL(file);
 
       const formData = new FormData();
-
       formData.append('image', file);
+      this.uploadProgress = 0;
 
       this.fileUploadService.uploadImage(formData).subscribe({
         next: (res) => {
-          this.onBackImageUpload.emit(res.url);
-          this.snackBarService.success('Document back uploaded');
+          // Start the interval to increment the progress bar
+          this.interval = setInterval(() => {
+            this.uploadProgress += 20;
+
+            if (this.uploadProgress >= 100) {
+              this.uploadProgress = 100; // Ensure it caps at 100
+              this.clearUploadProgressInterval();
+              this.onBackImageUpload.emit(res.url);
+              this.snackBarService.success('Document front uploaded');
+            }
+          }, 500); // Increment every 1 second
         },
         error: (err) => {
           this.snackBarService.error(err);
+          this.clearUploadProgressInterval(); // Clear interval on error
         },
       });
     }
+  }
+
+  // Clear the interval function
+  clearUploadProgressInterval() {
+    if (this.interval) {
+      clearInterval(this.interval);
+      this.interval = null;
+    }
+  }
+
+  // Cleanup interval when component is destroyed
+  ngOnDestroy(): void {
+    this.clearUploadProgressInterval();
   }
 }

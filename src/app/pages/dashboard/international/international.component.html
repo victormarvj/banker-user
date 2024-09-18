@@ -1,3 +1,14 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt=""
+  />
+</div>
+}
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -17,25 +28,43 @@
             <div class="content-text w-100 p-3">
               <span class="balance-text text-light">Balance</span>
               <div class="d-flex justify-content-between">
-                <h5 class="text-light">$5,756</h5>
+                <h5 class="text-light">
+                  {{ userData?.currency }} {{ userData?.display_balance }}
+                </h5>
                 <mat-icon class="text-light">contactless</mat-icon>
               </div>
 
               <div class="d-flex justify-content-between px-2 mt-md-3">
                 <div class="d-flex flex-column text-light">
                   <span class="fw-light fs-12">CARD HOLDER</span>
-                  <span class="fs-12">Richard Austin</span>
+                  <span class="fs-12">{{ userData?.fullname }}</span>
                 </div>
                 <div>
                   <div class="d-flex flex-column text-light me-3">
                     <span class="fw-light fs-12">VALID THRU</span>
-                    <span class="fs-12">12/22</span>
+                    @if (userData?.master_card_expiry !== null) {
+                    <span class="fs-12">{{
+                      userData?.master_card_expiry
+                    }}</span>
+                    }@else {
+                    <span class="fs-12">**/**</span>
+                    }
                   </div>
                 </div>
               </div>
               <div class="d-flex justify-content-between px-2 mt-md-3">
                 <div class="d-flex flex-column text-light">
-                  <p class="mt-2">3778 **** **** 1234</p>
+                  @if (userData?.master_card !== null) {
+                  <p class="mt-2">
+                    {{
+                      userData?.master_card.substring(0, 4) +
+                        "**** ****" +
+                        userData?.master_card.substring(-4)
+                    }}
+                  </p>
+                  }@else {
+                  <p class="mt-2">**** **** **** ****</p>
+                  }
                 </div>
                 <div>
                   <img src="img/master-card-type.png" alt="" />
@@ -53,100 +82,44 @@
             <div class="content-text w-100 p-3">
               <span class="balance-text text-light">Balance</span>
               <div class="d-flex justify-content-between">
-                <h5 class="text-light">$5,756</h5>
+                <h5 class="text-light">
+                  {{ userData?.currency }} {{ userData?.display_balance }}
+                </h5>
                 <mat-icon class="text-light">contactless</mat-icon>
               </div>
 
               <div class="d-flex justify-content-between px-2 mt-md-3">
                 <div class="d-flex flex-column text-light">
                   <span class="fw-light fs-12">CARD HOLDER</span>
-                  <span class="fs-12">Richard Austin</span>
+                  <span class="fs-12">{{ userData?.fullname }}</span>
                 </div>
                 <div>
                   <div class="d-flex flex-column text-light me-3">
                     <span class="fw-light fs-12">VALID THRU</span>
-                    <span class="fs-12">12/22</span>
+                    @if (userData?.visa_card_expiry !== null) {
+                    <span class="fs-12">{{ userData?.visa_card_expiry }}</span>
+                    }@else {
+                    <span class="fs-12">**/**</span>
+                    }
                   </div>
                 </div>
               </div>
               <div class="d-flex justify-content-between px-2 mt-md-3">
                 <div class="d-flex flex-column text-light">
-                  <p class="mt-2">3778 **** **** 1234</p>
+                  @if (userData?.visa_card !== null) {
+                  <p class="mt-2">
+                    {{
+                      userData?.visa_card.substring(0, 4) +
+                        "**** ****" +
+                        userData?.visa_card.substring(-4)
+                    }}
+                  </p>
+                  }@else {
+                  <p class="mt-2">**** **** **** ****</p>
+                  }
                 </div>
                 <div>
                   <img src="img/visa-card-type.png" alt="" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="billing-details-div mt-4">
-            <div class="card theme-rounded card-dark-theme">
-              <div class="card-body">
-                <h4>Billing Information</h4>
-
-                <div class="p-1 p-md-2 mb-3">
-                  <h5>Alisa Cara Black</h5>
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <p class="fs-12">Email Address:</p>
-                      <p class="fs-12">VAT Number:</p>
-                      <p class="fs-12">Account Number:</p>
-                    </div>
-                    <div>
-                      <p class="fs-12">{{ "alisacara@gmail.com" }}</p>
-                      <p class="fs-12">FRB67389276</p>
-                      <p class="fs-12">5837465937</p>
-                    </div>
-                    <div class="d-block d-md-flex">
-                      <a
-                        routerLink="/dashboard/edit"
-                        class="fs-10 text-danger text-decoration-none fw-bold d-flex align-items-center"
-                      >
-                        <mat-icon>delete_forever</mat-icon>
-                        <span>DELETE</span>
-                      </a>
-                      <a
-                        routerLink="/dashboard/edit"
-                        class="fs-10 text-decoration-none fw-bold d-flex align-items-center ms-3 text-secondary"
-                      >
-                        <mat-icon>edit</mat-icon>
-                        <span>EDIT</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="p-2 mb-3">
-                  <h5>Alisa Cara Black</h5>
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <p class="fs-12">Email Address:</p>
-                      <p class="fs-12">VAT Number:</p>
-                      <p class="fs-12">Account Number:</p>
-                    </div>
-                    <div>
-                      <p class="fs-12">{{ "alisacara@gmail.com" }}</p>
-                      <p class="fs-12">FRB67389276</p>
-                      <p class="fs-12">5837465937</p>
-                    </div>
-                    <div class="d-block d-md-flex">
-                      <a
-                        routerLink="/dashboard/edit"
-                        class="fs-10 text-danger text-decoration-none fw-bold d-flex align-items-center"
-                      >
-                        <mat-icon>delete_forever</mat-icon>
-                        <span>DELETE</span>
-                      </a>
-                      <a
-                        routerLink="/dashboard/edit"
-                        class="fs-10 text-decoration-none fw-bold d-flex align-items-center ms-3 text-secondary"
-                      >
-                        <mat-icon>edit</mat-icon>
-                        <span>EDIT</span>
-                      </a>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -207,10 +180,23 @@
                         appearance="outline"
                       >
                         <mat-label>Bank Name</mat-label>
-                        <mat-select formControlName="bank_name">
-                          <mat-option value="0">Zenith</mat-option>
-                          <mat-option value="1">First Bank</mat-option>
-                        </mat-select>
+                        <input
+                          type="text"
+                          matInput
+                          formControlName="bank_name"
+                          [matAutocomplete]="auto"
+                        />
+                        <mat-autocomplete
+                          #auto="matAutocomplete"
+                          [displayWith]="displayFn"
+                          (optionSelected)="setSwiftCode($event)"
+                        >
+                          @for (bank of filteredBanks | async; track $index) {
+                          <mat-option [value]="bank">{{
+                            bank.bank_name
+                          }}</mat-option>
+                          }
+                        </mat-autocomplete>
                       </mat-form-field>
 
                       <mat-form-field
@@ -222,6 +208,7 @@
                           matInput
                           type="text"
                           placeholder=""
+                          readonly=""
                           formControlName="swift_code"
                         />
                       </mat-form-field>
@@ -320,10 +307,10 @@
                             </div>
 
                             <button
-                              type="submit"
+                              type="button"
                               [disabled]="isLoading || pin.length < 4"
                               class="btn w-100 btn-gradient-primary btn-gradient-padding"
-                              data-bs-dismiss="modal"
+                              (click)="checkPin()"
                             >
                               Confirm
                             </button>
@@ -332,14 +319,77 @@
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      #openModal
+                      data-bs-toggle="modal"
+                      data-bs-target="#otpModal"
+                      style="visibility: hidden"
+                    >
+                      OpenOtpModal
+                    </button>
+
+                    <!-- OTP Modal -->
+                    <div
+                      class="modal fade"
+                      id="otpModal"
+                      tabindex="-1"
+                      aria-labelledby="otpModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="otpModalLabel">
+                              Enter Transaction OTP
+                            </h1>
+
+                            <button
+                              #closeModal
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                              An OTP has been sent to your enter. Please enter
+                              OTP
+                            </p>
+                            <mat-form-field class="col-12" appearance="outline">
+                              <mat-label>OTP Code</mat-label>
+                              <input
+                                (input)="setOTPValue($event)"
+                                matInput
+                                type="number"
+                                placeholder="OTP Code"
+                                minlength="6"
+                                maxlength="6"
+                              />
+                            </mat-form-field>
+
+                            <button
+                              type="submit"
+                              [disabled]="isLoading"
+                              class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                            >
+                              Confirm
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                      <div class="col-12">
                         <button
                           type="button"
+                          (click)="enterPin()"
                           [disabled]="isLoading || transferForm.invalid"
-                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
                           data-bs-toggle="modal"
                           data-bs-target="#pinModal"
+                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
                         >
                           Transfer
                         </button>

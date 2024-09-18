@@ -34,19 +34,17 @@ import { map, Observable, startWith } from 'rxjs';
 export class DomesticComponent implements OnInit {
   @ViewChild('openModal') open!: ElementRef;
   @ViewChild('closeModal') close!: ElementRef;
+  @ViewChild('otpBtn') otpBtn!: ElementRef;
 
   transferForm: FormGroup;
   isLoading: boolean = false;
 
   pinCount = 4;
+  otpCount = 4;
   pin: string = '';
   otp: string = '';
 
   userData: any;
-
-  banks: any;
-  filteredBanks!: Observable<any[]>;
-  swiftCode: string = 'jsjdfl';
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -63,53 +61,6 @@ export class DomesticComponent implements OnInit {
         this.snackBarService.error(err.error);
       },
     });
-
-    this.getBanks();
-  }
-
-  getBanks() {
-    this.isLoading = true;
-    this.transferService.getBanks().subscribe({
-      next: (res) => {
-        this.isLoading = false;
-        this.banks = res.banks;
-
-        // Listen to form control value changes
-        this.filteredBanks = this.transferForm
-          .get('bank_name')!
-          .valueChanges.pipe(
-            startWith(''),
-            map((value: any) => {
-              return typeof value === 'string'
-                ? this._filterBanks(value)
-                : this.banks;
-            })
-          );
-      },
-      error: (err) => {
-        this.isLoading = false;
-        console.log(err);
-        this.snackBarService.error(err.error.error);
-      },
-    });
-  }
-
-  // Filter banks by name
-  private _filterBanks(value: string): any[] {
-    const filterValue = value.toLowerCase();
-    return this.banks.filter((bank: any) =>
-      bank.bank_name.toLowerCase().includes(filterValue)
-    );
-  }
-
-  // Display function to show the name in the input field after selection
-  displayFn(bank: any): string {
-    return bank && bank.bank_name ? bank.bank_name : '';
-  }
-
-  setSwiftCode($event: any) {
-    const swift_code = $event.option.value.swift_code;
-    this.transferForm.get('swift_code')?.patchValue(swift_code);
   }
 
   constructor(
@@ -122,9 +73,9 @@ export class DomesticComponent implements OnInit {
       account_number: ['', Validators.required],
       account_name: ['', Validators.required],
       bank_name: ['', Validators.required],
-      swift_code: ['', Validators.required],
       amount: ['', Validators.required],
       description: [''],
+      save_beneficiary: [false],
       pin: [''],
       digits: this.fb.array(this.createDigitsArray()),
     });
@@ -197,7 +148,53 @@ export class DomesticComponent implements OnInit {
 
   setOTPValue(event: any) {
     this.otp = event.target.value; // Correct way to access the input value
-    console.log(this.otp); // Logs the entered OTP value
+  }
+
+  checkOtp() {
+    // Ensure the form is valid before proceeding
+    if (this.transferForm.valid) {
+      this.otpCount--; // Decrement the OTP count
+
+      // Check if the entered OTP is correct
+      if (this.otp != this.userData?.otp) {
+        this.otp = '';
+
+        // Display an error message with remaining tries
+        this.snackBarService.error(
+          `Incorrect OTP. ${this.otpCount} tries remaining`
+        );
+
+        // If no tries are remaining, reset the form and reload the page
+        if (this.otpCount === 0) {
+          this.transferForm.reset(); // Reset the form
+
+          // Reset the OTP button to initial state
+          this.otpBtn.nativeElement.innerHTML = 'Confirm OTP';
+          this.otpBtn.nativeElement.type = 'button'; // Ensure button is not submit
+
+          // Optionally show a message before reload
+          this.snackBarService.error('No OTP attempts remaining. Reloading...');
+
+          // Reload the page after a brief delay (optional)
+          setTimeout(() => {
+            location.reload(); // Force the page to reload
+          }, 2000); // Delay the reload to show the message (optional)
+        }
+      } else {
+        // If OTP is correct, change the button to confirm the transaction
+        this.otpBtn.nativeElement.innerHTML = 'Continue Transaction';
+        this.otpBtn.nativeElement.type = 'submit'; // Set button to submit
+        this.snackBarService.success(
+          'OTP Verified! Proceeding to transaction.'
+        );
+
+        // Optionally disable the button to prevent further OTP entry
+        this.otpBtn.nativeElement.disabled = true;
+      }
+    } else {
+      console.log('Form is not valid');
+      this.snackBarService.error('Invalid Form');
+    }
   }
 
   checkPin() {
@@ -242,21 +239,57 @@ export class DomesticComponent implements OnInit {
     }
   }
 
+  checkBalance(event: any) {
+    const inputAmount = event.target.value;
+    const balance = this.userData?.account_balance;
+    const transfer_limit = this.userData?.transfer_limit;
+    const account_minimum = this.userData?.account_minimum;
+
+    const amountControl = this.transferForm.get('amount');
+
+    if (balance === 0 || inputAmount > balance) {
+      amountControl?.markAllAsTouched();
+      amountControl?.setErrors({ insufficientBalance: true });
+    } else if (inputAmount > transfer_limit) {
+      amountControl?.markAllAsTouched();
+      amountControl?.setErrors({ transferLimit: true });
+    } else if (inputAmount < account_minimum) {
+      amountControl?.markAllAsTouched();
+      amountControl?.setErrors({ accountMinimum: true });
+    } else {
+      amountControl?.setErrors(null);
+    }
+  }
+
+  checkAccountNumber(event: any) {
+    const account_number = event.target.value;
+    if (account_number.length === 10) {
+      let formData = {
+        account_no: account_number,
+      };
+      this.isLoading = true;
+      this.transferService.checkAccountNumber(formData).subscribe({
+        next: (res) => {
+          this.isLoading = false;
+          this.transferForm
+            .get('account_name')
+            ?.setValue(res.receiver.fullname);
+          this.transferForm.get('bank_name')?.setValue(res.receiver.bank_name);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log(err);
+          const accountNumberControl = this.transferForm.get('account_number');
+          accountNumberControl?.markAllAsTouched();
+          accountNumberControl?.setErrors({ notDomestic: true });
+          this.snackBarService.error(err.error.error);
+        },
+      });
+    }
+  }
+
   onSubmit() {
     if (this.transferForm.valid) {
-      if (this.otp != this.userData.otp) {
-        this.otp = '';
-        this.snackBarService.error('Invalid OTP Code. Try Again');
-      } else {
-        const selectedBankId = this.transferForm.get('bank_name')!.value.id;
-
-        this.transferForm.patchValue({
-          bank_name: selectedBankId,
-        });
-
-        const formData = this.transferForm.value;
-        console.log(formData);
-      }
     } else {
       console.log('Invalid form');
     }

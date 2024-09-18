@@ -17,9 +17,19 @@ export class TransferService {
   }
 
   getOTP(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/user/get-otp`, {
+    return this.http.post(`${this.apiUrl}/user/transfer/get-otp`, {
       withCredentials: true,
     });
+  }
+
+  checkAccountNumber(formData: any): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/user/transfer/check-account-number`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   transferDomestic(formData: any): Observable<any> {
