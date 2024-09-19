@@ -1,0 +1,72 @@
+<div
+  class="modal fade show"
+  id="transactionModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="transactionModalLabel"
+  aria-hidden="true"
+  style="display: block"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Transaction Receipt</h5>
+      </div>
+
+      <div class="modal-body receipt-container">
+        @if (isLoading) {
+        <div class="spinner">
+          <img
+            src="img/spinner.png"
+            class="rotating-img"
+            style="width: 50px; height: 50px"
+            alt=""
+          />
+        </div>
+        }@else {
+        <div>
+          <div class="receipt-item">
+            <strong>Transaction ID:</strong> {{ transaction.transaction_id }}
+          </div>
+          <div class="receipt-item">
+            <strong>Transfer Type:</strong>
+            {{ transaction.transfer_type === 0 ? "Domestic" : "International" }}
+          </div>
+          <div class="receipt-item">
+            <strong>Transaction Status:</strong>
+
+            @if (transaction.status === 0) {
+            <span class="badge text-bg-warning">Pending</span>
+            }@else if (transaction.status === 1) {
+            <span class="badge text-bg-success">Success</span>
+            }@else {
+            <span class="badge text-bg-danger">Declined</span>
+            }
+          </div>
+          <div class="receipt-item">
+            <strong>Sender Name:</strong> {{ transaction.sender_name }}
+          </div>
+          <div class="receipt-item">
+            <strong>Receiver Name:</strong> {{ transaction.receiver_name }}
+          </div>
+          <div class="receipt-item">
+            <strong>Amount:</strong> {{ transaction.amount }}
+          </div>
+          <div class="receipt-item">
+            <strong>Description:</strong> {{ transaction.description }}
+          </div>
+          <div class="receipt-item">
+            <strong>Date:</strong> {{ transaction.created_at | date : "short" }}
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

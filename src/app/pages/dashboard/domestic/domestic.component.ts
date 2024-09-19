@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material.module';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {
   FormArray,
   FormBuilder,
@@ -10,7 +10,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from 'express';
 import { UserService } from '../../../services/user.service';
 import { SnackBarService } from '../../../services/snack-bar.service';
 import { TransferService } from '../../../services/transfer.service';
@@ -44,6 +43,8 @@ export class DomesticComponent implements OnInit {
   pin: string = '';
   otp: string = '';
 
+  isSubmitBtn: boolean = false;
+
   userData: any;
 
   ngOnInit(): void {
@@ -51,7 +52,6 @@ export class DomesticComponent implements OnInit {
     this.userService.getUserDetails().subscribe({
       next: (res) => {
         this.isLoading = false;
-        console.log(res.user);
         this.userService.updateUserSignal(res.user);
         this.userData = this.userService.getAuthenticatedUserStorage;
       },
@@ -67,7 +67,8 @@ export class DomesticComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private snackBarService: SnackBarService,
-    private transferService: TransferService
+    private transferService: TransferService,
+    private router: Router
   ) {
     this.transferForm = this.fb.group({
       account_number: ['', Validators.required],
@@ -75,7 +76,7 @@ export class DomesticComponent implements OnInit {
       bank_name: ['', Validators.required],
       amount: ['', Validators.required],
       description: [''],
-      save_beneficiary: [false],
+      save_beneficiary: false,
       pin: [''],
       digits: this.fb.array(this.createDigitsArray()),
     });
@@ -183,13 +184,20 @@ export class DomesticComponent implements OnInit {
       } else {
         // If OTP is correct, change the button to confirm the transaction
         this.otpBtn.nativeElement.innerHTML = 'Continue Transaction';
-        this.otpBtn.nativeElement.type = 'submit'; // Set button to submit
-        this.snackBarService.success(
-          'OTP Verified! Proceeding to transaction.'
-        );
+        // this.otpBtn.nativeElement.type = 'submit'; // Set button to submit
+
+        this.isLoading = true;
+        setTimeout(() => {
+          this.isLoading = false;
+          this.close.nativeElement.click();
+          this.isSubmitBtn = true;
+          this.snackBarService.success(
+            'OTP Verified! Proceeding to transaction.'
+          );
+        }, 1000);
 
         // Optionally disable the button to prevent further OTP entry
-        this.otpBtn.nativeElement.disabled = true;
+        // this.otpBtn.nativeElement.disabled = true;
       }
     } else {
       console.log('Form is not valid');
@@ -213,6 +221,10 @@ export class DomesticComponent implements OnInit {
 
         if (this.pinCount === 0) {
           this.transferForm.reset();
+
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
         }
       } else {
         this.isLoading = true;
@@ -223,6 +235,12 @@ export class DomesticComponent implements OnInit {
             this.userData = this.userService.getAuthenticatedUserStorage;
 
             this.open.nativeElement.click();
+
+            this.digitsArray.at(0).setValue('');
+            this.digitsArray.at(1).setValue('');
+            this.digitsArray.at(2).setValue('');
+            this.digitsArray.at(3).setValue('');
+            this.pin = '';
           },
           error: (err) => {
             this.close.nativeElement.click();
@@ -290,6 +308,27 @@ export class DomesticComponent implements OnInit {
 
   onSubmit() {
     if (this.transferForm.valid) {
+      const formData = this.transferForm.value;
+      this.isLoading = true;
+      this.transferService.transferDomestic(formData).subscribe({
+        next: (res) => {
+          this.isLoading = false;
+          this.userService.updateUserSignal(res.user);
+          this.userData = this.userService.getAuthenticatedUserStorage;
+
+          this.router.navigate([`/dashboard/success/${res.transactionId}`]);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log(err);
+          this.snackBarService.error(err.error.error);
+          this.transferForm.reset();
+          this.transferForm.patchValue({
+            save_beneficiary: false,
+          });
+          this.isSubmitBtn = false;
+        },
+      });
     } else {
       console.log('Invalid form');
     }

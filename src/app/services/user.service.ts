@@ -65,6 +65,12 @@ export class UserService {
     });
   }
 
+  forgotPassword(formData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/forgot-password`, formData, {
+      withCredentials: true,
+    });
+  }
+
   logOut(): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/user/logout`, {
       withCredentials: true,

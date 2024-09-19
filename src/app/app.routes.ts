@@ -18,6 +18,8 @@ import { InternationalComponent } from './pages/dashboard/international/internat
 import { SupportComponent } from './pages/dashboard/support/support.component';
 import { TransactionPinComponent } from './pages/transaction-pin/transaction-pin.component';
 import { TestComponent } from './pages/test/test.component';
+import { SuccessComponent } from './pages/dashboard/success/success.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +41,11 @@ export const routes: Routes = [
     path: 'signup',
     component: SignUpComponent,
     title: 'Sign Up | Banker.com',
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    title: 'Forgot Password | Banker.com',
   },
   {
     path: 'verify-email',
@@ -118,6 +125,11 @@ export const routes: Routes = [
         path: 'settings',
         component: SettingsComponent,
         title: 'Settings | Banker.com',
+      },
+      {
+        path: 'success/:transactionId',
+        component: SuccessComponent,
+        title: 'Transaction Success | Banker.com',
       },
     ],
   },

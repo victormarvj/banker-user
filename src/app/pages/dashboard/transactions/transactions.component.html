@@ -1,3 +1,14 @@
+@if (isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt="Loading"
+  />
+</div>
+}
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -16,121 +27,96 @@
                         <th scope="col">Description</th>
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Type</th>
-                        <th scope="col">Card</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Date</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Receipt</th>
                       </tr>
                     </thead>
-                    <tbody class="">
-                      <tr>
+                    <tbody>
+                      <tr *ngFor="let transaction of transactions$ | async">
                         <td class="text-truncate">
                           <div class="d-flex align-items-center">
-                            <mat-icon class="text-danger"
-                              >arrow_circle_up</mat-icon
+                            <mat-icon
+                              [ngClass]="{
+                                'text-success':
+                                  (transaction.transaction_type == 1 || transaction.transaction_type == 0) &&
+                                  transaction.receiver_id == userData?.id,
+                                'text-danger':
+                                  transaction.transaction_type == 0 &&
+                                  transaction.sender_id == userData?.id,
+                              }"
                             >
-                            <span class="ms-3">Spotify Subscription</span>
+                              {{
+                                (transaction.transaction_type == 0 ||
+                                  transaction.transaction_type == 1) &&
+                                transaction.receiver_id == userData?.id
+                                  ? "arrow_circle_down"
+                                  : "arrow_circle_up"
+                              }}
+                            </mat-icon>
+                            <span class="ms-3">{{
+                              transaction.description
+                            }}</span>
                           </div>
                         </td>
-                        <td class="text-truncate">#7979797123</td>
-                        <td class="text-truncate">Shopping</td>
-                        <td class="text-truncate">1234 *****</td>
-                        <td class="text-truncate">28 Jan, 12:30 AM</td>
                         <td class="text-truncate">
-                          <span class="text-danger">-$2,500</span>
+                          {{ transaction.transaction_id }}
                         </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
+                        <td class="text-truncate">
+                          {{
+                            transaction.transaction_type == 0
+                              ? "Domestic"
+                              : "International"
+                          }}
+                        </td>
+                        <td class="text-truncate">
+                          @if (transaction.status == 0) {
+                          <span class="badge text-bg-warning">Pending</span>
+                          }@else if (transaction.status == 1) {
+                          <span class="badge text-bg-success">Success</span>
+                          }@else {
+                          <span class="badge text-bg-danger">Declined</span>
+                          }
+                        </td>
+                        <td class="text-truncate">
+                          {{ transaction.created_at | date : "long" }}
+                        </td>
+                        <td class="text-truncate">
+                          <span
+                            [ngClass]="{
+                              'text-danger':
+                                transaction.transaction_type == 0 &&
+                                transaction.sender_id == userData?.id,
+                              'text-success':
+                                (transaction.transaction_type == 1 ||
+                                  transaction.transaction_type == 0) &&
+                                transaction.receiver_id == userData?.id
+                            }"
+                          >
+                            {{
+                              transaction.transaction_type == 0 &&
+                              transaction.sender_id == userData?.id
+                                ? "- "
+                                : "+ "
+                            }}{{ transaction.amount }}
+                          </span>
+                        </td>
+                        <td class="d-flex">
+                          <button
+                            (click)="viewDetails(transaction.id)"
+                            class="btn btn-gradient-primary fs-10 col-12"
+                          >
+                            View
+                          </button>
+                          <!-- @if(transaction.status !== 0) { -->
+                          <button
+                            (click)="downloadReceipt(transaction.id)"
+                            class="btn btn-gradient-primary fs-10 col-12 ms-2"
+                          >
                             Download
                           </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            <mat-icon class="text-success"
-                              >arrow_circle_down</mat-icon
-                            >
-                            <span class="ms-3">Freepik Sales</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">#7827365467</td>
-                        <td class="text-truncate">Transfer</td>
-                        <td class="text-truncate">3245 *****</td>
-                        <td class="text-truncate">25 Jan, 10:40 AM</td>
-                        <td class="text-truncate">
-                          <span class="text-success">$2,500</span>
-                        </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
-                            Download
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            <mat-icon class="text-danger"
-                              >arrow_circle_up</mat-icon
-                            >
-                            <span class="ms-3">Mobile Service</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">#1234265745</td>
-                        <td class="text-truncate">Service</td>
-                        <td class="text-truncate">7865 *****</td>
-                        <td class="text-truncate">20 Jan, 10:40 AM</td>
-                        <td class="text-truncate">
-                          <span class="text-danger">-$2,500</span>
-                        </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
-                            Download
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            <mat-icon class="text-danger"
-                              >arrow_circle_up</mat-icon
-                            >
-                            <span class="ms-3">Spotify Subscription</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">#7979797123</td>
-                        <td class="text-truncate">Shopping</td>
-                        <td class="text-truncate">1234 *****</td>
-                        <td class="text-truncate">28 Jan, 12:30 AM</td>
-                        <td class="text-truncate">
-                          <span class="text-danger">-$2,500</span>
-                        </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
-                            Download
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            <mat-icon class="text-success"
-                              >arrow_circle_down</mat-icon
-                            >
-                            <span class="ms-3">Spotify Subscription</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">#7979797123</td>
-                        <td class="text-truncate">Shopping</td>
-                        <td class="text-truncate">1234 *****</td>
-                        <td class="text-truncate">28 Jan, 12:30 AM</td>
-                        <td class="text-truncate">
-                          <span class="text-success">$2,500</span>
-                        </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
-                            Download
-                          </button>
+                          <!-- } -->
                         </td>
                       </tr>
                     </tbody>
@@ -140,6 +126,7 @@
             </div>
           </ng-template>
         </mat-tab>
+
         <mat-tab label="Income">
           <ng-template matTabContent>
             <div class="card theme-rounded card-dark-theme mt-4">
@@ -151,55 +138,100 @@
                         <th scope="col">Description</th>
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Type</th>
-                        <th scope="col">Card</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Date</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Receipt</th>
                       </tr>
                     </thead>
-                    <tbody class="">
-                      <tr>
+                    <tbody>
+                      <tr
+                        *ngFor="
+                          let transaction of getCreditTransactionType(1) | async
+                        "
+                      >
                         <td class="text-truncate">
                           <div class="d-flex align-items-center">
-                            <mat-icon class="text-success"
-                              >arrow_circle_down</mat-icon
+                            <mat-icon
+                              [ngClass]="{
+                              'text-success':
+                                (transaction.transaction_type == 1 || transaction.transaction_type == 0) &&
+                                transaction.receiver_id == userData?.id,
+                              'text-danger':
+                                transaction.transaction_type == 0 &&
+                                transaction.sender_id == userData?.id,
+                            }"
                             >
-                            <span class="ms-3">Freepik Sales</span>
+                              {{
+                                (transaction.transaction_type == 0 ||
+                                  transaction.transaction_type == 1) &&
+                                transaction.receiver_id == userData?.id
+                                  ? "arrow_circle_down"
+                                  : "arrow_circle_up"
+                              }}
+                            </mat-icon>
+                            <span class="ms-3">{{
+                              transaction.description
+                            }}</span>
                           </div>
                         </td>
-                        <td class="text-truncate">#7827365467</td>
-                        <td class="text-truncate">Transfer</td>
-                        <td class="text-truncate">3245 *****</td>
-                        <td class="text-truncate">25 Jan, 10:40 AM</td>
                         <td class="text-truncate">
-                          <span class="text-success">$2,500</span>
+                          {{ transaction.transaction_id }}
                         </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
+                        <td class="text-truncate">
+                          {{
+                            transaction.transaction_type == 0
+                              ? "Domestic"
+                              : "International"
+                          }}
+                        </td>
+                        <td class="text-truncate">
+                          @if (transaction.status == 0) {
+                          <span class="badge text-bg-warning">Pending</span>
+                          }@else if (transaction.status == 1) {
+                          <span class="badge text-bg-success">Success</span>
+                          }@else {
+                          <span class="badge text-bg-danger">Declined</span>
+                          }
+                        </td>
+                        <td class="text-truncate">
+                          {{ transaction.created_at | date : "long" }}
+                        </td>
+                        <td class="text-truncate">
+                          <span
+                            [ngClass]="{
+                              'text-danger':
+                                transaction.transaction_type == 0 &&
+                                transaction.sender_id == userData?.id,
+                              'text-success':
+                                (transaction.transaction_type == 1 ||
+                                  transaction.transaction_type == 0) &&
+                                transaction.receiver_id == userData?.id
+                            }"
+                          >
+                            {{
+                              transaction.transaction_type == 0 &&
+                              transaction.sender_id == userData?.id
+                                ? "- "
+                                : "+ "
+                            }}{{ transaction.amount }}
+                          </span>
+                        </td>
+                        <td class="d-flex">
+                          <button
+                            (click)="viewDetails(transaction.id)"
+                            class="btn btn-gradient-primary fs-10 col-12"
+                          >
+                            View
+                          </button>
+                          <!-- @if(transaction.status !== 0) { -->
+                          <button
+                            (click)="downloadReceipt(transaction.id)"
+                            class="btn btn-gradient-primary fs-10 col-12 ms-2"
+                          >
                             Download
                           </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            <mat-icon class="text-success"
-                              >arrow_circle_down</mat-icon
-                            >
-                            <span class="ms-3">Spotify Subscription</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">#7979797123</td>
-                        <td class="text-truncate">Shopping</td>
-                        <td class="text-truncate">1234 *****</td>
-                        <td class="text-truncate">28 Jan, 12:30 AM</td>
-                        <td class="text-truncate">
-                          <span class="text-success">$2,500</span>
-                        </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
-                            Download
-                          </button>
+                          <!-- } -->
                         </td>
                       </tr>
                     </tbody>
@@ -209,6 +241,7 @@
             </div>
           </ng-template>
         </mat-tab>
+
         <mat-tab label="Expense">
           <ng-template matTabContent>
             <div class="card theme-rounded card-dark-theme mt-4">
@@ -220,77 +253,100 @@
                         <th scope="col">Description</th>
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Type</th>
-                        <th scope="col">Card</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Date</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Receipt</th>
                       </tr>
                     </thead>
-                    <tbody class="">
-                      <tr>
+                    <tbody>
+                      <tr
+                        *ngFor="
+                          let transaction of getDebitTransactionType(0) | async
+                        "
+                      >
                         <td class="text-truncate">
                           <div class="d-flex align-items-center">
-                            <mat-icon class="text-danger"
-                              >arrow_circle_up</mat-icon
+                            <mat-icon
+                              [ngClass]="{
+                              'text-success':
+                                (transaction.transaction_type == 1 || transaction.transaction_type == 0) &&
+                                transaction.receiver_id == userData?.id,
+                              'text-danger':
+                                transaction.transaction_type == 0 &&
+                                transaction.sender_id == userData?.id,
+                            }"
                             >
-                            <span class="ms-3">Spotify Subscription</span>
+                              {{
+                                (transaction.transaction_type == 0 ||
+                                  transaction.transaction_type == 1) &&
+                                transaction.receiver_id == userData?.id
+                                  ? "arrow_circle_down"
+                                  : "arrow_circle_up"
+                              }}
+                            </mat-icon>
+                            <span class="ms-3">{{
+                              transaction.description
+                            }}</span>
                           </div>
                         </td>
-                        <td class="text-truncate">#7979797123</td>
-                        <td class="text-truncate">Shopping</td>
-                        <td class="text-truncate">1234 *****</td>
-                        <td class="text-truncate">28 Jan, 12:30 AM</td>
                         <td class="text-truncate">
-                          <span class="text-danger">-$2,500</span>
+                          {{ transaction.transaction_id }}
                         </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
+                        <td class="text-truncate">
+                          {{
+                            transaction.transaction_type == 0
+                              ? "Domestic"
+                              : "International"
+                          }}
+                        </td>
+                        <td class="text-truncate">
+                          @if (transaction.status == 0) {
+                          <span class="badge text-bg-warning">Pending</span>
+                          }@else if (transaction.status == 1) {
+                          <span class="badge text-bg-success">Success</span>
+                          }@else {
+                          <span class="badge text-bg-danger">Declined</span>
+                          }
+                        </td>
+                        <td class="text-truncate">
+                          {{ transaction.created_at | date : "long" }}
+                        </td>
+                        <td class="text-truncate">
+                          <span
+                            [ngClass]="{
+                              'text-danger':
+                                transaction.transaction_type == 0 &&
+                                transaction.sender_id == userData?.id,
+                              'text-success':
+                                (transaction.transaction_type == 1 ||
+                                  transaction.transaction_type == 0) &&
+                                transaction.receiver_id == userData?.id
+                            }"
+                          >
+                            {{
+                              transaction.transaction_type == 0 &&
+                              transaction.sender_id == userData?.id
+                                ? "- "
+                                : "+ "
+                            }}{{ transaction.amount }}
+                          </span>
+                        </td>
+                        <td class="d-flex">
+                          <button
+                            (click)="viewDetails(transaction.id)"
+                            class="btn btn-gradient-primary fs-10 col-12"
+                          >
+                            View
+                          </button>
+                          <!-- @if(transaction.status !== 0) { -->
+                          <button
+                            (click)="downloadReceipt(transaction.id)"
+                            class="btn btn-gradient-primary fs-10 col-12 ms-2"
+                          >
                             Download
                           </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            <mat-icon class="text-danger"
-                              >arrow_circle_up</mat-icon
-                            >
-                            <span class="ms-3">Mobile Service</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">#1234265745</td>
-                        <td class="text-truncate">Service</td>
-                        <td class="text-truncate">7865 *****</td>
-                        <td class="text-truncate">20 Jan, 10:40 AM</td>
-                        <td class="text-truncate">
-                          <span class="text-danger">-$2,500</span>
-                        </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
-                            Download
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            <mat-icon class="text-danger"
-                              >arrow_circle_up</mat-icon
-                            >
-                            <span class="ms-3">Spotify Subscription</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">#7979797123</td>
-                        <td class="text-truncate">Shopping</td>
-                        <td class="text-truncate">1234 *****</td>
-                        <td class="text-truncate">28 Jan, 12:30 AM</td>
-                        <td class="text-truncate">
-                          <span class="text-danger">-$2,300</span>
-                        </td>
-                        <td>
-                          <button class="btn btn-gradient-primary fs-10 w-100">
-                            Download
-                          </button>
+                          <!-- } -->
                         </td>
                       </tr>
                     </tbody>
@@ -305,3 +361,10 @@
     </div>
   </div>
 </div>
+
+@if (showModal) {
+<app-transaction-details-modal
+  [transactionId]="transactionId"
+  (modalClosed)="closeModal()"
+></app-transaction-details-modal>
+}

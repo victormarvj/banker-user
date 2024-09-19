@@ -230,7 +230,7 @@
                         <mat-label>Account Number</mat-label>
                         <input
                           matInput
-                          type="text"
+                          type="number"
                           placeholder=""
                           formControlName="account_number"
                           (input)="checkAccountNumber($event)"
@@ -402,7 +402,7 @@
                           </div>
                           <div class="modal-body">
                             <p>
-                              An OTP has been sent to your enter. Please enter
+                              An OTP has been sent to your email. Please enter
                               OTP
                             </p>
                             <mat-form-field class="col-12" appearance="outline">
@@ -433,6 +433,7 @@
 
                     <div class="row justify-content-center">
                       <div class="col-12">
+                        @if(!isSubmitBtn) {
                         <button
                           type="button"
                           (click)="enterPin()"
@@ -443,10 +444,16 @@
                         >
                           Transfer
                         </button>
+                        }@else {
+                        <button
+                          type="submit"
+                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                        >
+                          Confirm Transaction
+                        </button>
+                        }
                       </div>
                     </div>
-
-                    {{ transferForm.value | json }}
                   </form>
                 </div>
               </div>

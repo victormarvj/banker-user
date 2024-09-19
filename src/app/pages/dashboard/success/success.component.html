@@ -1,0 +1,58 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt="Loading"
+  />
+</div>
+}
+
+<div class="container-fluid">
+  <div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-6">
+      <div class="card theme-rounded card-dark-theme text-center p-5">
+        <div class="d-flex justify-content-center">
+          <img
+            src="img/success-icon.png"
+            alt="Success"
+            class="mb-4"
+            style="width: 100px; height: 100px"
+          />
+        </div>
+        <h3 class="text-primary mb-3">Success!</h3>
+        <p class="text-secondary mb-5">
+          Your transaction has been completed successfully. Thank you for your
+          trust in us.
+        </p>
+
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <a
+              (click)="viewDetails(transactionId)"
+              class="btn btn-primary theme-rounded col-12 px-4 py-2"
+            >
+              View Details
+            </a>
+          </div>
+          <div class="col-12 col-md-6">
+            <a
+              routerLink="/dashboard"
+              class="btn btn-gradient-primary col-12 theme-rounded mt-3 mt-md-0 px-4 py-2"
+            >
+              Return to Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if (showModal) {
+<app-transaction-details-modal
+  [transactionId]="transactionId"
+  (modalClosed)="closeModal()"
+></app-transaction-details-modal>
+}

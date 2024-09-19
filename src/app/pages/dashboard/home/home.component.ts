@@ -5,11 +5,13 @@ import { ThemesService } from '../../../services/themes.service';
 import { text } from 'stream/consumers';
 import { UserService } from '../../../services/user.service';
 import { SnackBarService } from '../../../services/snack-bar.service';
+import { TransferService } from '../../../services/transfer.service';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AngularMaterialModule, AngularChartsModule],
+  imports: [CommonModule, AngularMaterialModule, AngularChartsModule, DatePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -23,10 +25,15 @@ export class HomeComponent implements OnInit {
 
   isLoading: boolean = false;
 
+  latestData: any;
+  invoicesData: any;
+  beneficiaryData: any;
+
   constructor(
     private themeService: ThemesService,
     private userService: UserService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private transferService: TransferService
   ) {}
 
   ngOnInit(): void {
@@ -37,9 +44,54 @@ export class HomeComponent implements OnInit {
     this.userService.getUserDetails().subscribe({
       next: (res) => {
         this.isLoading = false;
-        console.log(res.user);
         this.userService.updateUserSignal(res.user);
         this.userData = this.userService.getAuthenticatedUserStorage;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error);
+      },
+    });
+
+    this.getLastestTransactions();
+    this.getInvoices();
+    this.getBeneficiaries();
+  }
+
+  getLastestTransactions() {
+    this.transferService.getLatestTransactions().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.latestData = res;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error);
+      },
+    });
+  }
+
+  getInvoices() {
+    this.transferService.getInvoices().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.invoicesData = res;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error);
+      },
+    });
+  }
+
+  getBeneficiaries() {
+    this.transferService.getBeneficiaries().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.beneficiaryData = res;
       },
       error: (err) => {
         this.isLoading = false;

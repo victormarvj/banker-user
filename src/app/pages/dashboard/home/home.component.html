@@ -172,60 +172,61 @@
                       </tr>
                     </thead>
                     <tbody class="">
+                      @for(recent of latestData; track $index) {
                       <tr>
                         <td class="text-truncate">
                           <div class="d-flex align-items-center">
+                            @if (recent.transaction_type === 0) {
                             <img
                               src="img/icon-danger.png"
                               style="width: 41.72px; height: 41.72px"
                               alt=""
                             />
-                            <span class="ms-3">Bitcoin Transactions</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">Jan 16, 2020</td>
-                        <td class="text-truncate">*****45246</td>
-                        <td class="text-truncate">-$853.00</td>
-                        <td>
-                          <span class="badge text-bg-success">Success</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            <img
-                              src="img/icon-danger.png"
-                              style="width: 41.72px; height: 41.72px"
-                              alt=""
-                            />
-                            <span class="ms-3">Sent to Antonia</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">Jan 16, 2020</td>
-                        <td class="text-truncate">*****172654</td>
-                        <td class="text-truncate">-$153.00</td>
-                        <td>
-                          <span class="badge text-bg-warning">Pending</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
+                            }@else {
                             <img
                               src="img/icon-success.png"
                               style="width: 41.72px; height: 41.72px"
                               alt=""
                             />
-                            <span class="ms-3">Withdraw to Paypal</span>
+                            }
+                            <span class="ms-3">{{ recent.description }}</span>
                           </div>
                         </td>
-                        <td class="text-truncate">Jan 16, 2020</td>
-                        <td class="text-truncate">*****23453</td>
-                        <td class="text-truncate">+$223.00</td>
+                        <td class="text-truncate">
+                          {{ recent.created_at | date : "long" }}
+                        </td>
+                        <td class="text-truncate">{{ recent.sender_name }}</td>
+                        <td class="text-truncate">
+                          <span
+                            [ngClass]="{
+                              'text-danger':
+                                recent.transaction_type == 0 &&
+                                recent.sender_id == userData?.id,
+                              'text-success':
+                                (recent.transaction_type == 1 ||
+                                  recent.transaction_type == 0) &&
+                                recent.receiver_id == userData?.id
+                            }"
+                          >
+                            {{
+                              recent.transaction_type == 0 &&
+                              recent.sender_id == userData?.id
+                                ? "- "
+                                : "+ "
+                            }}{{ recent.amount }}
+                          </span>
+                        </td>
                         <td>
+                          @if (recent.status == 0) {
+                          <span class="badge text-bg-warning">Pending</span>
+                          }@else if (recent.status == 1) {
                           <span class="badge text-bg-success">Success</span>
+                          }@else {
+                          <span class="badge text-bg-danger">Declined</span>
+                          }
                         </td>
                       </tr>
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -267,7 +268,9 @@
                     />
                     <div class="ms-md-4">
                       <p class="m-1 text-secondary fs-12">Income</p>
-                      <h6>{{ userData?.currency }}0.00</h6>
+                      <h6>
+                        {{ userData?.currency }}{{ userData?.display_balance }}
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -284,7 +287,9 @@
                     />
                     <div class="ms-md-4">
                       <p class="m-1 text-secondary fs-12">Expenses</p>
-                      <h6>{{ userData?.currency }}0.00</h6>
+                      <h6>
+                        {{ userData?.currency }}{{ userData?.display_expenses }}
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -301,7 +306,9 @@
                     />
                     <div class="ms-md-4">
                       <p class="m-1 text-secondary fs-12">Total Savings</p>
-                      <h6>{{ userData?.currency }}0.00</h6>
+                      <h6>
+                        {{ userData?.currency }}{{ userData?.display_balance }}
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -317,102 +324,101 @@
           <h5 class="mb-4">Invoices Sent</h5>
           <div class="card theme-rounded card-dark-theme">
             <div class="card-body">
+              @for (invoice of invoicesData; track $index) {
+
               <div
                 class="d-flex justify-content-between align-items-center px-4 my-4"
               >
-                <img src="img/icon-success.png" alt="" />
-                <div>
-                  <span class="d-block fs-14">Apple Store</span>
-                  <span class="d-block fs-12">5h Ago</span>
-                </div>
-                <div>$450</div>
-              </div>
-              <div
-                class="d-flex justify-content-between align-items-center px-4 my-4"
-              >
+                @if (invoice.status === 0) {
                 <img src="img/icon-warning.png" alt="" />
-                <div>
-                  <span class="d-block fs-14">Micheal</span>
-                  <span class="d-block fs-12">2 days Ago</span>
-                </div>
-                <div>$160</div>
-              </div>
-              <div
-                class="d-flex justify-content-between align-items-center px-4 my-4"
-              >
+                }@else if (invoice.status === 1) {
+                <img src="img/icon-success.png" alt="" />
+                }@else {
                 <img src="img/icon-danger.png" alt="" />
+                }
                 <div>
-                  <span class="d-block fs-14">William</span>
-                  <span class="d-block fs-12">10 days Ago</span>
+                  <span class="d-block fs-14">{{
+                    invoice.transfer_type === 0 ? "Domestic" : "International"
+                  }}</span>
+                  <span class="d-block fs-12">? time Ago</span>
                 </div>
-                <div>$90</div>
-              </div>
-              <div
-                class="d-flex justify-content-between align-items-center px-4 my-4"
-              >
-                <img src="img/icon-danger.png" alt="" />
                 <div>
-                  <span class="d-block fs-14">William</span>
-                  <span class="d-block fs-12">10 days Ago</span>
+                  <span
+                    [ngClass]="{
+                      'text-danger':
+                        invoice.transaction_type == 0 &&
+                        invoice.sender_id == userData?.id,
+                      'text-success':
+                        (invoice.transaction_type == 1 ||
+                          invoice.transaction_type == 0) &&
+                        invoice.receiver_id == userData?.id
+                    }"
+                  >
+                    {{
+                      invoice.transaction_type == 0 &&
+                      invoice.sender_id == userData?.id
+                        ? "- "
+                        : "+ "
+                    }}{{ invoice.amount }}
+                  </span>
                 </div>
-                <div>$90</div>
               </div>
+              }
             </div>
           </div>
         </div>
 
         <div class="col-12 mt-5">
           <h5>Recent Contact</h5>
-          <p class="m-0 fs-12">18 Recipients</p>
+          <p class="m-0 fs-12">{{ beneficiaryData?.length }} Recipients</p>
           <div class="card theme-rounded card-dark-theme">
             <div class="card-body">
+              @for (beneficiary of beneficiaryData; track $index) {
               <div
                 class="d-flex justify-content-between align-items-center p-2 my-3 bg-secondary-dark theme-rounded"
               >
-                <img
-                  src="img/icon-success.png"
-                  style="width: 41.72px; height: 41.72px"
-                  alt=""
-                />
-                <div class="text-dark">
-                  <span class="d-block fs-12">Alisha Cara</span>
-                  <span class="d-block fs-10">$420.00</span>
-                </div>
-                <div>
-                  <button class="btn btn-gradient-primary fs-10 d-inline w-100">
-                    Repeat Transaction
-                  </button>
-                </div>
-              </div>
-              <div
-                class="d-flex justify-content-between align-items-center p-2 my-3 bg-secondary-dark theme-rounded"
-              >
+                @if (beneficiary.status === 0) {
                 <img
                   src="img/icon-warning.png"
                   style="width: 41.72px; height: 41.72px"
                   alt=""
                 />
-                <div class="text-dark">
-                  <span class="d-block fs-12">Austin Blake</span>
-                  <span class="d-block fs-10">$920.00</span>
-                </div>
-                <div>
-                  <button class="btn btn-gradient-primary fs-10 d-inline w-100">
-                    Repeat Transaction
-                  </button>
-                </div>
-              </div>
-              <div
-                class="d-flex justify-content-between align-items-center p-2 my-3 bg-secondary-dark theme-rounded"
-              >
+                }@else if (beneficiary.status === 1) {
+                <img
+                  src="img/icon-success.png"
+                  style="width: 41.72px; height: 41.72px"
+                  alt=""
+                />
+                }@else {
                 <img
                   src="img/icon-danger.png"
                   style="width: 41.72px; height: 41.72px"
                   alt=""
                 />
+                }
                 <div class="text-dark">
-                  <span class="d-block fs-12">Austin Blake</span>
-                  <span class="d-block fs-10">$920.00</span>
+                  <span class="d-block fs-12">{{
+                    beneficiary.receiver_account_name
+                  }}</span>
+
+                  <span
+                    [ngClass]="{
+                      'text-danger':
+                        beneficiary.transaction_type == 0 &&
+                        beneficiary.sender_id == userData?.id,
+                      'text-success':
+                        (beneficiary.transaction_type == 1 ||
+                          beneficiary.transaction_type == 0) &&
+                        beneficiary.receiver_id == userData?.id
+                    }"
+                  >
+                    {{
+                      beneficiary.transaction_type == 0 &&
+                      beneficiary.sender_id == userData?.id
+                        ? "- "
+                        : "+ "
+                    }}{{ beneficiary.amount }}
+                  </span>
                 </div>
                 <div>
                   <button class="btn btn-gradient-primary fs-10 d-inline w-100">
@@ -420,6 +426,7 @@
                   </button>
                 </div>
               </div>
+              }
             </div>
           </div>
         </div>

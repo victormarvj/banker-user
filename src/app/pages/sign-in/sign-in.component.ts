@@ -41,17 +41,19 @@ export class SignInComponent implements OnInit {
 
   submitForm() {
     if (this.signinForm.valid) {
+      this.isLoading = true;
       const formData = this.signinForm.value;
       this.userService.getCrsfToken().subscribe((res) => {
         this.userService.login(formData).subscribe({
           next: (res) => {
-            // console.log(res);
+            this.isLoading = false;
             this.userService.setUserSignal(res);
 
             this.userService.isAuthUserSignal();
             this.router.navigate(['/dashboard']);
           },
           error: (err) => {
+            this.isLoading = false;
             console.log(err);
             this.snackBarService.error(err.error.error);
           },

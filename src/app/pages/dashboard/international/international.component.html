@@ -147,20 +147,29 @@
             <div class="col-12 mt-3">
               <div class="card theme-rounded card-dark-theme">
                 <div class="card-body">
-                  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+                  <form
+                    [formGroup]="transferForm"
+                    (ngSubmit)="onSubmit()"
+                    (keydown.enter)="$event.preventDefault()"
+                  >
                     <div class="row">
-                      <mat-form-field
-                        class="col-12 col-md-6"
-                        appearance="outline"
-                      >
+                      <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Account Number</mat-label>
                         <input
                           matInput
-                          type="text"
+                          type="number"
                           placeholder=""
                           formControlName="account_number"
+                          (input)="checkAccountNumberInternational($event)"
                         />
                       </mat-form-field>
+                      @if (transferForm.get('account_number')?.touched &&
+                      transferForm.get('account_number')?.hasError('notDomestic'))
+                      {
+                      <small class="text-danger mb-2"
+                        >Account is not a domestic account</small
+                      >
+                      }
 
                       <mat-form-field
                         class="col-12 col-md-6"
@@ -234,18 +243,39 @@
                         <mat-select formControlName="account_type">
                           <mat-option value="0">Checkings</mat-option>
                           <mat-option value="1">Savings</mat-option>
+                          <mat-option value="2">Fixed</mat-option>
                         </mat-select>
                       </mat-form-field>
 
+                      <p>Available Balance: {{ userData?.display_balance }}</p>
                       <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Amount</mat-label>
                         <input
+                          min="0"
                           matInput
                           type="number"
                           placeholder=""
                           formControlName="amount"
+                          (input)="checkBalance($event)"
                         />
                       </mat-form-field>
+                      @if (transferForm.get('amount')?.touched &&
+                      transferForm.get('amount')?.hasError('insufficientBalance'))
+                      {
+                      <small class="text-danger mb-2"
+                        >Insufficient balance</small
+                      >
+                      } @if (transferForm.get('amount')?.touched &&
+                      transferForm.get('amount')?.hasError('transferLimit')) {
+                      <small class="text-danger mb-2"
+                        >Amount exceeds transfer limit</small
+                      >
+                      } @if (transferForm.get('amount')?.touched &&
+                      transferForm.get('amount')?.hasError('accountMinimum')) {
+                      <small class="text-danger mb-2"
+                        >Amount is below the minimum required</small
+                      >
+                      }
 
                       <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Description (Optional)</mat-label>
@@ -258,7 +288,9 @@
                         />
                       </mat-form-field>
 
-                      <mat-slide-toggle class="mb-3"
+                      <mat-slide-toggle
+                        class="mb-3"
+                        formControlName="save_beneficiary"
                         >Save Beneficiary</mat-slide-toggle
                       >
                     </div>
@@ -354,7 +386,7 @@
                           </div>
                           <div class="modal-body">
                             <p>
-                              An OTP has been sent to your enter. Please enter
+                              An OTP has been sent to your email. Please enter
                               OTP
                             </p>
                             <mat-form-field class="col-12" appearance="outline">
@@ -370,11 +402,13 @@
                             </mat-form-field>
 
                             <button
-                              type="submit"
+                              (click)="checkOtp()"
+                              #otpBtn
+                              type="button"
                               [disabled]="isLoading"
                               class="btn w-100 btn-gradient-primary btn-gradient-padding"
                             >
-                              Confirm
+                              Confirm OTP
                             </button>
                           </div>
                         </div>
@@ -383,6 +417,7 @@
 
                     <div class="row justify-content-center">
                       <div class="col-12">
+                        @if(!isSubmitBtn) {
                         <button
                           type="button"
                           (click)="enterPin()"
@@ -393,6 +428,14 @@
                         >
                           Transfer
                         </button>
+                        }@else {
+                        <button
+                          type="submit"
+                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                        >
+                          Confirm Transaction
+                        </button>
+                        }
                       </div>
                     </div>
                   </form>
