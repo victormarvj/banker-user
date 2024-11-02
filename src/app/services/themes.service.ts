@@ -11,7 +11,7 @@ export class ThemesService {
   constructor() {}
 
   toggleTheme() {
-    const newTheme = this.themeSignal() === 'light' ? 'dark' : 'light';
+    const newTheme = this.themeSignal() === 'dark' ? 'light' : 'dark';
     this.themeSignal.set(newTheme);
     if (this.isBrowser()) {
       localStorage.setItem(this.themeKey, newTheme);
@@ -24,9 +24,9 @@ export class ThemesService {
   }
 
   initTheme() {
-    let theme: string = 'light';
+    let theme: string = 'dark';
     if (this.isBrowser()) {
-      theme = localStorage.getItem(this.themeKey) || 'light';
+      theme = localStorage.getItem(this.themeKey) || 'dark';
     }
 
     this.applyTheme(theme);

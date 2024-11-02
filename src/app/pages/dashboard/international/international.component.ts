@@ -342,7 +342,7 @@ export class InternationalComponent implements OnInit {
       this.transferService.checkAccountNumberInternational(formData).subscribe({
         next: (res) => {
           this.isLoading = false;
-          console.log(res);
+          // console.log(res);
         },
         error: (err) => {
           this.isLoading = false;

@@ -39,17 +39,16 @@
                           <div class="d-flex align-items-center">
                             <mat-icon
                               [ngClass]="{
-                                'text-success':
-                                  (transaction.transaction_type == 1 || transaction.transaction_type == 0) &&
-                                  transaction.receiver_id == userData?.id,
-                                'text-danger':
-                                  transaction.transaction_type == 0 &&
-                                  transaction.sender_id == userData?.id,
-                              }"
+                              'text-success':
+                                (transaction.transaction_type == 0) &&
+                                transaction.receiver_id == userData?.id,
+                              'text-danger':
+                                transaction.transaction_type == 0 &&
+                                transaction.sender_id == userData?.id,
+                            }"
                             >
                               {{
-                                (transaction.transaction_type == 0 ||
-                                  transaction.transaction_type == 1) &&
+                                transaction.transaction_type == 0 &&
                                 transaction.receiver_id == userData?.id
                                   ? "arrow_circle_down"
                                   : "arrow_circle_up"
@@ -65,7 +64,7 @@
                         </td>
                         <td class="text-truncate">
                           {{
-                            transaction.transaction_type == 0
+                            transaction.transfer_type == 0
                               ? "Domestic"
                               : "International"
                           }}
@@ -155,7 +154,7 @@
                             <mat-icon
                               [ngClass]="{
                               'text-success':
-                                (transaction.transaction_type == 1 || transaction.transaction_type == 0) &&
+                                (transaction.transaction_type == 0) &&
                                 transaction.receiver_id == userData?.id,
                               'text-danger':
                                 transaction.transaction_type == 0 &&
@@ -163,8 +162,7 @@
                             }"
                             >
                               {{
-                                (transaction.transaction_type == 0 ||
-                                  transaction.transaction_type == 1) &&
+                                transaction.transaction_type == 0 &&
                                 transaction.receiver_id == userData?.id
                                   ? "arrow_circle_down"
                                   : "arrow_circle_up"
@@ -180,7 +178,7 @@
                         </td>
                         <td class="text-truncate">
                           {{
-                            transaction.transaction_type == 0
+                            transaction.transfer_type == 0
                               ? "Domestic"
                               : "International"
                           }}
@@ -270,7 +268,7 @@
                             <mat-icon
                               [ngClass]="{
                               'text-success':
-                                (transaction.transaction_type == 1 || transaction.transaction_type == 0) &&
+                                (transaction.transaction_type == 0) &&
                                 transaction.receiver_id == userData?.id,
                               'text-danger':
                                 transaction.transaction_type == 0 &&
@@ -278,8 +276,7 @@
                             }"
                             >
                               {{
-                                (transaction.transaction_type == 0 ||
-                                  transaction.transaction_type == 1) &&
+                                transaction.transaction_type == 0 &&
                                 transaction.receiver_id == userData?.id
                                   ? "arrow_circle_down"
                                   : "arrow_circle_up"
@@ -295,7 +292,7 @@
                         </td>
                         <td class="text-truncate">
                           {{
-                            transaction.transaction_type == 0
+                            transaction.transfer_type == 0
                               ? "Domestic"
                               : "International"
                           }}

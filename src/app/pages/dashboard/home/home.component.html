@@ -176,7 +176,8 @@
                       <tr>
                         <td class="text-truncate">
                           <div class="d-flex align-items-center">
-                            @if (recent.transaction_type === 0) {
+                            @if (recent.transaction_type === 0 && userData.id ==
+                            recent.sender_id) {
                             <img
                               src="img/icon-danger.png"
                               style="width: 41.72px; height: 41.72px"
@@ -349,8 +350,7 @@
                         invoice.transaction_type == 0 &&
                         invoice.sender_id == userData?.id,
                       'text-success':
-                        (invoice.transaction_type == 1 ||
-                          invoice.transaction_type == 0) &&
+                        invoice.transaction_type == 0 &&
                         invoice.receiver_id == userData?.id
                     }"
                   >
@@ -407,8 +407,7 @@
                         beneficiary.transaction_type == 0 &&
                         beneficiary.sender_id == userData?.id,
                       'text-success':
-                        (beneficiary.transaction_type == 1 ||
-                          beneficiary.transaction_type == 0) &&
+                        beneficiary.transaction_type == 0 &&
                         beneficiary.receiver_id == userData?.id
                     }"
                   >

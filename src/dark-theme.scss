@@ -201,4 +201,21 @@ $dark-theme: mat.define-theme(
   .border-linear-accent {
     border: 1px solid var(--bg-linear-accent2);
   }
+
+  /* Add this CSS in your dark theme setup */
+
+  .modal {
+    color: var(--bg-dark);
+  }
+
+  .modal
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+    .mdc-text-field__input {
+    color: var(--bg-dark);
+    caret-color: var(--bg-dark);
+  }
+
+  .modal-backdrop {
+    visibility: hidden;
+  }
 }
