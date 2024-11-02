@@ -202,7 +202,7 @@
 
                     <div class="row">
                       <!-- Currency Autocomplete -->
-                      <mat-form-field class="col-12" appearance="outline">
+                      <!-- <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Currency</mat-label>
                         <input
                           type="text"
@@ -224,6 +224,15 @@
                           </mat-option>
                           }
                         </mat-autocomplete>
+                      </mat-form-field> -->
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Currency</mat-label>
+                        <mat-select formControlName="currency">
+                          <mat-option value="$">USD $</mat-option>
+                          <mat-option value="¥">JPY ¥</mat-option>
+                          <mat-option value="€">EUR €</mat-option>
+                          <mat-option value="£">GBP £</mat-option>
+                        </mat-select>
                       </mat-form-field>
                     </div>
                     <div class="row">

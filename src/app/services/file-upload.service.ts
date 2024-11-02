@@ -12,6 +12,8 @@ export class FileUploadService {
   constructor(private http: HttpClient) {}
 
   uploadImage(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/user/upload-front-doc`, data);
+    return this.http.post<any>(`${this.apiUrl}/user/upload-image`, data, {
+      reportProgress: true,
+    });
   }
 }

@@ -7,3 +7,67 @@
     left: 0;
   }
 }
+
+.modal-content {
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  background: #f9f9f9;
+}
+
+.modal-header {
+  background-color: #004085;
+  color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 1rem;
+}
+
+.intro-text {
+  color: #606060;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.bank-details {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.icon {
+  font-size: 1.25rem;
+  color: #004085;
+  margin-right: 0.75rem;
+}
+
+.btn-gradient-primary {
+  background: linear-gradient(90deg, #007bff, #00c8ff);
+  color: white;
+  border: none;
+}
+
+.close-btn {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.btn-gradient-padding {
+  padding: 0.6rem 0;
+}
+
+.btn-gradient-primary:hover {
+  background: linear-gradient(90deg, #005bb5, #008fcc);
+}

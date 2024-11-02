@@ -184,7 +184,7 @@
                         />
                       </mat-form-field>
 
-                      <mat-form-field
+                      <!-- <mat-form-field
                         class="col-12 col-md-6"
                         appearance="outline"
                       >
@@ -206,9 +206,22 @@
                           }}</mat-option>
                           }
                         </mat-autocomplete>
-                      </mat-form-field>
+                      </mat-form-field> -->
 
                       <mat-form-field
+                        class="col-12 col-md-6"
+                        appearance="outline"
+                      >
+                        <mat-label>Bank Name</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          formControlName="bank_name"
+                        />
+                      </mat-form-field>
+
+                      <!-- <mat-form-field
                         class="col-12 col-md-6"
                         appearance="outline"
                       >
@@ -220,13 +233,26 @@
                           readonly=""
                           formControlName="swift_code"
                         />
+                      </mat-form-field> -->
+
+                      <mat-form-field
+                        class="col-12 col-md-6"
+                        appearance="outline"
+                      >
+                        <mat-label>Swift Code</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          formControlName="swift_code"
+                        />
                       </mat-form-field>
 
                       <mat-form-field
                         class="col-12 col-md-6"
                         appearance="outline"
                       >
-                        <mat-label>Routing Number</mat-label>
+                        <mat-label>IBAN Number</mat-label>
                         <input
                           matInput
                           type="text"
@@ -235,15 +261,21 @@
                         />
                       </mat-form-field>
 
-                      <mat-form-field
-                        class="col-12 col-md-6"
-                        appearance="outline"
-                      >
+                      <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Account Type</mat-label>
                         <mat-select formControlName="account_type">
-                          <mat-option value="0">Checkings</mat-option>
-                          <mat-option value="1">Savings</mat-option>
-                          <mat-option value="2">Fixed</mat-option>
+                          <mat-option value="0">Checkings Account</mat-option>
+                          <mat-option value="1">Savings Account</mat-option>
+                          <mat-option value="2">Fixed Account</mat-option>
+                          <mat-option value="3">Current Account</mat-option>
+                          <mat-option value="4">Investment Account</mat-option>
+                          <mat-option value="5">Business Account</mat-option>
+                          <mat-option value="6"
+                            >Cooperate Business Account</mat-option
+                          >
+                          <mat-option value="7"
+                            >Non Resident Account</mat-option
+                          >
                         </mat-select>
                       </mat-form-field>
 

@@ -7,11 +7,18 @@ import { UserService } from '../../../services/user.service';
 import { SnackBarService } from '../../../services/snack-bar.service';
 import { TransferService } from '../../../services/transfer.service';
 import { CommonModule, DatePipe } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, AngularMaterialModule, AngularChartsModule, DatePipe],
+  imports: [
+    CommonModule,
+    AngularMaterialModule,
+    AngularChartsModule,
+    DatePipe,
+    RouterModule,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -33,7 +40,8 @@ export class HomeComponent implements OnInit {
     private themeService: ThemesService,
     private userService: UserService,
     private snackBarService: SnackBarService,
-    private transferService: TransferService
+    private transferService: TransferService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -138,23 +146,58 @@ export class HomeComponent implements OnInit {
         fillOpacity: 0.9,
         color: 'rgba(224, 236, 252,.7)',
         xValueFormatString: 'YYYY',
-        dataPoints: [
-          { x: new Date(2018, 0), y: 24000000 }, // Initial value
-          { x: new Date(2019, 0), y: 25980000 }, // Increase
-          { x: new Date(2020, 0), y: 26000000 }, // Dip
-          { x: new Date(2021, 0), y: 27000000 }, // Increase
-          { x: new Date(2022, 0), y: 29000000 }, // Small dip
-          { x: new Date(2023, 0), y: 30000000 }, // Significant increase
-          { x: new Date(2024, 0), y: 30005000 }, // Small dip
-          { x: new Date(2025, 0), y: 29000000 }, // Increase
-          { x: new Date(2026, 0), y: 29000000 }, // Small dip
-          { x: new Date(2027, 0), y: 30000000 }, // Increase
-          { x: new Date(2028, 0), y: 33000000 }, // Small dip
-          { x: new Date(2029, 0), y: 34000000 }, // Increase
-          { x: new Date(2030, 0), y: 34000000 }, // Dip
-          { x: new Date(2031, 0), y: 34000000 }, // Final increase
-        ],
+        // dataPoints: [
+        //   { x: new Date(2018, 0), y: 24000000 }, // Initial value
+        //   { x: new Date(2019, 0), y: 25980000 }, // Increase
+        //   { x: new Date(2020, 0), y: 26000000 }, // Dip
+        //   { x: new Date(2021, 0), y: 27000000 }, // Increase
+        //   { x: new Date(2022, 0), y: 29000000 }, // Small dip
+        //   { x: new Date(2023, 0), y: 30000000 }, // Significant increase
+        //   { x: new Date(2024, 0), y: 30005000 }, // Small dip
+        //   { x: new Date(2025, 0), y: 29000000 }, // Increase
+        //   { x: new Date(2026, 0), y: 29000000 }, // Small dip
+        //   { x: new Date(2027, 0), y: 30000000 }, // Increase
+        //   { x: new Date(2028, 0), y: 33000000 }, // Small dip
+        //   { x: new Date(2029, 0), y: 34000000 }, // Increase
+        //   { x: new Date(2030, 0), y: 34000000 }, // Dip
+        //   { x: new Date(2031, 0), y: 34000000 }, // Final increase
+        // ],
+        dataPoints: this.generateDataPoints(),
       },
     ],
   };
+
+  generateDataPoints() {
+    let initialYear = 2018;
+    let initialValue = 24000000; // Starting point
+    let dataPoints = [];
+    let year = initialYear;
+
+    // Function to create a random trend with a controlled range
+    function generateRandomValue(
+      previousValue: number,
+      minChange: number,
+      maxChange: number
+    ): number {
+      const change =
+        Math.floor(Math.random() * (maxChange - minChange + 1)) + minChange;
+      return previousValue + (Math.random() < 0.5 ? -change : change);
+    }
+
+    // Generate data points dynamically for 14 years
+    for (let i = 0; i < 14; i++) {
+      let yValue: any =
+        i === 0
+          ? initialValue
+          : generateRandomValue(dataPoints[i - 1].y, 50000, 1000000);
+      dataPoints.push({ x: new Date(year, 0), y: yValue });
+      year += 1;
+    }
+
+    return dataPoints;
+  }
+
+  goToDomestic() {
+    this.router.navigate(['/dashboard/domestic']);
+  }
 }

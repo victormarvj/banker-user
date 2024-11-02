@@ -10,3 +10,7 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
+
+
+check dashboard component to change the gethelp email
+then change the environments variables

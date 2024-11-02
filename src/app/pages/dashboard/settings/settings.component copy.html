@@ -19,47 +19,16 @@
               <div>
                 <div class="d-flex justify-content-center">
                   <div class="profile-card-div">
-                    @if (profileImagePreview) {
                     <img
-                      [src]="profileImagePreview"
+                      src="img/avatar-profile.png"
                       style="width: 130px; height: 130px; border-radius: 50%"
-                      alt="Profile Image"
+                      alt=""
                     />
-                    } @else {
-                    <img
-                      [src]="
-                        apiRootUrl + userData?.pic || 'img/avatar-profile.png'
-                      "
-                      style="width: 130px; height: 130px; border-radius: 50%"
-                      alt="Profile Image"
-                    />
-                    }
-                    <a
-                      class="edit-icon-div cursor-pointer"
-                      (click)="fileInput.click()"
-                    >
+                    <a class="edit-icon-div">
                       <mat-icon class="text-light">edit</mat-icon>
                     </a>
-                    <!-- Hidden file input -->
-                    <input
-                      type="file"
-                      #fileInput
-                      (change)="onFileUpload($event)"
-                      style="display: none"
-                      accept="image/*"
-                    />
                   </div>
                 </div>
-
-                <!-- Upload Progress Bar -->
-                @if (uploadProgress > 0 && uploadProgress < 100) {
-                <div class="progress mt-3">
-                  <mat-progress-bar
-                    mode="determinate"
-                    [value]="uploadProgress"
-                  ></mat-progress-bar>
-                </div>
-                }
                 <h5 class="text-center mt-3">{{ userData?.fullname }}</h5>
                 <div class="d-flex justify-content-center">
                   <p

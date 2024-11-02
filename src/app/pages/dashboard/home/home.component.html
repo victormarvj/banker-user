@@ -88,16 +88,16 @@
                           userData?.currency + userData?.display_balance
                         }}</mat-option
                       >
-                      <mat-option value="2"
+                      <!-- <mat-option value="2"
                         >Credit &nbsp;&nbsp;{{
                           userData?.currency + userData?.display_balance
                         }}</mat-option
-                      >
+                      > -->
                     </mat-select>
                   </mat-form-field>
                 </div>
 
-                <div class="my-3">
+                <!-- <div class="my-3">
                   <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Enter Amount</mat-label>
                     <input
@@ -107,39 +107,51 @@
                       placeholder="0.00"
                     />
                   </mat-form-field>
-                </div>
+                </div> -->
 
                 <div class="d-flex justify-content-between">
                   <div class="d-flex flex-column align-items-center">
-                    <div class="card theme-rounded card-dark-theme">
-                      <div class="card-body p-2 px-md-3">
-                        <mat-icon class="text-purple">price_change</mat-icon>
+                    <a routerLink="/dashboard/international">
+                      <div class="card theme-rounded card-dark-theme">
+                        <div class="card-body p-2 px-md-3">
+                          <mat-icon class="text-purple">price_change</mat-icon>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                     <p class="fs-10 mt-4">Send</p>
                   </div>
                   <div class="d-flex flex-column align-items-center">
-                    <div class="card theme-rounded card-dark-theme">
-                      <div class="card-body p-2 px-md-3">
-                        <mat-icon class="text-lemon">price_change</mat-icon>
+                    <a
+                      class="cursor-pointer"
+                      data-bs-toggle="modal"
+                      data-bs-target="#detailsModal"
+                    >
+                      <div class="card theme-rounded card-dark-theme">
+                        <div class="card-body p-2 px-md-3">
+                          <mat-icon class="text-lemon">price_change</mat-icon>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                     <p class="fs-10 mt-4">Receive</p>
                   </div>
                   <div class="d-flex flex-column align-items-center">
-                    <div class="card theme-rounded card-dark-theme">
-                      <div class="card-body p-2 px-md-3">
-                        <mat-icon class="text-lemon">receipt_long</mat-icon>
+                    <a routerLink="/dashboard/transactions">
+                      <div class="card theme-rounded card-dark-theme">
+                        <div class="card-body p-2 px-md-3">
+                          <mat-icon class="text-lemon">receipt_long</mat-icon>
+                        </div>
                       </div>
-                    </div>
-                    <p class="fs-10 mt-4">Invoicing</p>
+                    </a>
+                    <p class="fs-10 mt-4">Receipts</p>
                   </div>
                   <div class="d-flex flex-column align-items-center">
-                    <div class="card theme-rounded card-dark-theme">
-                      <div class="card-body p-2 px-md-3">
-                        <mat-icon class="text-lemon">widgets</mat-icon>
+                    <a routerLink="/dashboard/settings">
+                      <div class="card theme-rounded card-dark-theme">
+                        <div class="card-body p-2 px-md-3">
+                          <mat-icon class="text-lemon">widgets</mat-icon>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                     <p class="fs-10 mt-4">More</p>
                   </div>
                 </div>
@@ -317,6 +329,77 @@
             </div>
           </div>
         </div>
+
+        <!-- Details Modal -->
+        <div
+          class="modal fade"
+          id="detailsModal"
+          tabindex="-1"
+          aria-labelledby="detailsModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detailsModalLabel">
+                  Account Details
+                </h1>
+                <button
+                  #closeModal
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <!-- Bank Details Section -->
+                <div class="bank-details">
+                  <p class="text-center intro-text">
+                    Use the account details below to top up your account or
+                    receive payments.
+                  </p>
+                  <div class="detail-item">
+                    <i class="icon fas fa-user"></i>
+                    <span
+                      ><strong>Account Name:</strong>
+                      {{ userData.fullname }}</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <i class="icon fas fa-hashtag"></i>
+                    <span
+                      ><strong>Account Number:</strong>
+                      {{ userData.account_no }}</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <i class="icon fas fa-university"></i>
+                    <span><strong>Bank Name:</strong> Banker.com</span>
+                  </div>
+                  <div class="detail-item">
+                    <i class="icon fas fa-file-invoice-dollar"></i>
+                    <span
+                      ><strong>VAT Number:</strong>
+                      {{ userData.vat_number }}</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Close Button -->
+                <button
+                  type="button"
+                  class="btn w-100 btn-gradient-primary btn-gradient-padding close-btn"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of modal-->
       </div>
     </div>
     <div class="col-12 col-md-3">
