@@ -30,7 +30,13 @@
           </div>
           <div class="receipt-item">
             <strong>Transfer Type:</strong>
-            {{ transaction.transfer_type === 0 ? "Domestic" : "International" }}
+            {{
+              transaction.transfer_type === 0
+                ? "Domestic"
+                : transaction.transfer_type === 1
+                ? "International"
+                : "Europe"
+            }}
           </div>
           <div class="receipt-item">
             <strong>Transaction Status:</strong>

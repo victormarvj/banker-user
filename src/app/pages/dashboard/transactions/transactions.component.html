@@ -64,9 +64,11 @@
                         </td>
                         <td class="text-truncate">
                           {{
-                            transaction.transfer_type == 0
+                            transaction.transfer_type === 0
                               ? "Domestic"
-                              : "International"
+                              : transaction.transfer_type === 1
+                              ? "International"
+                              : "Europe"
                           }}
                         </td>
                         <td class="text-truncate">
@@ -178,9 +180,11 @@
                         </td>
                         <td class="text-truncate">
                           {{
-                            transaction.transfer_type == 0
+                            transaction.transfer_type === 0
                               ? "Domestic"
-                              : "International"
+                              : transaction.transfer_type === 1
+                              ? "International"
+                              : "Europe"
                           }}
                         </td>
                         <td class="text-truncate">
@@ -292,9 +296,11 @@
                         </td>
                         <td class="text-truncate">
                           {{
-                            transaction.transfer_type == 0
+                            transaction.transfer_type === 0
                               ? "Domestic"
-                              : "International"
+                              : transaction.transfer_type === 1
+                              ? "International"
+                              : "Europe"
                           }}
                         </td>
                         <td class="text-truncate">

@@ -25,6 +25,13 @@
                       style="width: 130px; height: 130px; border-radius: 50%"
                       alt="Profile Image"
                     />
+                    } @else { @if (userData?.pic == "" || userData?.pic == null)
+                    {
+                    <img
+                      src="img/avatar-profile.png"
+                      style="width: 130px; height: 130px; border-radius: 50%"
+                      alt="Profile Image"
+                    />
                     } @else {
                     <img
                       [src]="
@@ -33,7 +40,7 @@
                       style="width: 130px; height: 130px; border-radius: 50%"
                       alt="Profile Image"
                     />
-                    }
+                    } }
                     <a
                       class="edit-icon-div cursor-pointer"
                       (click)="fileInput.click()"

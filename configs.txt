@@ -12,5 +12,5 @@
 </IfModule>
 
 
-check dashboard component to change the gethelp email
+check dashboard component to change the gethelp email and signin page
 then change the environments variables

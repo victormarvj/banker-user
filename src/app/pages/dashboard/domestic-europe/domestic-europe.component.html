@@ -185,28 +185,28 @@
                       </mat-form-field>
 
                       <!-- <mat-form-field
-                        class="col-12 col-md-6"
-                        appearance="outline"
-                      >
-                        <mat-label>Bank Name</mat-label>
-                        <input
-                          type="text"
-                          matInput
-                          formControlName="bank_name"
-                          [matAutocomplete]="auto"
-                        />
-                        <mat-autocomplete
-                          #auto="matAutocomplete"
-                          [displayWith]="displayFn"
-                          (optionSelected)="setSwiftCode($event)"
+                          class="col-12 col-md-6"
+                          appearance="outline"
                         >
-                          @for (bank of filteredBanks | async; track $index) {
-                          <mat-option [value]="bank">{{
-                            bank.bank_name
-                          }}</mat-option>
-                          }
-                        </mat-autocomplete>
-                      </mat-form-field> -->
+                          <mat-label>Bank Name</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            formControlName="bank_name"
+                            [matAutocomplete]="auto"
+                          />
+                          <mat-autocomplete
+                            #auto="matAutocomplete"
+                            [displayWith]="displayFn"
+                            (optionSelected)="setSwiftCode($event)"
+                          >
+                            @for (bank of filteredBanks | async; track $index) {
+                            <mat-option [value]="bank">{{
+                              bank.bank_name
+                            }}</mat-option>
+                            }
+                          </mat-autocomplete>
+                        </mat-form-field> -->
 
                       <mat-form-field
                         class="col-12 col-md-6"
@@ -222,24 +222,24 @@
                       </mat-form-field>
 
                       <!-- <mat-form-field
-                        class="col-12 col-md-6"
-                        appearance="outline"
-                      >
-                        <mat-label>Swift Code</mat-label>
-                        <input
-                          matInput
-                          type="text"
-                          placeholder=""
-                          readonly=""
-                          formControlName="swift_code"
-                        />
-                      </mat-form-field> -->
+                          class="col-12 col-md-6"
+                          appearance="outline"
+                        >
+                          <mat-label>Swift Code</mat-label>
+                          <input
+                            matInput
+                            type="text"
+                            placeholder=""
+                            readonly=""
+                            formControlName="swift_code"
+                          />
+                        </mat-form-field> -->
 
                       <mat-form-field
                         class="col-12 col-md-6"
                         appearance="outline"
                       >
-                        <mat-label>Swift Code</mat-label>
+                        <mat-label>SEPA / Swift Code</mat-label>
                         <input
                           matInput
                           type="text"
@@ -252,7 +252,7 @@
                         class="col-12 col-md-6"
                         appearance="outline"
                       >
-                        <mat-label>Routing Number</mat-label>
+                        <mat-label>IBAN Number</mat-label>
                         <input
                           matInput
                           type="text"

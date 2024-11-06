@@ -422,7 +422,11 @@
                 }
                 <div>
                   <span class="d-block fs-14">{{
-                    invoice.transfer_type === 0 ? "Domestic" : "International"
+                    invoice.transfer_type === 0
+                      ? "Domestic"
+                      : invoice.transfer_type === 1
+                      ? "International"
+                      : "Europe"
                   }}</span>
                   <span class="d-block fs-12">? time Ago</span>
                 </div>

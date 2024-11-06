@@ -85,6 +85,22 @@
               </a>
             </mat-list-item>
 
+            <mat-list-item
+              class="my-3"
+              data-bs-dismiss="offcanvas"
+              [activated]="activeLink === '/dashboard/domestic-europe'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/domestic-europe"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/domestic-europe'"
+              >
+                <mat-icon>currency_exchange</mat-icon>
+                <span class="ms-2">Domestic-EUR</span>
+              </a>
+            </mat-list-item>
+
             <div class="dark-theme-bottom-divider">
               <span class="ms-3 text-dark-responsive">Extras</span>
             </div>
@@ -306,6 +322,21 @@
             >
               <mat-icon>currency_exchange</mat-icon>
               <span class="ms-2">International</span>
+            </a>
+          </mat-list-item>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/domestic-europe'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/domestic-europe"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/domestic-europe'"
+            >
+              <mat-icon>currency_exchange</mat-icon>
+              <span class="ms-2">Domestic-EUR</span>
             </a>
           </mat-list-item>
 

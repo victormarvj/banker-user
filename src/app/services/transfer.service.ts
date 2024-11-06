@@ -62,6 +62,16 @@ export class TransferService {
     );
   }
 
+  transferDomesticEurope(formData: any): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/user/transfer/domestic-europe-transfer`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
   getTransactionDetails(id: any): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/transfer/transactions/${id}`, {
       withCredentials: true,

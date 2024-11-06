@@ -1,6 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AngularMaterialModule } from '../../../shared/angular-material/angular-material.module';
-import { Router, RouterModule } from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -12,23 +10,18 @@ import {
 import { UserService } from '../../../services/user.service';
 import { SnackBarService } from '../../../services/snack-bar.service';
 import { TransferService } from '../../../services/transfer.service';
+import { Router, RouterModule } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AngularMaterialModule } from '../../../shared/angular-material/angular-material.module';
 
 @Component({
-  selector: 'app-international',
+  selector: 'app-domestic-europe',
   standalone: true,
-  imports: [
-    JsonPipe,
-    AngularMaterialModule,
-    RouterModule,
-    ReactiveFormsModule,
-    AsyncPipe,
-  ],
-  templateUrl: './international.component.html',
-  styleUrl: './international.component.scss',
+  imports: [AngularMaterialModule, RouterModule, ReactiveFormsModule],
+  templateUrl: './domestic-europe.component.html',
+  styleUrl: './domestic-europe.component.scss',
 })
-export class InternationalComponent implements OnInit {
+export class DomesticEuropeComponent {
   @ViewChild('openModal') open!: ElementRef;
   @ViewChild('closeModal') close!: ElementRef;
   @ViewChild('otpBtn') otpBtn!: ElementRef;
@@ -366,7 +359,7 @@ export class InternationalComponent implements OnInit {
 
       const formData = this.transferForm.value;
       this.isLoading = true;
-      this.transferService.transferInternational(formData).subscribe({
+      this.transferService.transferDomesticEurope(formData).subscribe({
         next: (res) => {
           this.isLoading = false;
           this.userService.updateUserSignal(res.user);

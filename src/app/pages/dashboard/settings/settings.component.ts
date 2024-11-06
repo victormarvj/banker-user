@@ -78,7 +78,7 @@ export class SettingsComponent implements OnInit {
     this.isLoading = true;
     this.userService.getUserDetails().subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.isLoading = false;
         this.userService.updateUserSignal(res.user);
         this.userData = this.userService.getAuthenticatedUserStorage;

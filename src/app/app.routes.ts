@@ -20,6 +20,7 @@ import { TransactionPinComponent } from './pages/transaction-pin/transaction-pin
 import { TestComponent } from './pages/test/test.component';
 import { SuccessComponent } from './pages/dashboard/success/success.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { DomesticEuropeComponent } from './pages/dashboard/domestic-europe/domestic-europe.component';
 
 export const routes: Routes = [
   {
@@ -85,6 +86,11 @@ export const routes: Routes = [
         path: 'international',
         component: InternationalComponent,
         title: 'International | Banker.com',
+      },
+      {
+        path: 'domestic-europe',
+        component: DomesticEuropeComponent,
+        title: 'Domestic Europe | Banker.com',
       },
       {
         path: 'transactions',
