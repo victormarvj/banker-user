@@ -11,6 +11,14 @@
   RewriteRule . /index.html [L]
 </IfModule>
 
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "https://dashboard.novatrustcapital.com"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Authorization, Content-Type"
+    Header always set Access-Control-Allow-Credentials "true"
+</IfModule>
+
+
 
 check dashboard component to change the gethelp email and signin page
 then change the environments variables

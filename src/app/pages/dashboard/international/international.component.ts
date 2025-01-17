@@ -358,11 +358,11 @@ export class InternationalComponent implements OnInit {
 
   onSubmit() {
     if (this.transferForm.valid) {
-      // const bankName = this.transferForm.get('bank_name')!.value.bank_name;
+      const bankName = this.transferForm.get('bank_name')!.value.bank_name;
 
-      // this.transferForm.patchValue({
-      //   bank_name: bankName,
-      // });
+      this.transferForm.patchValue({
+        bank_name: bankName,
+      });
 
       const formData = this.transferForm.value;
       this.isLoading = true;

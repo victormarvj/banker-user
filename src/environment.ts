@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.cloudcititrust.com/api', // Example environment variable
+  apiUrl: 'https://backend.novatrustcapital.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.cloudcititrust.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.cloudcititrust.com',
+  csrfUrl: 'https://backend.novatrustcapital.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.novatrustcapital.com',
 };
