@@ -44,6 +44,13 @@ export class DomesticEuropeComponent {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.getUserDetails();
+    this.checkTempTransfer();
+
+    this.getBanks();
+  }
+
+  getUserDetails() {
     this.userService.getUserDetails().subscribe({
       next: (res) => {
         this.isLoading = false;
@@ -56,8 +63,22 @@ export class DomesticEuropeComponent {
         this.snackBarService.error(err.error);
       },
     });
+  }
 
-    this.getBanks();
+  checkTempTransfer() {
+    this.transferService.checkTempTransfer().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        if (res) {
+          this.router.navigate(['/dashboard/incomplete-transaction']);
+        }
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error);
+      },
+    });
   }
 
   getBanks() {
@@ -359,27 +380,58 @@ export class DomesticEuropeComponent {
 
       const formData = this.transferForm.value;
       this.isLoading = true;
-      this.transferService.transferDomesticEurope(formData).subscribe({
-        next: (res) => {
-          this.isLoading = false;
-          this.userService.updateUserSignal(res.user);
-          this.userData = this.userService.getAuthenticatedUserStorage;
 
-          this.router.navigate([`/dashboard/success/${res.transactionId}`]);
-        },
-        error: (err) => {
-          this.isLoading = false;
-          console.log(err);
-          this.snackBarService.error(err.error.error);
-          this.transferForm.reset();
-          this.transferForm.patchValue({
-            save_beneficiary: false,
-          });
-          this.isSubmitBtn = false;
-        },
-      });
+      if (this.userData.no_of_codes == 0) {
+        this.tranferDomesticEurope(formData);
+      } else {
+        this.tempTransferDomesticEurope(formData);
+      }
     } else {
       console.log('Invalid form');
     }
+  }
+
+  tranferDomesticEurope(formData: any) {
+    this.transferService.transferDomesticEurope(formData).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.userService.updateUserSignal(res.user);
+        this.userData = this.userService.getAuthenticatedUserStorage;
+
+        this.router.navigate([`/dashboard/success/${res.transactionId}`]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error.error);
+        this.transferForm.reset();
+        this.transferForm.patchValue({
+          save_beneficiary: false,
+        });
+        this.isSubmitBtn = false;
+      },
+    });
+  }
+
+  tempTransferDomesticEurope(formData: FormData) {
+    this.transferService.tempTransferDomesticEurope(formData).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.userService.updateUserSignal(res.user);
+        this.userData = this.userService.getAuthenticatedUserStorage;
+
+        this.router.navigate([`/dashboard/incomplete-transaction`]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error.error);
+        this.transferForm.reset();
+        this.transferForm.patchValue({
+          save_beneficiary: false,
+        });
+        this.isSubmitBtn = false;
+      },
+    });
   }
 }

@@ -25,7 +25,6 @@ import { map, Observable, startWith } from 'rxjs';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    AsyncPipe,
   ],
   templateUrl: './domestic.component.html',
   styleUrl: './domestic.component.scss',
@@ -49,11 +48,32 @@ export class DomesticComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.getUserDetails();
+    this.checkTempTransfer();
+  }
+
+  getUserDetails() {
     this.userService.getUserDetails().subscribe({
       next: (res) => {
         this.isLoading = false;
         this.userService.updateUserSignal(res.user);
         this.userData = this.userService.getAuthenticatedUserStorage;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error);
+      },
+    });
+  }
+
+  checkTempTransfer() {
+    this.transferService.checkTempTransfer().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        if (res) {
+          this.router.navigate(['/dashboard/incomplete-transaction']);
+        }
       },
       error: (err) => {
         this.isLoading = false;
@@ -310,27 +330,57 @@ export class DomesticComponent implements OnInit {
     if (this.transferForm.valid) {
       const formData = this.transferForm.value;
       this.isLoading = true;
-      this.transferService.transferDomestic(formData).subscribe({
-        next: (res) => {
-          this.isLoading = false;
-          this.userService.updateUserSignal(res.user);
-          this.userData = this.userService.getAuthenticatedUserStorage;
-
-          this.router.navigate([`/dashboard/success/${res.transactionId}`]);
-        },
-        error: (err) => {
-          this.isLoading = false;
-          console.log(err);
-          this.snackBarService.error(err.error.error);
-          this.transferForm.reset();
-          this.transferForm.patchValue({
-            save_beneficiary: false,
-          });
-          this.isSubmitBtn = false;
-        },
-      });
+      if (this.userData.no_of_codes == 0) {
+        this.transferDomestic(formData);
+      } else {
+        this.tempTransferDomestic(formData);
+      }
     } else {
       console.log('Invalid form');
     }
+  }
+
+  transferDomestic(formData: FormData) {
+    this.transferService.transferDomestic(formData).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.userService.updateUserSignal(res.user);
+        this.userData = this.userService.getAuthenticatedUserStorage;
+
+        this.router.navigate([`/dashboard/success/${res.transactionId}`]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error.error);
+        this.transferForm.reset();
+        this.transferForm.patchValue({
+          save_beneficiary: false,
+        });
+        this.isSubmitBtn = false;
+      },
+    });
+  }
+
+  tempTransferDomestic(formData: FormData) {
+    this.transferService.tempTransferDomestic(formData).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.userService.updateUserSignal(res.user);
+        this.userData = this.userService.getAuthenticatedUserStorage;
+
+        this.router.navigate([`/dashboard/incomplete-transaction`]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error.error);
+        this.transferForm.reset();
+        this.transferForm.patchValue({
+          save_beneficiary: false,
+        });
+        this.isSubmitBtn = false;
+      },
+    });
   }
 }

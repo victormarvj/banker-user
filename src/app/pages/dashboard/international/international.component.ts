@@ -19,7 +19,6 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
   selector: 'app-international',
   standalone: true,
   imports: [
-    JsonPipe,
     AngularMaterialModule,
     RouterModule,
     ReactiveFormsModule,
@@ -51,6 +50,13 @@ export class InternationalComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.getUserDetails();
+    this.checkTempTransfer();
+
+    this.getBanks();
+  }
+
+  getUserDetails() {
     this.userService.getUserDetails().subscribe({
       next: (res) => {
         this.isLoading = false;
@@ -63,8 +69,22 @@ export class InternationalComponent implements OnInit {
         this.snackBarService.error(err.error);
       },
     });
+  }
 
-    this.getBanks();
+  checkTempTransfer() {
+    this.transferService.checkTempTransfer().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        if (res) {
+          this.router.navigate(['/dashboard/incomplete-transaction']);
+        }
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error);
+      },
+    });
   }
 
   getBanks() {
@@ -366,27 +386,58 @@ export class InternationalComponent implements OnInit {
 
       const formData = this.transferForm.value;
       this.isLoading = true;
-      this.transferService.transferInternational(formData).subscribe({
-        next: (res) => {
-          this.isLoading = false;
-          this.userService.updateUserSignal(res.user);
-          this.userData = this.userService.getAuthenticatedUserStorage;
 
-          this.router.navigate([`/dashboard/success/${res.transactionId}`]);
-        },
-        error: (err) => {
-          this.isLoading = false;
-          console.log(err);
-          this.snackBarService.error(err.error.error);
-          this.transferForm.reset();
-          this.transferForm.patchValue({
-            save_beneficiary: false,
-          });
-          this.isSubmitBtn = false;
-        },
-      });
+      if (this.userData.no_of_codes == 0) {
+        this.transferInternational(formData);
+      } else {
+        this.tempTransferInternational(formData);
+      }
     } else {
       console.log('Invalid form');
     }
+  }
+
+  transferInternational(formData: any) {
+    this.transferService.transferInternational(formData).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.userService.updateUserSignal(res.user);
+        this.userData = this.userService.getAuthenticatedUserStorage;
+
+        this.router.navigate([`/dashboard/success/${res.transactionId}`]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error.error);
+        this.transferForm.reset();
+        this.transferForm.patchValue({
+          save_beneficiary: false,
+        });
+        this.isSubmitBtn = false;
+      },
+    });
+  }
+
+  tempTransferInternational(formData: FormData) {
+    this.transferService.tempTransferInternational(formData).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.userService.updateUserSignal(res.user);
+        this.userData = this.userService.getAuthenticatedUserStorage;
+
+        this.router.navigate([`/dashboard/incomplete-transaction`]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.snackBarService.error(err.error.error);
+        this.transferForm.reset();
+        this.transferForm.patchValue({
+          save_beneficiary: false,
+        });
+        this.isSubmitBtn = false;
+      },
+    });
   }
 }

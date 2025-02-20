@@ -46,7 +46,7 @@ export class BackImageUploadComponent {
               this.uploadProgress = 100; // Ensure it caps at 100
               this.clearUploadProgressInterval();
               this.onBackImageUpload.emit(res.url);
-              this.snackBarService.success('Document front uploaded');
+              this.snackBarService.success('Document back uploaded');
             }
           }, 500); // Increment every 1 second
         },

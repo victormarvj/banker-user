@@ -1,0 +1,58 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt=""
+  />
+</div>
+}
+
+<section>
+  <div class="container mt-5 p-3">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+        <h6>Hello, You have a pending / incomplete transaction</h6>
+
+        <h2>
+          <span class="text-primary">{{ codeLabel }}</span> Required
+        </h2>
+
+        <p class="text-secondary">
+          Due to business account regulation, you are expected to provide a
+          <span class="text-primary fw-bold">{{ codeLabel }}</span> as prior to
+          your transfer request. If you do not have this code, please contact
+          customer service.
+        </p>
+
+        <div class="d-flex justify-content-center">
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>{{ codeLabel }}</mat-label>
+            <input matInput type="number" name="code" [(ngModel)]="code" />
+          </mat-form-field>
+        </div>
+
+        <p class="alert alert-warning">
+          <b>Note That: </b>After {{ triesLeft }} failed attempt(s), this
+          transaction will be cancelled automatically!
+        </p>
+        <p>Tries Left: {{ triesLeft }}</p>
+
+        <p>
+          <a (click)="cancelTransaction()" class="text-primary cursor-pointer"
+            >Cancel Transaction</a
+          >
+        </p>
+
+        <button
+          (click)="checkCode()"
+          [disabled]="!code"
+          class="btn btn-gradient-primary btn-gradient-padding mt-5 col-12"
+        >
+          Authenticate
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
