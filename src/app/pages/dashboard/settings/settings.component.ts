@@ -20,11 +20,12 @@ import { finalize } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { FileUploadService } from '../../../services/file-upload.service';
 import { environment } from '../../../../environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [AngularMaterialModule, ReactiveFormsModule, JsonPipe],
+  imports: [AngularMaterialModule, ReactiveFormsModule],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })
@@ -50,7 +51,8 @@ export class SettingsComponent implements OnInit {
     private userService: UserService,
     private snackBarService: SnackBarService,
     private fb: FormBuilder,
-    private fileUploadService: FileUploadService
+    private fileUploadService: FileUploadService,
+    private router: Router
   ) {
     this.profileForm = this.fb.group({
       fullname: ['', Validators.required],
@@ -209,6 +211,7 @@ export class SettingsComponent implements OnInit {
           this.isLoading = false;
           this.userService.updateUserSignal(res.user);
           this.userData = this.userService.getAuthenticatedUserStorage;
+          this.reloadPage();
           this.snackBarService.success('User data updated successfully');
         },
         error: (err) => {
@@ -243,5 +246,9 @@ export class SettingsComponent implements OnInit {
     } else {
       console.log('Invalid form');
     }
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 }
