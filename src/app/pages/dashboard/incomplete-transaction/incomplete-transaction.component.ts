@@ -68,12 +68,12 @@ export class IncompleteTransactionComponent implements OnInit {
         if (res) {
           switch (res.transaction.code_level) {
             case 1:
-              this.type = this.userData.transfer_code;
-              this.codeLabel = 'Transfer Code';
-              return;
-            case 2:
               this.type = this.userData.tax_code;
               this.codeLabel = 'Tax Code';
+              return;
+            case 2:
+              this.type = this.userData.transfer_code;
+              this.codeLabel = 'Transfer Code';
               return;
             case 3:
               this.type = this.userData.imf_code;
