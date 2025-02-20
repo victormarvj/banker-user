@@ -208,7 +208,9 @@
                         <td class="text-truncate">
                           {{ recent.created_at | date : "long" }}
                         </td>
-                        <td class="text-truncate">{{ recent.sender_name }}</td>
+                        <td class="text-truncate">
+                          {{ recent.receiver_name }}
+                        </td>
                         <td class="text-truncate">
                           <span
                             [ngClass]="{
