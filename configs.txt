@@ -20,5 +20,5 @@
 
 
 
-check dashboard component to change the gethelp email and signin page
+check dashboard component to change the gethelp email and signin page and transaction details layouts
 then change the environments variables

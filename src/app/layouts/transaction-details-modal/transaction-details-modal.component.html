@@ -10,12 +10,21 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Transaction Receipt</h5>
+        <a href="#" style="font-size: 10px; color: #525252">Visit Us Online</a>
+        <br />
+        <img
+          src="https://pulsebyteciti.com/en/assets/images/logo.png"
+          alt="logo"
+          style="width: 120px; height: 30px"
+        />
       </div>
 
-      <div class="modal-body receipt-container">
+      <div
+        class="modal-body receipt-container"
+        style="background-color: #fff; padding: 15px"
+      >
         @if (isLoading) {
-        <div class="spinner">
+        <div class="spinner text-center">
           <img
             src="img/spinner.png"
             class="rotating-img"
@@ -25,50 +34,86 @@
         </div>
         }@else {
         <div>
-          <div class="receipt-item">
-            <strong>Transaction ID:</strong> {{ transaction.transaction_id }}
-          </div>
-          <div class="receipt-item">
-            <strong>Transfer Type:</strong>
+          <h1
+            class="text-center"
+            [style.color]="statusColor"
+            style="font-weight: bold; line-height: 30px; font-size: 28px"
+          >
+            Transaction
             {{
-              transaction.transfer_type === 0
-                ? "Domestic"
-                : transaction.transfer_type === 1
-                ? "International"
-                : "Europe"
+              transaction.status === 1
+                ? "Success"
+                : transaction.status === 0
+                ? "Pending"
+                : "Declined"
             }}
-          </div>
-          <div class="receipt-item">
-            <strong>Transaction Status:</strong>
+          </h1>
+          <h2 class="text-center" style="font-weight: bold; color: #333">
+            ID:
+            <span style="color: #5c68e2"
+              >#{{ transaction.transaction_id }}</span
+            >
+          </h2>
+          <p class="text-center">
+            {{ transaction.created_at | date : "MMM d, yyyy" }}
+          </p>
+          <p class="text-center">
+            This is a confirmation for a recent transaction on your account.
+          </p>
 
-            @if (transaction.status === 0) {
-            <span class="badge text-bg-warning">Pending</span>
-            }@else if (transaction.status === 1) {
-            <span class="badge text-bg-success">Success</span>
-            }@else {
-            <span class="badge text-bg-danger">Declined</span>
-            }
-          </div>
-          <div class="receipt-item">
-            <strong>Sender Name:</strong> {{ transaction.sender_name }}
-          </div>
-          <div class="receipt-item">
-            <strong>Receiver Name:</strong> {{ transaction.receiver_name }}
-          </div>
-          <div class="receipt-item">
-            <strong>Amount:</strong> {{ transaction.amount }}
-          </div>
-          <div class="receipt-item">
-            <strong>Description:</strong> {{ transaction.description }}
-          </div>
-          <div class="receipt-item">
-            <strong>Date:</strong> {{ transaction.created_at | date : "short" }}
-          </div>
+          <h5 style="font-weight: bold; color: #525252">Recipient Details</h5>
+          <p class="m-0">
+            <strong>Name:</strong> {{ transaction.receiver_name }}
+          </p>
+          <p class="m-0">
+            <strong>Bank:</strong> {{ transaction.receiver_bank_name }} |
+            {{ transaction.receiver_account_no }}
+          </p>
+
+          <h5 style="font-weight: bold; color: #525252; margin-top: 10px">
+            Sender Details
+          </h5>
+          <p class="m-0">
+            <strong>Name:</strong> {{ transaction.sender_name }}
+          </p>
+          <p class="m-0">
+            <strong>Bank:</strong> {{ transaction.sender_bank_name }} |
+            {{ transaction.sender_account_no }}
+          </p>
+
+          <hr />
+          <table style="width: 100%; font-size: 12px">
+            <tr>
+              <td><strong>Subtotal:</strong> {{ transaction.amount }}</td>
+              <td><strong>Charge:</strong> $0.00</td>
+              <td><strong>Total:</strong> {{ transaction.amount }}</td>
+            </tr>
+          </table>
+          <hr />
+
+          <p class="text-center">
+            Got a question? Email us at
+            <a href="mailto:support@pulsebyteciti.com">{{
+              "support@pulsebyteciti.com"
+            }}</a>
+          </p>
         </div>
         }
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer text-center">
+        <a href="#" style="color: #525252">Facebook</a> |
+        <a href="#" style="color: #525252">Twitter</a> |
+        <a href="#" style="color: #525252">Instagram</a>
+        <p style="font-size: 10px; margin-top: 10px">
+          PulseByteCiti © 2025 pulsebyteciti.com. All Rights Reserved.
+        </p>
+        <p style="font-size: 12px">
+          4562 Hazy Panda Limits, Chair Crossing, Kentucky, US, 607898
+        </p>
+        <a href="#" style="color: #525252">Privacy Policy</a> |
+        <a href="#" style="color: #525252">Terms of Use</a>
+        <p style="font-size: 12px"><a href="#">Unsubscribe</a></p>
         <button type="button" class="btn btn-secondary" (click)="closeModal()">
           Close
         </button>

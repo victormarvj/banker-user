@@ -16,6 +16,8 @@ export class TransactionDetailsModalComponent implements OnInit {
   transaction: any;
   isLoading = true;
 
+  statusColor: string = '';
+
   constructor(
     private transferService: TransferService,
     private snackBarService: SnackBarService
@@ -30,6 +32,13 @@ export class TransactionDetailsModalComponent implements OnInit {
       next: (res: any) => {
         this.transaction = res;
         this.isLoading = false;
+
+        this.statusColor =
+          this.transaction.status === 1
+            ? '#28a745'
+            : this.transaction.status === 0
+            ? '#ffc107'
+            : '#dc3545';
       },
       error: (err) => {
         console.error('Error fetching transaction details', err);
