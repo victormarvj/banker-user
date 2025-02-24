@@ -1,15 +1,15 @@
-export const environment = {
-  production: false,
-  apiUrl: 'http://127.0.0.1:8000/api', // Example environment variable
-  appVersion: '1.0.0',
-  csrfUrl: 'http://127.0.0.1:8000/sanctum/csrf-cookie',
-  apiRootUrl: 'http://127.0.0.1:8000',
-};
-
 // export const environment = {
-//   production: true,
-//   apiUrl: 'https://backend.pulsebyteciti.com/api', // Example environment variable
+//   production: false,
+//   apiUrl: 'http://127.0.0.1:8000/api', // Example environment variable
 //   appVersion: '1.0.0',
-//   csrfUrl: 'https://backend.pulsebyteciti.com/sanctum/csrf-cookie',
-//   apiRootUrl: 'https://backend.pulsebyteciti.com',
+//   csrfUrl: 'http://127.0.0.1:8000/sanctum/csrf-cookie',
+//   apiRootUrl: 'http://127.0.0.1:8000',
 // };
+
+export const environment = {
+  production: true,
+  apiUrl: 'https://backend.pulsebyteciti.com/api', // Example environment variable
+  appVersion: '1.0.0',
+  csrfUrl: 'https://backend.pulsebyteciti.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.pulsebyteciti.com',
+};
