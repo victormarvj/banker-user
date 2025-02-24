@@ -1,0 +1,104 @@
+<div
+  class="modal fade show"
+  id="transactionModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="transactionModalLabel"
+  aria-hidden="true"
+  style="display: block"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Deposit Details</h5>
+        <span class="cancel-btn cursor-pointer">
+          <mat-icon (click)="closeModal()">cancel</mat-icon>
+        </span>
+      </div>
+
+      <div
+        class="modal-body receipt-container"
+        style="background-color: #fff; padding: 15px"
+      >
+        @if (isLoading) {
+        <div class="spinner text-center">
+          <img
+            src="img/spinner.png"
+            class="rotating-img"
+            style="width: 50px; height: 50px"
+            alt=""
+          />
+        </div>
+        }@else {
+        <div>
+          <p class="text-center">
+            Please make deposit to the {{ address?.name }} address below
+          </p>
+
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>Amount</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder=""
+              [(ngModel)]="amount"
+              step="0.01"
+              (input)="setValue()"
+            />
+          </mat-form-field>
+
+          <div class="d-flex flex-column align-items-center">
+            <img
+              src="{{ apiRootUrl + address?.image }}"
+              alt="{{ address?.name }}"
+              class="img-fluid img"
+            />
+            <p>
+              <b>{{ address.network }}</b>
+            </p>
+            <h4>
+              <b>{{ address.address }}</b>
+            </h4>
+
+            <h4>
+              VALUE: <b>{{ value.toFixed(5) }}</b>
+            </h4>
+
+            <div class="col-12 mt-3">
+              <p>Please upload receipt of payment</p>
+              <app-front-image-upload
+                [imageType]="'Deposit Receipt'"
+                (onFrontImageUpload)="onImageUpload($event)"
+              ></app-front-image-upload>
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Receipt URL</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  placeholder=""
+                  readonly=""
+                  [(ngModel)]="receipt"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">
+          Close
+        </button>
+        <button
+          type="button"
+          [disabled]="receipt === '' || amount === 0 || amount === null"
+          class="btn btn-gradient-primary"
+          (click)="uploadReceipt(address.id)"
+        >
+          Upload Receipt
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+@if (isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt="Loading"
+  />
+</div>
+}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h5>Recent deposits</h5>
+
+      @if (isBrowser) {
+      <div class="card theme-rounded card-dark-theme mt-4">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table datatable class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Account</th>
+                  <th scope="col">Method</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let deposit of deposits">
+                  <td class="text-truncate">
+                    <div class="d-flex align-items-center">
+                      <mat-icon class="text-success">
+                        arrow_circle_down
+                      </mat-icon>
+                      <span class="ms-3">{{ deposit.fullname }}</span>
+                    </div>
+                  </td>
+                  <td class="text-truncate">
+                    {{ deposit.name }}
+                  </td>
+                  <td class="text-truncate">
+                    {{ deposit.address }}
+                  </td>
+                  <td class="text-truncate">
+                    {{ deposit.amount }}
+                  </td>
+                  <td class="text-truncate">
+                    @if (deposit.status == 0) {
+                    <span class="badge text-bg-warning">Pending</span>
+                    }@else if (deposit.status == 1) {
+                    <span class="badge text-bg-success">Success</span>
+                    }@else {
+                    <span class="badge text-bg-danger">Declined</span>
+                    }
+                  </td>
+                  <td class="text-truncate">
+                    {{ deposit.created_at | date : "long" }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

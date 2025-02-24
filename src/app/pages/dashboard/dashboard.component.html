@@ -102,6 +102,42 @@
             </mat-list-item>
 
             <div class="dark-theme-bottom-divider">
+              <span class="ms-3 text-dark-responsive">Deposits</span>
+            </div>
+
+            <mat-list-item
+              class="my-3"
+              data-bs-dismiss="offcanvas"
+              [activated]="activeLink === '/dashboard/deposit'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/deposit"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/deposit'"
+              >
+                <mat-icon>point_of_sale</mat-icon>
+                <span class="ms-2">Deposit</span>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item
+              class="my-3"
+              data-bs-dismiss="offcanvas"
+              [activated]="activeLink === '/dashboard/deposit-history'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/deposit-history"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/deposit-history'"
+              >
+                <mat-icon>point_of_sale</mat-icon>
+                <span class="ms-2">Deposit History</span>
+              </a>
+            </mat-list-item>
+
+            <div class="dark-theme-bottom-divider">
               <span class="ms-3 text-dark-responsive">Extras</span>
             </div>
 
@@ -337,6 +373,40 @@
             >
               <mat-icon>currency_exchange</mat-icon>
               <span class="ms-2">Domestic-EUR</span>
+            </a>
+          </mat-list-item>
+
+          <div class="dark-theme-bottom-divider">
+            <span class="ms-3">Deposits</span>
+          </div>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/deposit'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/deposit"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/deposit'"
+            >
+              <mat-icon>credit_card</mat-icon>
+              <span class="ms-2">Deposit</span>
+            </a>
+          </mat-list-item>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/deposit'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/deposit-history"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/deposit-history'"
+            >
+              <mat-icon>history</mat-icon>
+              <span class="ms-2">Deposit History</span>
             </a>
           </mat-list-item>
 

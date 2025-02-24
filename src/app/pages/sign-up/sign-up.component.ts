@@ -29,7 +29,6 @@ import { map, startWith } from 'rxjs/operators';
     PageNumberComponent,
     FrontImageUploadComponent,
     BackImageUploadComponent,
-    FileUploadComponent,
     AsyncPipe,
     RouterModule,
   ],

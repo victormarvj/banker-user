@@ -23,7 +23,6 @@ import { UserService } from '../../../services/user.service';
     AngularMaterialModule,
     AngularDatatablesModule,
     DatePipe,
-    CurrencyPipe,
     TransactionDetailsModalComponent,
   ],
   templateUrl: './transactions.component.html',

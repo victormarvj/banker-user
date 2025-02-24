@@ -22,6 +22,8 @@ import { SuccessComponent } from './pages/dashboard/success/success.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { DomesticEuropeComponent } from './pages/dashboard/domestic-europe/domestic-europe.component';
 import { IncompleteTransactionComponent } from './pages/dashboard/incomplete-transaction/incomplete-transaction.component';
+import { DepositComponent } from './pages/dashboard/deposit/deposit.component';
+import { DepositHistoryComponent } from './pages/dashboard/deposit-history/deposit-history.component';
 
 export const routes: Routes = [
   {
@@ -97,6 +99,16 @@ export const routes: Routes = [
         path: 'incomplete-transaction',
         component: IncompleteTransactionComponent,
         title: 'Incomplete Transaction | Banker.com',
+      },
+      {
+        path: 'deposit',
+        component: DepositComponent,
+        title: 'Deposit | Banker.com',
+      },
+      {
+        path: 'deposit-history',
+        component: DepositHistoryComponent,
+        title: 'Deposit History | Banker.com',
       },
       {
         path: 'transactions',
