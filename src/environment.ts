@@ -6,10 +6,10 @@
 //   apiRootUrl: 'http://127.0.0.1:8000',
 // };
 
-// export const environment = {
-//   production: true,
-//   apiUrl: 'https://backend.pulsebyteciti.com/api', // Example environment variable
-//   appVersion: '1.0.0',
-//   csrfUrl: 'https://backend.pulsebyteciti.com/sanctum/csrf-cookie',
-//   apiRootUrl: 'https://backend.pulsebyteciti.com',
-// };
+export const environment = {
+  production: true,
+  apiUrl: 'https://backend.pulsebyteciti.com/api', // Example environment variable
+  appVersion: '1.0.0',
+  csrfUrl: 'https://backend.pulsebyteciti.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.pulsebyteciti.com',
+};
