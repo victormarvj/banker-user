@@ -6,6 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ThemesService } from './services/themes.service';
+import { TawkToService } from './services/tawk-to.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,10 @@ export class AppComponent implements OnInit {
 
   theme: string = '';
 
-  constructor(private themeService: ThemesService) {}
+  constructor(
+    private themeService: ThemesService,
+    private tawkToService: TawkToService
+  ) {}
 
   ngOnInit(): void {
     this.themeService.initTheme();
