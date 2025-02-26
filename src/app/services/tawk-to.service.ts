@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 
-declare var Tawk_API: any;
-declare var Tawk_LoadStart: any; // Change the declared type to 'any' (correctly removing the '=' sign)
+// declare let Tawk_API: any;
+// declare let Tawk_LoadStart: any; // Change the declared type to 'any' (correctly removing the '=' sign)
 
 @Injectable({
   providedIn: 'root',
 })
 export class TawkToService {
+  Tawk_API: any;
+  Tawk_LoadStart: any;
   constructor() {
     this.loadTawkTo();
   }
@@ -16,7 +18,7 @@ export class TawkToService {
       return; // Prevent duplicate script loading
     }
 
-    var script = document.createElement('script');
+    let script = document.createElement('script');
     script.id = 'tawk-script';
     script.src = 'https://embed.tawk.to/67be0ee487b472191189bb1b/1ikv6kbq8';
     script.async = true;
@@ -25,20 +27,21 @@ export class TawkToService {
     document.body.appendChild(script);
 
     script.onload = () => {
-      (Tawk_API = Tawk_API || {}), (Tawk_LoadStart = new Date());
+      this.Tawk_API = this.Tawk_API || {};
+      this.Tawk_LoadStart = new Date();
       console.log('Tawk.to chat loaded successfully.');
     };
   }
 
   hideChat() {
-    if (Tawk_API) {
-      Tawk_API.hideWidget();
+    if (this.Tawk_API) {
+      this.Tawk_API.hideWidget();
     }
   }
 
   showChat() {
-    if (Tawk_API) {
-      Tawk_API.showWidget();
+    if (this.Tawk_API) {
+      this.Tawk_API.showWidget();
     }
   }
 }

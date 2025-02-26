@@ -12,7 +12,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <h5>Recent deposits</h5>
+      <h5>Recent withdrawals</h5>
 
       @if (isBrowser) {
       <div class="card theme-rounded card-dark-theme mt-4">
@@ -21,9 +21,8 @@
             <table datatable class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Account</th>
-                  <th scope="col">Transaction ID</th>
                   <th scope="col">Method</th>
+                  <th scope="col">Transaction ID</th>
                   <th scope="col">Address</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Status</th>
@@ -31,38 +30,35 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let deposit of deposits">
+                <tr *ngFor="let withdrawal of withdrawals">
                   <td class="text-truncate">
                     <div class="d-flex align-items-center">
-                      <mat-icon class="text-success">
-                        arrow_circle_down
-                      </mat-icon>
-                      <span class="ms-3">{{ deposit.fullname }}</span>
+                      <mat-icon class="text-danger"> arrow_circle_up </mat-icon>
+                      <span class="ms-3">{{
+                        withdrawal?.name + "-" + withdrawal?.network
+                      }}</span>
                     </div>
                   </td>
                   <td class="text-truncate">
-                    {{ deposit.transaction_id }}
+                    {{ withdrawal?.transaction_id }}
                   </td>
                   <td class="text-truncate">
-                    {{ deposit.name }}
+                    {{ withdrawal?.address }}
                   </td>
                   <td class="text-truncate">
-                    {{ deposit.address }}
+                    {{ userData?.currency + "" + withdrawal?.amount }}
                   </td>
                   <td class="text-truncate">
-                    {{ userData?.currency + "" + deposit.amount }}
-                  </td>
-                  <td class="text-truncate">
-                    @if (deposit.status == 0) {
+                    @if (withdrawal?.status == 0) {
                     <span class="badge text-bg-warning">Pending</span>
-                    }@else if (deposit.status == 1) {
+                    }@else if (withdrawal?.status == 1) {
                     <span class="badge text-bg-success">Success</span>
                     }@else {
                     <span class="badge text-bg-danger">Declined</span>
                     }
                   </td>
                   <td class="text-truncate">
-                    {{ deposit.created_at | date : "long" }}
+                    {{ withdrawal?.created_at | date : "long" }}
                   </td>
                 </tr>
               </tbody>

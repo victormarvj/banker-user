@@ -138,6 +138,42 @@
             </mat-list-item>
 
             <div class="dark-theme-bottom-divider">
+              <span class="ms-3 text-dark-responsive">Withdrawals</span>
+            </div>
+
+            <mat-list-item
+              class="my-3"
+              data-bs-dismiss="offcanvas"
+              [activated]="activeLink === '/dashboard/withdrawal'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/withdrawal"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/withdrawal'"
+              >
+                <mat-icon>point_of_sale</mat-icon>
+                <span class="ms-2">Withdrawal</span>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item
+              class="my-3"
+              data-bs-dismiss="offcanvas"
+              [activated]="activeLink === '/dashboard/withdrawal-history'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/withdrawal-history"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/withdrawal-history'"
+              >
+                <mat-icon>point_of_sale</mat-icon>
+                <span class="ms-2">Withdrawal History</span>
+              </a>
+            </mat-list-item>
+
+            <div class="dark-theme-bottom-divider">
               <span class="ms-3 text-dark-responsive">Extras</span>
             </div>
 
@@ -397,7 +433,7 @@
 
           <mat-list-item
             class="my-3"
-            [activated]="activeLink === '/dashboard/deposit'"
+            [activated]="activeLink === '/dashboard/deposit-history'"
           >
             <a
               matListItemTitle
@@ -407,6 +443,40 @@
             >
               <mat-icon>history</mat-icon>
               <span class="ms-2">Deposit History</span>
+            </a>
+          </mat-list-item>
+
+          <div class="dark-theme-bottom-divider">
+            <span class="ms-3">Withdrawals</span>
+          </div>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/withdrawal'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/withdrawal"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/withdrawal'"
+            >
+              <mat-icon>credit_card</mat-icon>
+              <span class="ms-2">Withdrawal</span>
+            </a>
+          </mat-list-item>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/withdrawal-history'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/withdrawal-history"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/withdrawal-history'"
+            >
+              <mat-icon>history</mat-icon>
+              <span class="ms-2">Withdrawal History</span>
             </a>
           </mat-list-item>
 

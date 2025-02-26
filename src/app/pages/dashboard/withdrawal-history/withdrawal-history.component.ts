@@ -2,31 +2,30 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AngularMaterialModule } from '../../../shared/angular-material/angular-material.module';
 import { Config } from 'datatables.net';
-import { DepositService } from '../../../services/deposit.service';
-import { SnackBarService } from '../../../services/snack-bar.service';
+import { WithdrawalService } from '../../../services/withdrawal.service';
 import { UserService } from '../../../services/user.service';
+import { SnackBarService } from '../../../services/snack-bar.service';
 
 @Component({
-  selector: 'app-deposit-history',
+  selector: 'app-withdrawal-history',
   standalone: true,
   imports: [CommonModule, AngularMaterialModule],
-  templateUrl: './deposit-history.component.html',
-  styleUrl: './deposit-history.component.scss',
+  templateUrl: './withdrawal-history.component.html',
+  styleUrl: './withdrawal-history.component.scss',
 })
-export class DepositHistoryComponent implements OnInit {
+export class WithdrawalHistoryComponent implements OnInit {
   dtOptions: Config = {};
   isBrowser: boolean = false;
-
   isLoading: boolean = false;
 
-  deposits!: any;
+  withdrawals!: any;
   userData!: any;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private depositService: DepositService,
-    private snackBarService: SnackBarService,
-    private userService: UserService
+    private withdrawalService: WithdrawalService,
+    private userService: UserService,
+    private snackBarService: SnackBarService
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
@@ -35,11 +34,11 @@ export class DepositHistoryComponent implements OnInit {
     if (this.isBrowser) {
       this.dtOptions = {
         pagingType: 'full_numbers',
+        searching: true,
       };
     }
-
     this.getUserDetails();
-    this.getDeposits();
+    this.getWithdrawals();
   }
 
   getUserDetails() {
@@ -57,11 +56,11 @@ export class DepositHistoryComponent implements OnInit {
     });
   }
 
-  getDeposits() {
+  getWithdrawals() {
     this.isLoading = true;
-    this.depositService.allDeposits().subscribe((deposit) => {
+    this.withdrawalService.getWithdrawals().subscribe((withdrawals) => {
       this.isLoading = false;
-      this.deposits = deposit;
+      this.withdrawals = withdrawals;
     });
   }
 }

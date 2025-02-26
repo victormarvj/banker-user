@@ -1,0 +1,392 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt=""
+  />
+</div>
+}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12 col-md-4" id="quickTransfer">
+          <div class="row mb-4">
+            <div class="col-12">
+              <h6>My Cards</h6>
+            </div>
+          </div>
+          <div class="card-div">
+            <img
+              src="img/master-card-bg.png"
+              class="w-100 theme-rounded"
+              alt=""
+            />
+            <div class="content-text w-100 p-3">
+              <span class="balance-text text-light">Balance</span>
+              <div class="d-flex justify-content-between">
+                <h5 class="text-light">
+                  {{ userData?.currency }} {{ userData?.display_balance }}
+                </h5>
+                <mat-icon class="text-light">contactless</mat-icon>
+              </div>
+
+              <div class="d-flex justify-content-between px-2 mt-md-3">
+                <div class="d-flex flex-column text-light">
+                  <span class="fw-light fs-12">CARD HOLDER</span>
+                  <span class="fs-12">{{ userData?.fullname }}</span>
+                </div>
+                <div>
+                  <div class="d-flex flex-column text-light me-3">
+                    <span class="fw-light fs-12">VALID THRU</span>
+                    @if (userData?.master_card_expiry !== null) {
+                    <span class="fs-12">{{
+                      userData?.master_card_expiry
+                    }}</span>
+                    }@else {
+                    <span class="fs-12">**/**</span>
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between px-2 mt-md-3">
+                <div class="d-flex flex-column text-light">
+                  @if (userData?.master_card !== null) {
+                  <p class="mt-2">
+                    {{
+                      userData?.master_card.substring(0, 4) +
+                        "**** ****" +
+                        userData?.master_card.substring(-4)
+                    }}
+                  </p>
+                  }@else {
+                  <p class="mt-2">**** **** **** ****</p>
+                  }
+                </div>
+                <div>
+                  <img src="img/master-card-type.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-div mt-4">
+            <img
+              src="img/visa-card-bg.png"
+              class="w-100 theme-rounded"
+              alt=""
+            />
+            <div class="content-text w-100 p-3">
+              <span class="balance-text text-light">Balance</span>
+              <div class="d-flex justify-content-between">
+                <h5 class="text-light">
+                  {{ userData?.currency }} {{ userData?.display_balance }}
+                </h5>
+                <mat-icon class="text-light">contactless</mat-icon>
+              </div>
+
+              <div class="d-flex justify-content-between px-2 mt-md-3">
+                <div class="d-flex flex-column text-light">
+                  <span class="fw-light fs-12">CARD HOLDER</span>
+                  <span class="fs-12">{{ userData?.fullname }}</span>
+                </div>
+                <div>
+                  <div class="d-flex flex-column text-light me-3">
+                    <span class="fw-light fs-12">VALID THRU</span>
+                    @if (userData?.visa_card_expiry !== null) {
+                    <span class="fs-12">{{ userData?.visa_card_expiry }}</span>
+                    }@else {
+                    <span class="fs-12">**/**</span>
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between px-2 mt-md-3">
+                <div class="d-flex flex-column text-light">
+                  @if (userData?.visa_card !== null) {
+                  <p class="mt-2">
+                    {{
+                      userData?.visa_card.substring(0, 4) +
+                        "**** ****" +
+                        userData?.visa_card.substring(-4)
+                    }}
+                  </p>
+                  }@else {
+                  <p class="mt-2">**** **** **** ****</p>
+                  }
+                </div>
+                <div>
+                  <img src="img/visa-card-type.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mt-4">
+          <div class="billing-details-div mt-4">
+            <div class="card theme-rounded card-dark-theme">
+              <div class="card-body">
+                <h4>Billing Information</h4>
+
+                <div class="p-1 p-md-2 mb-3">
+                  <h5>{{ userData?.fullname }}</h5>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div>
+                      <p class="fs-12">Email Address:</p>
+                      <p class="fs-12">VAT Number:</p>
+                      <p class="fs-12">Account Number:</p>
+                    </div>
+                    <div>
+                      <p class="fs-12">{{ userData?.email }}</p>
+                      <p class="fs-12">{{ userData?.vat_number }}</p>
+                      <p class="fs-12">{{ userData?.account_no }}</p>
+                    </div>
+                    <div class="d-block d-md-flex">
+                      <a
+                        routerLink="/dashboard/delete"
+                        class="fs-10 text-danger text-decoration-none fw-bold d-flex align-items-center"
+                      >
+                        <mat-icon>delete_forever</mat-icon>
+                        <span>DELETE</span>
+                      </a>
+                      <a
+                        routerLink="/dashboard/edit"
+                        class="fs-10 text-decoration-none fw-bold d-flex align-items-center ms-3 text-secondary"
+                      >
+                        <mat-icon>edit</mat-icon>
+                        <span>EDIT</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-2 mb-3">
+                  <h5>Account 2 - Coming Soon</h5>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <p class="fs-12">Email Address:</p>
+                      <p class="fs-12">VAT Number:</p>
+                      <p class="fs-12">Account Number:</p>
+                    </div>
+                    <div>
+                      <p class="fs-12"></p>
+                      <p class="fs-12"></p>
+                      <p class="fs-12"></p>
+                    </div>
+                    <div class="d-block d-md-flex">
+                      <a
+                        class="fs-10 text-danger text-decoration-none fw-bold d-flex align-items-center"
+                      >
+                        <mat-icon>delete_forever</mat-icon>
+                        <span>DELETE</span>
+                      </a>
+                      <a
+                        class="fs-10 text-decoration-none fw-bold d-flex align-items-center ms-3 text-secondary"
+                      >
+                        <mat-icon>edit</mat-icon>
+                        <span>EDIT</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mt-4 mt-md-0" id="requestCard">
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="col-12 d-flex justify-content-between">
+                <h6>Wire Transfer</h6>
+                <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center">
+                    <img src="img/master-card-type.png" alt="" />
+                    <span class="ms-2">Debit</span>
+                  </div>
+                  <div class="ms-5">
+                    <div class="d-flex align-items-center">
+                      <span>{{
+                        userData?.currency + userData?.display_balance
+                      }}</span>
+                      <mat-icon>keyboard_arrow_down</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <div class="card theme-rounded card-dark-theme">
+                <div class="card-body">
+                  <form
+                    [formGroup]="withdrawalForm"
+                    (ngSubmit)="onSubmit()"
+                    (keydown.enter)="$event.preventDefault()"
+                  >
+                    <div class="row">
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Payment Method</mat-label>
+                        <mat-select
+                          formControlName="method_id"
+                          (selectionChange)="getNetwork($event)"
+                        >
+                          @for(method of methods; track $index) {
+                          <mat-option [value]="method?.id">{{
+                            method?.name + "-" + method?.abbreviation
+                          }}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Network</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          formControlName="network"
+                          readonly
+                        />
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Address</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          placeholder=""
+                          formControlName="address"
+                        />
+                      </mat-form-field>
+
+                      <p>Available Balance: {{ userData?.display_balance }}</p>
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Amount</mat-label>
+                        <input
+                          min="0"
+                          matInput
+                          type="number"
+                          placeholder=""
+                          formControlName="amount"
+                          (input)="checkBalance($event)"
+                          [readonly]="!withdrawalForm.get('method_id')?.value"
+                        />
+                      </mat-form-field>
+                      @if (withdrawalForm.get('amount')?.touched &&
+                      withdrawalForm.get('amount')?.hasError('insufficientBalance'))
+                      {
+                      <small class="text-danger mb-2"
+                        >Insufficient balance</small
+                      >
+                      } @if (withdrawalForm.get('amount')?.touched &&
+                      withdrawalForm.get('amount')?.hasError('transferLimit')) {
+                      <small class="text-danger mb-2"
+                        >Amount exceeds transfer limit</small
+                      >
+                      } @if (withdrawalForm.get('amount')?.touched &&
+                      withdrawalForm.get('amount')?.hasError('accountMinimum'))
+                      {
+                      <small class="text-danger mb-2"
+                        >Amount is below the minimum required</small
+                      >
+                      }
+                    </div>
+
+                    <mat-form-field class="col-12" appearance="outline">
+                      <mat-label>Value</mat-label>
+                      <input
+                        matInput
+                        type="number"
+                        placeholder=""
+                        formControlName="value"
+                        readonly
+                      />
+                    </mat-form-field>
+
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="confirmModal"
+                      tabindex="-1"
+                      aria-labelledby="confirmModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="confirmModalLabel">
+                              Confirmation Dialog
+                            </h1>
+
+                            <button
+                              #closeModal
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                              Are you sure you want to continue with this
+                              transaction?
+                            </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary btn-gradient-padding"
+                              data-bs-dismiss="modal"
+                            >
+                              No
+                            </button>
+                            <button
+                              type="button"
+                              [disabled]="isLoading"
+                              class="btn btn-gradient-primary btn-gradient-padding"
+                              (click)="confirmModal()"
+                            >
+                              Yes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                      <div class="col-12">
+                        @if(!isSubmitBtn) {
+                        <button
+                          type="button"
+                          [disabled]="isLoading || withdrawalForm.invalid"
+                          data-bs-toggle="modal"
+                          data-bs-target="#confirmModal"
+                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                        >
+                          Transfer
+                        </button>
+                        }@else {
+                        <button
+                          #submitBtn
+                          type="submit"
+                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                        >
+                          Confirm Transaction
+                        </button>
+                        }
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

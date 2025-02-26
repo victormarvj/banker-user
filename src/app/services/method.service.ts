@@ -15,4 +15,10 @@ export class MethodService {
       withCredentials: true,
     });
   }
+
+  retrieveCryptoMethods(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/methods/crypto-methods`, {
+      withCredentials: true,
+    });
+  }
 }

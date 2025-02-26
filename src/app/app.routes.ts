@@ -24,6 +24,8 @@ import { DomesticEuropeComponent } from './pages/dashboard/domestic-europe/domes
 import { IncompleteTransactionComponent } from './pages/dashboard/incomplete-transaction/incomplete-transaction.component';
 import { DepositComponent } from './pages/dashboard/deposit/deposit.component';
 import { DepositHistoryComponent } from './pages/dashboard/deposit-history/deposit-history.component';
+import { WithdrawalComponent } from './pages/dashboard/withdrawal/withdrawal.component';
+import { WithdrawalHistoryComponent } from './pages/dashboard/withdrawal-history/withdrawal-history.component';
 
 export const routes: Routes = [
   {
@@ -109,6 +111,16 @@ export const routes: Routes = [
         path: 'deposit-history',
         component: DepositHistoryComponent,
         title: 'Deposit History | Pulsebyteciti.com',
+      },
+      {
+        path: 'withdrawal',
+        component: WithdrawalComponent,
+        title: 'Withdrawal | Pulsebyteciti.com',
+      },
+      {
+        path: 'withdrawal-history',
+        component: WithdrawalHistoryComponent,
+        title: 'Withdrawal History | Pulsebyteciti.com',
       },
       {
         path: 'transactions',
