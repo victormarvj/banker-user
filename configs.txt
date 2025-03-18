@@ -22,3 +22,5 @@
 
 check dashboard component to change the gethelp email and signin page and transaction details layouts
 then change the environments variables
+
+check the tawkto api service
