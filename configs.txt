@@ -12,7 +12,7 @@
 </IfModule>
 
 <IfModule mod_headers.c>
-    Header always set Access-Control-Allow-Origin "https://backend.springtrustcapital.com"
+    Header always set Access-Control-Allow-Origin "https://backend.apexintltrustcapital.com"
     Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
     Header always set Access-Control-Allow-Headers "Authorization, Content-Type"
     Header always set Access-Control-Allow-Credentials "true"
@@ -24,3 +24,5 @@ check dashboard component to change the gethelp email and signin page and transa
 then change the environments variables
 
 check the tawkto api service
+
+change logo url in transaction details layouts
