@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.ultimaterecoveryfirm.com/api', // Example environment variable
+  apiUrl: 'https://backend.springtrustcapital.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.ultimaterecoveryfirm.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.ultimaterecoveryfirm.com',
+  csrfUrl: 'https://backend.springtrustcapital.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.springtrustcapital.com',
 };
