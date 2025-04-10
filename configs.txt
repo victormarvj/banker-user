@@ -12,7 +12,7 @@
 </IfModule>
 
 <IfModule mod_headers.c>
-    Header always set Access-Control-Allow-Origin "https://backend.apexintltrustcapital.com"
+    Header always set Access-Control-Allow-Origin "https://backend.springcititrustcapital.com"
     Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
     Header always set Access-Control-Allow-Headers "Authorization, Content-Type"
     Header always set Access-Control-Allow-Credentials "true"
