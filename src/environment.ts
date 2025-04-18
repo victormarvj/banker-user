@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.springcititrustcapital.com/api', // Example environment variable
+  apiUrl: 'https://backend.edgespringcititrust.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.springcititrustcapital.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.springcititrustcapital.com',
+  csrfUrl: 'https://backend.edgespringcititrust.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.edgespringcititrust.com',
 };
