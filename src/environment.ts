@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.intciticapital.com/api', // Example environment variable
+  apiUrl: 'https://backend.sterlingheightcapital.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.intciticapital.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.intciticapital.com',
+  csrfUrl: 'https://backend.sterlingheightcapital.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.sterlingheightcapital.com',
 };
