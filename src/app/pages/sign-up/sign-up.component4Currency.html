@@ -70,8 +70,12 @@
                 ></app-page-number>
               </div>
 
-              <h5 class="mt-5 fw-bold">{{ signupHeading }}</h5>
-              <p class="text-secondary">{{ signupSubHeading }}</p>
+              <h5 class="mt-5 fw-bold">
+                {{ signupHeading }}
+              </h5>
+              <p class="text-secondary">
+                {{ signupSubHeading }}
+              </p>
 
               <div class="row">
                 @if (isLoading || preloader) {
@@ -198,7 +202,7 @@
 
                     <div class="row">
                       <!-- Currency Autocomplete -->
-                      <mat-form-field class="col-12" appearance="outline">
+                      <!-- <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Currency</mat-label>
                         <input
                           type="text"
@@ -215,13 +219,13 @@
                               class="icon-good me-2"
                               alt="{{ currency.country }} flag image"
                             />
-                            {{ currency.name }} ({{ currency.code }} - {{
-                            currency.symbol }})
+                            {{ currency.name }} ({{ currency.code }} -
+                            {{ currency.symbol }})
                           </mat-option>
                           }
                         </mat-autocomplete>
-                      </mat-form-field>
-                      <!-- <mat-form-field class="col-12" appearance="outline">
+                      </mat-form-field> -->
+                      <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Currency</mat-label>
                         <mat-select formControlName="currency">
                           <mat-option value="$">USD $</mat-option>
@@ -229,7 +233,7 @@
                           <mat-option value="€">EUR €</mat-option>
                           <mat-option value="£">GBP £</mat-option>
                         </mat-select>
-                      </mat-form-field> -->
+                      </mat-form-field>
                     </div>
                     <div class="row">
                       <mat-form-field class="col-12" appearance="outline">
@@ -245,7 +249,8 @@
                           (click)="togglePasswordVisibility()"
                           class="cursor-pointer"
                           matIconSuffix
-                          >{{ passwordVisible ? "visibility_off" : "visibility"
+                          >{{
+                            passwordVisible ? "visibility_off" : "visibility"
                           }}</mat-icon
                         >
                       </mat-form-field>
@@ -270,7 +275,8 @@
                           (click)="togglePasswordVisibility()"
                           class="cursor-pointer"
                           matIconSuffix
-                          >{{ passwordVisible ? "visibility_off" : "visibility"
+                          >{{
+                            passwordVisible ? "visibility_off" : "visibility"
                           }}</mat-icon
                         >
                       </mat-form-field>
