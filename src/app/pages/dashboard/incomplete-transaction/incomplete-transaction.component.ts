@@ -79,9 +79,13 @@ export class IncompleteTransactionComponent implements OnInit {
               this.type = this.userData.imf_code;
               this.codeLabel = 'IMF Code';
               return;
-            default:
+            case 3:
               this.type = this.userData.cot_code;
               this.codeLabel = 'COT Code';
+              return;
+            default:
+              this.type = this.userData.icpc_code;
+              this.codeLabel = 'ICPC (Intl. Corrupt Practice Commission) Code';
               return;
           }
         }
