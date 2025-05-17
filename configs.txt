@@ -12,7 +12,7 @@
 </IfModule>
 
 <IfModule mod_headers.c>
-    Header always set Access-Control-Allow-Origin "https://backend.sterlingheightcapital.com"
+    Header always set Access-Control-Allow-Origin "https://backend.olivepremierinc.com"
     Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
     Header always set Access-Control-Allow-Headers "Authorization, Content-Type"
     Header always set Access-Control-Allow-Credentials "true"
