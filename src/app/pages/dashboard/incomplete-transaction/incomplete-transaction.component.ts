@@ -79,7 +79,7 @@ export class IncompleteTransactionComponent implements OnInit {
               this.type = this.userData.imf_code;
               this.codeLabel = 'IMF Code';
               return;
-            case 3:
+            case 4:
               this.type = this.userData.cot_code;
               this.codeLabel = 'COT Code';
               return;
