@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.olivepremierinc.com/api', // Example environment variable
+  apiUrl: 'https://backend.trusthorizonciti.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.olivepremierinc.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.olivepremierinc.com',
+  csrfUrl: 'https://backend.trusthorizonciti.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.trusthorizonciti.com',
 };
