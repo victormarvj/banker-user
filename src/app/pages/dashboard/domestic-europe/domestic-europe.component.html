@@ -450,13 +450,29 @@
                       </div>
                     </div>
 
+                    @if (userData?.can_transfer === 0){
+                    <small
+                      class="label bg-warning"
+                      style="
+                        font-size: 12px;
+                        display: inline-block;
+                        padding: 2px 8px;
+                        margin-bottom: 5px;
+                      "
+                      >{{ userData?.reason }}</small
+                    >
+                    }
                     <div class="row justify-content-center">
                       <div class="col-12">
                         @if(!isSubmitBtn) {
                         <button
                           type="button"
                           (click)="enterPin()"
-                          [disabled]="isLoading || transferForm.invalid"
+                          [disabled]="
+                            isLoading ||
+                            transferForm.invalid ||
+                            userData?.can_transfer === 0
+                          "
                           data-bs-toggle="modal"
                           data-bs-target="#pinModal"
                           class="btn w-100 btn-gradient-primary btn-gradient-padding"
