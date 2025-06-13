@@ -20,7 +20,7 @@ export class TawkToService {
 
     let script = document.createElement('script');
     script.id = 'tawk-script';
-    script.src = 'https://embed.tawk.to/6838dc6a88481f191095cd05/1isf1q0oc';
+    script.src = 'https://embed.tawk.to/684b82f679f629190d666977/1itjff5m7';
     script.async = true;
     script.charset = 'UTF-8';
     script.setAttribute('crossorigin', '*');

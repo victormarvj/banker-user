@@ -19,6 +19,7 @@ import { UserService } from '../../services/user.service';
 import { SnackBarService } from '../../services/snack-bar.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { GoogleTranslateService } from '../../services/google-translate.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -65,7 +66,8 @@ export class SignUpComponent {
     private countryService: CountriesService,
     private userService: UserService,
     private snackBarService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private googleTranslate: GoogleTranslateService
   ) {}
 
   ngOnInit(): void {
@@ -289,5 +291,29 @@ export class SignUpComponent {
     } else if (imageType === 'back') {
       this.signupForm.patchValue({ back_doc: url });
     }
+  }
+
+  @ViewChild('translateParent', { static: true }) translateParent!: ElementRef;
+  private translateDivId = 'google_translate_element';
+
+  ngAfterViewInit(): void {
+    // Create and insert div
+    const div = document.createElement('div');
+    div.id = this.translateDivId;
+    this.translateParent.nativeElement.appendChild(div);
+
+    this.googleTranslate.loadScript().then(() => {
+      this.googleTranslate.createWidget(this.translateDivId);
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Clean up
+    const div = document.getElementById(this.translateDivId);
+    if (div) {
+      div.remove();
+    }
+
+    this.googleTranslate.unloadScript();
   }
 }

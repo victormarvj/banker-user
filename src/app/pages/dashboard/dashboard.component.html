@@ -17,7 +17,7 @@
           </a> -->
 
           <a class="navbar-brand" href="#">
-            <h4 class="logo-text"><i>TrustHorizonCiti.com</i></h4>
+            <h4 class="logo-text"><i>ZenithEdgeWiseCiti.com</i></h4>
           </a>
         </h5>
         <button
@@ -308,7 +308,7 @@
 
           <div class="d-flex justify-content-center my-3 nav-color">
             <fa-icon [icon]="faInfoCircle" size="sm"></fa-icon>
-            <a href="mailto: support@trusthorizonciti.com" class="fs-12 ms-2"
+            <a href="mailto: support@zenithedgewiseciti.com" class="fs-12 ms-2"
               >Get Help</a
             >
           </div>
@@ -343,7 +343,7 @@
           <img src="img/logo.png" class="logo" alt="" />
         </a> -->
         <a class="navbar-brand d-none d-md-inline" href="#">
-          <h4 class="logo-text"><i>TrustHorizonCiti.com</i></h4>
+          <h4 class="logo-text"><i>ZenithEdgeWiseCiti.com</i></h4>
         </a>
       </div>
       <div
@@ -607,7 +607,7 @@
 
         <div class="d-flex justify-content-center my-3">
           <fa-icon [icon]="faInfoCircle" size="sm"></fa-icon>
-          <a href="mailto: support@trusthorizonciti.com" class="fs-12 ms-2"
+          <a href="mailto: support@zenithedgewiseciti.com" class="fs-12 ms-2"
             >Get Help</a
           >
         </div>
@@ -637,10 +637,23 @@
       </div>
 
       <div class="views px-3 mt-3">
+        <p
+          class="label bg-warning"
+          style="
+            font-size: 12px;
+            display: inline-block;
+            padding: 2px 8px;
+            margin-left: auto;
+          "
+        >
+          ! You can translate this site at the bottom of the page.
+        </p>
         <router-outlet></router-outlet>
       </div>
 
       <div class="px-4 mt-5">
+        <div #translateParent class="translate-box"></div>
+
         <app-footer></app-footer>
       </div>
     </div>

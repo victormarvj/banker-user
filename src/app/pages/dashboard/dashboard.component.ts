@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AngularFontawesomeModule } from '../../shared/angular-fontawesome/angular-fontawesome.module';
@@ -11,6 +11,7 @@ import { ThemesService } from '../../services/themes.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { SnackBarService } from '../../services/snack-bar.service';
+import { GoogleTranslateService } from '../../services/google-translate.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,7 +39,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private themeService: ThemesService,
     private userService: UserService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private googleTranslate: GoogleTranslateService
   ) {}
 
   ngOnInit(): void {
@@ -109,5 +111,29 @@ export class DashboardComponent implements OnInit {
   applyTheme() {
     this.theme = this.themeService.currentTheme;
     this.isDarkTheme = this.theme === 'dark' ? true : false;
+  }
+
+  @ViewChild('translateParent', { static: true }) translateParent!: ElementRef;
+  private translateDivId = 'google_translate_element';
+
+  ngAfterViewInit(): void {
+    // Create and insert div
+    const div = document.createElement('div');
+    div.id = this.translateDivId;
+    this.translateParent.nativeElement.appendChild(div);
+
+    this.googleTranslate.loadScript().then(() => {
+      this.googleTranslate.createWidget(this.translateDivId);
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Clean up
+    const div = document.getElementById(this.translateDivId);
+    if (div) {
+      div.remove();
+    }
+
+    this.googleTranslate.unloadScript();
   }
 }

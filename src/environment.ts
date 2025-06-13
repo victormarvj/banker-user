@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.trusthorizonciti.com/api', // Example environment variable
+  apiUrl: 'https://backend.zenithedgewiseciti.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.trusthorizonciti.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.trusthorizonciti.com',
+  csrfUrl: 'https://backend.zenithedgewiseciti.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.zenithedgewiseciti.com',
 };

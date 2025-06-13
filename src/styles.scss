@@ -214,6 +214,43 @@ body {
   align-items: center; /* Center vertically */
   z-index: 9999; /* High z-index to ensure it's above other elements */
 }
+// .goog-te-banner-frame.skiptranslate {
+//   display: none !important;
+// }
+// body {
+//   top: 0px !important;
+// }
+// .goog-logo-link,
+// .goog-te-gadget span {
+//   display: none !important;
+// }
+
+/* Style the outer container */
+#google_translate_element {
+  margin: 1rem auto;
+  padding: 6px 12px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  width: fit-content;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Target the dropdown itself */
+.goog-te-combo {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.goog-te-combo:hover {
+  border-color: #999;
+}
 
 @keyframes rotate {
   from {
