@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.agnitudehorizons.com/api', // Example environment variable
+  apiUrl: 'https://backend.intspringwellciti.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.agnitudehorizons.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.agnitudehorizons.com',
+  csrfUrl: 'https://backend.intspringwellciti.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.intspringwellciti.com',
 };
