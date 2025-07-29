@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.kapikoneedge.com/api', // Example environment variable
+  apiUrl: 'https://backend.lunexaedge.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.kapikoneedge.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.kapikoneedge.com',
+  csrfUrl: 'https://backend.lunexaedge.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.lunexaedge.com',
 };
