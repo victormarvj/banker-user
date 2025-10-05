@@ -4,9 +4,9 @@
 @include mat.core();
 
 :root {
-  --bg-accent: #690911;
-  --bg-primary: #7901e3;
-  --bg-dark: #1e1d23;
+  --bg-accent: #1565d8;
+  --bg-primary: #b559e9;
+  --bg-dark: #1a191e;
   --bg-secondary: #a4b4cb;
   --bg-success: #2f9f93;
   --bg-success2: #61bb84;
@@ -17,8 +17,8 @@
   --bg-dark-theme: #050624;
   --bg-dark-theme2: #080a36;
 
-  --bg-linear-accent: #690911;
-  --bg-linear-accent2: #7901e3;
+  --bg-linear-accent: #3e79e5;
+  --bg-linear-accent2: #01b8e3;
 
   --bg-purple: #a789ff;
 
@@ -63,13 +63,13 @@ body {
 }
 
 .bg-gradient-primary {
-  background: linear-gradient(to right, #690911, #7901e3) !important;
+  background: linear-gradient(to right, #1565d8, #b559e9) !important;
 }
 
 .btn-gradient-primary {
   position: relative; /* Position relative to position the ripple effect */
   overflow: hidden; /* Hide overflow of the pseudo-element */
-  background: linear-gradient(to right, #690911, #7901e3) !important;
+  background: linear-gradient(to right, #1565d8, #b559e9) !important;
   border: none;
   color: #fff !important;
   transition: background-color 0.3s ease; /* Optional: smooth transition for background color change */

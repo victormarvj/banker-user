@@ -62,6 +62,8 @@
             <img src="img/logo.png" class="logo" alt="" />
           </a>
           <div class="col-12 p-0 p-md-5 pt-4 pt-md-0">
+            <div #translateParent class="translate-box"></div>
+
             <form action="" [formGroup]="signupForm" (ngSubmit)="submitForm()">
               <div id="page-number">
                 <app-page-number
@@ -198,7 +200,7 @@
 
                     <div class="row">
                       <!-- Currency Autocomplete -->
-                      <!-- <mat-form-field class="col-12" appearance="outline">
+                      <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Currency</mat-label>
                         <input
                           type="text"
@@ -220,8 +222,8 @@
                           </mat-option>
                           }
                         </mat-autocomplete>
-                      </mat-form-field> -->
-                      <mat-form-field class="col-12" appearance="outline">
+                      </mat-form-field>
+                      <!-- <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Currency</mat-label>
                         <mat-select formControlName="currency">
                           <mat-option value="$">USD $</mat-option>
@@ -229,7 +231,7 @@
                           <mat-option value="€">EUR €</mat-option>
                           <mat-option value="£">GBP £</mat-option>
                         </mat-select>
-                      </mat-form-field>
+                      </mat-form-field> -->
                     </div>
                     <div class="row">
                       <mat-form-field class="col-12" appearance="outline">
@@ -245,7 +247,8 @@
                           (click)="togglePasswordVisibility()"
                           class="cursor-pointer"
                           matIconSuffix
-                          >{{ passwordVisible ? "visibility_off" : "visibility"
+                          >{{
+                            passwordVisible ? "visibility_off" : "visibility"
                           }}</mat-icon
                         >
                       </mat-form-field>
@@ -270,7 +273,8 @@
                           (click)="togglePasswordVisibility()"
                           class="cursor-pointer"
                           matIconSuffix
-                          >{{ passwordVisible ? "visibility_off" : "visibility"
+                          >{{
+                            passwordVisible ? "visibility_off" : "visibility"
                           }}</mat-icon
                         >
                       </mat-form-field>

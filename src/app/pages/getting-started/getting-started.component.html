@@ -1,50 +1,6 @@
 <section>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 col-md-6 signup-bg p-5 text-dark">
-        <!-- <a href="#" class="navbar-brand">
-          <img src="img/logo.png" class="logo" alt="" />
-        </a> -->
-
-        <a class="navbar-brand" href="#">
-          <h2 class="logo-text"><i>SterlingHeightCapital.com</i></h2>
-        </a>
-
-        <h1 class="banking-text">Banking starts here.</h1>
-
-        <p class="login-text">
-          Login to get started with SterlingHeightCapital If not yet registered
-          click on sign up to get started.
-        </p>
-
-        <div class="row">
-          <div class="col-12 mb-3">
-            <div class="d-flex">
-              <div class="d-flex me-2 me-md-5">
-                <img src="img/icon-good.png" class="me-2 icon-good" alt="" />
-                <span class="fs-auto">Instant Transfer</span>
-              </div>
-              <div class="d-flex">
-                <img src="img/icon-good.png" class="me-2 icon-good" alt="" />
-                <span class="fs-auto">Payments Worldwide</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="d-flex">
-              <div class="d-flex me-2 me-md-5">
-                <img src="img/icon-good.png" class="me-2 icon-good" alt="" />
-                <span class="fs-auto">Saving accounts</span>
-              </div>
-              <div class="d-flex">
-                <img src="img/icon-good.png" class="me-2 icon-good" alt="" />
-                <span class="fs-auto">100% mobile banking</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <img src="img/signup-girl.png" class="signup-girl" alt="" />
-      </div>
       <div class="col-12 col-md-6">
         <div class="row p-5">
           <div class="col-12 p-0 p-md-5 text-center">
@@ -52,22 +8,23 @@
 
             <h3 class="">Personalize Your Banking Experience</h3>
             <p class="text-secondary">
-              Checking and savings, SBA Loans, long-term investment
-              options–everything you’ll ever need from a banking partner, you’ll
-              find at Fresno First.
+              From everyday checking and high-interest savings to personal loans
+              and smart investment options—InvestiProInc gives you the tools to
+              manage your money with confidence, anytime, anywhere.
             </p>
 
             <div class="mt-5">
-              <p>Are you a New User?</p>
+              <p>New to InvestiProInc?</p>
 
               <a
                 routerLink="/signup"
                 class="btn btn-gradient-primary btn-gradient-padding mb-3"
-                >Lets Get Started</a
               >
+                Open an Account
+              </a>
 
               <p class="text-secondary">
-                Already have an account? <a routerLink="/signin">Login</a>
+                Already a customer? <a routerLink="/signin">Login here</a>
               </p>
             </div>
           </div>
@@ -82,12 +39,72 @@
                 [checked]="isDarkTheme"
                 (change)="toggleTheme($event)"
               />
-              <label class="form-check-label fs-12" for="switchThemeMain"
-                >Dark mode</label
-              >
+              <label class="form-check-label fs-12" for="switchThemeMain">
+                Dark Mode
+              </label>
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-12 col-md-6 signup-bg p-5 text-dark">
+        <!-- <a href="#" class="navbar-brand">
+          <img src="img/logo.png" class="logo" alt="" />
+        </a> -->
+
+        <a class="navbar-brand" href="#">
+          <h2 class="logo-text"><i>InvestiProInc.com</i></h2>
+        </a>
+
+        <h1 class="banking-text">Banking Made Simple.</h1>
+
+        <p class="login-text">
+          Securely log in to manage your InvestiProInc account. New here? Click
+          <strong>Sign Up</strong> to open your account today.
+        </p>
+
+        <div class="row">
+          <div class="col-12 mb-3">
+            <div class="d-flex">
+              <div class="d-flex me-2 me-md-5">
+                <img
+                  src="img/icon-good.png"
+                  class="me-2 icon-good"
+                  alt="Instant transfers"
+                />
+                <span class="fs-auto">Fast & Secure Transfers</span>
+              </div>
+              <div class="d-flex">
+                <img
+                  src="img/icon-good.png"
+                  class="me-2 icon-good"
+                  alt="Global payments"
+                />
+                <span class="fs-auto">Global Payments</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex">
+              <div class="d-flex me-2 me-md-5">
+                <img
+                  src="img/icon-good.png"
+                  class="me-2 icon-good"
+                  alt="Savings account"
+                />
+                <span class="fs-auto">Flexible Savings Accounts</span>
+              </div>
+              <div class="d-flex">
+                <img
+                  src="img/icon-good.png"
+                  class="me-2 icon-good"
+                  alt="Mobile banking"
+                />
+                <span class="fs-auto">24/7 Mobile Banking</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <img src="img/signup-girl.png" class="signup-girl" alt="" /> -->
       </div>
     </div>
   </div>
