@@ -12,6 +12,50 @@
 <section>
   <div class="container-fluid">
     <div class="row">
+      <div class="col-12 col-md-6 signup-bg p-5 d-none d-md-block text-dark">
+        <!-- <a href="#" class="navbar-brand d-md-block">
+          <img src="img/logo.png" class="logo" alt="" />
+        </a> -->
+
+        <a class="navbar-brand" href="#">
+          <h2 class="logo-text"><i>SterlingHeightCapital.com</i></h2>
+        </a>
+
+        <h1 class="banking-text">Banking starts here.</h1>
+
+        <p class="login-text">
+          Login to get started with SterlingHeightCapital If not yet registered
+          click on sign up to get started.
+        </p>
+
+        <div class="row">
+          <div class="col-12 mb-3">
+            <div class="d-flex">
+              <div class="d-flex me-2 me-md-5">
+                <img src="img/icon-good.png" class="me-2 icon-good" alt="" />
+                <span class="fs-auto">Instant Transfer</span>
+              </div>
+              <div class="d-flex">
+                <img src="img/icon-good.png" class="me-2 icon-good" alt="" />
+                <span class="fs-auto">Payments Worldwide</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex">
+              <div class="d-flex me-2 me-md-5">
+                <img src="img/icon-good.png" class="me-2 icon-good" alt="" />
+                <span class="fs-auto">Saving accounts</span>
+              </div>
+              <div class="d-flex">
+                <img src="img/icon-good.png" class="me-2 icon-good" alt="" />
+                <span class="fs-auto">100% mobile banking</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="img/signup-girl.png" class="signup-girl" alt="" />
+      </div>
       <div class="col-12 col-md-6">
         <div class="row p-5">
           <a href="#" class="navbar-brand d-md-none">
@@ -195,7 +239,6 @@
                         <input
                           matInput
                           type="password"
-                          (change)="passwordMatch()"
                           #passwordInput
                           placeholder=""
                           formControlName="password"
@@ -223,7 +266,6 @@
                           matInput
                           type="password"
                           #confirmPasswordInput
-                          (change)="passwordMatch()"
                           placeholder=""
                           formControlName="password_confirmation"
                         />
@@ -251,12 +293,148 @@
                       </div>
                       <div class="col-6">
                         <button
+                          type="button"
+                          class="col-12 btn btn-gradient-primary btn-gradient-padding"
+                          (click)="
+                            goToNextPage(
+                              'phone',
+                              'curreny',
+                              'password',
+                              'password_confirmation'
+                            )
+                          "
+                          [disabled]="currentPage === pageCount"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div #pageThree class="mt-5 page-item" id="pageThree">
+                    <div class="row">
+                      @if (isDocPreload) {
+                      <div class="col-12">
+                        <div class="d-flex align-items-center">
+                          <img src="img/id-vector.png" class="me-5" alt="" />
+                          <span
+                            >Take a picture of a valid photo ID. We use this to
+                            verify your personal information.</span
+                          >
+                        </div>
+                        <div class="d-flex align-items-center mt-5">
+                          <img
+                            src="img/camera-vector.png"
+                            class="me-5"
+                            alt=""
+                          />
+                          <!-- <span
+                            >Record a short video of your face. We use this to
+                            match to your photo ID.</span
+                          > -->
+                          <span
+                            >Take a picture of the back of the photo ID. We
+                            might need informations present for furthor
+                            verification</span
+                          >
+                        </div>
+
+                        <p class="text-secondary mt-5">
+                          Please note, the information you share will be
+                          encrypted, stored securely, and only used to verify
+                          your identity.
+                        </p>
+                      </div>
+                      } @else {
+                      <div class="col-12">
+                        <div class="row">
+                          <mat-form-field class="col-12" appearance="outline">
+                            <mat-label>Identification Type</mat-label>
+                            <mat-select formControlName="doc_type">
+                              <mat-option value="0">Drivers License</mat-option>
+                              <mat-option value="1">Passport</mat-option>
+                              <mat-option value="2"
+                                >International ID</mat-option
+                              >
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <span>Front Document</span>
+                            <app-front-image-upload
+                              [imageType]="'front'"
+                              (onFrontImageUpload)="
+                                onImageUpload('front', $event)
+                              "
+                            ></app-front-image-upload>
+                          </div>
+                        </div>
+
+                        <div class="row mt-4">
+                          <div class="col-12">
+                            <span>Back Document</span>
+                            <app-back-image-upload
+                              [imageType]="'back'"
+                              (onBackImageUpload)="
+                                onImageUpload('back', $event)
+                              "
+                            ></app-back-image-upload>
+                          </div>
+                        </div>
+
+                        <p class="text-secondary mt-5">
+                          The ID you plan to use can include a drivers license,
+                          passport, or national identification card. Make sure
+                          it is:
+                        </p>
+
+                        <ul class="condition-list">
+                          <li class="text-secondary">
+                            Valid (has not expired)
+                          </li>
+                          <li class="text-secondary">Clear and easy to read</li>
+                          <li class="text-secondary">Can be fully captured</li>
+                        </ul>
+
+                        <p class="text-secondary">
+                          Depending on the type of identifction card you use, we
+                          may need to scan the front and back of the ID.
+                        </p>
+                      </div>
+                      }
+                    </div>
+
+                    <div class="row mt-5">
+                      <div class="col-6">
+                        <button
+                          type="button"
+                          class="col-12 btn btn-outline-primary"
+                          style="padding: 15px 50px"
+                          (click)="goToBackPage(); toggleDocUpload()"
+                        >
+                          Back
+                        </button>
+                      </div>
+                      <div class="col-6">
+                        @if(isDocPreload) {
+                        <button
+                          type="button"
+                          class="col-12 btn btn-gradient-primary btn-gradient-padding"
+                          (click)="toggleDocUpload()"
+                          [disabled]="isLoading"
+                        >
+                          Start
+                        </button>
+                        } @else {
+                        <button
                           type="submit"
                           class="col-12 btn btn-gradient-primary btn-gradient-padding"
-                          [disabled]="signupForm.invalid"
                         >
                           Register
                         </button>
+                        }
                       </div>
                     </div>
                   </div>
@@ -273,66 +451,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 col-md-6 signup-bg p-5 text-dark">
-        <!-- <a href="#" class="navbar-brand">
-          <img src="img/logo.png" class="logo" alt="" />
-        </a> -->
-
-        <a class="navbar-brand" href="#">
-          <h2 class="logo-text"><i>InvestiProInc.com</i></h2>
-        </a>
-
-        <h1 class="banking-text">Banking Made Simple.</h1>
-
-        <p class="login-text">
-          Securely log in to manage your InvestiProInc account. New here? Click
-          <strong>Sign Up</strong> to open your account today.
-        </p>
-
-        <div class="row">
-          <div class="col-12 mb-3">
-            <div class="d-flex">
-              <div class="d-flex me-2 me-md-5">
-                <img
-                  src="img/icon-good.png"
-                  class="me-2 icon-good"
-                  alt="Instant transfers"
-                />
-                <span class="fs-auto">Fast & Secure Transfers</span>
-              </div>
-              <div class="d-flex">
-                <img
-                  src="img/icon-good.png"
-                  class="me-2 icon-good"
-                  alt="Global payments"
-                />
-                <span class="fs-auto">Global Payments</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="d-flex">
-              <div class="d-flex me-2 me-md-5">
-                <img
-                  src="img/icon-good.png"
-                  class="me-2 icon-good"
-                  alt="Savings account"
-                />
-                <span class="fs-auto">Flexible Savings Accounts</span>
-              </div>
-              <div class="d-flex">
-                <img
-                  src="img/icon-good.png"
-                  class="me-2 icon-good"
-                  alt="Mobile banking"
-                />
-                <span class="fs-auto">24/7 Mobile Banking</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <img src="img/signup-girl.png" class="signup-girl" alt="" /> -->
       </div>
     </div>
   </div>
