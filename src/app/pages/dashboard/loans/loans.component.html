@@ -1,14 +1,331 @@
+@if(isLoading) {
+<div class="spinner">
+  <img
+    src="img/spinner.png"
+    class="rotating-img"
+    style="width: 50px; height: 50px"
+    alt=""
+  />
+</div>
+}
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <mat-progress-bar mode="buffer" class="mb-3"></mat-progress-bar>
-    </div>
-    <div class="col-12 col-md-6">
-      <img
-        src="img/coming-soon3.png"
-        style="width: 300px; height: 300px"
-        alt=""
-      />
+      <div class="row">
+        <div class="col-12 col-md-4 mt-4 mt-md-0" id="requestCard">
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="col-12 d-flex justify-content-between">
+                <h6>Loan Services</h6>
+                <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center">
+                    <img src="img/master-card-type.png" alt="" />
+                    <span class="ms-2">Car loan</span>
+                  </div>
+                  <div class="ms-5">
+                    <div class="d-flex align-items-center">
+                      <span
+                        >{{ userData?.currency }}
+                        {{ userData?.display_balance }}</span
+                      >
+                      <mat-icon>keyboard_arrow_down</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <div class="card theme-rounded card-dark-theme">
+                <div class="card-body">
+                  <form
+                    [formGroup]="loanForm"
+                    (ngSubmit)="onSubmit()"
+                    (keydown.enter)="$event.preventDefault()"
+                  >
+                    <div class="row">
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Loan Amount</mat-label>
+                        <input
+                          matInput
+                          inputmode="numeric"
+                          type="number"
+                          placeholder=""
+                          formControlName="loan_amount"
+                          (input)="checkLoanAmount($event)"
+                          (change)="calcPaybackAmount($event)"
+                        />
+                      </mat-form-field>
+                      @if (loanForm.get('loan_amount')?.touched &&
+                      loanForm.get('loan_amount')?.hasError('invalidAmount')) {
+                      <small class="text-danger mb-2">Invalid amount!</small>
+                      }
+
+                      <p>
+                        Loan Limit:
+                        {{
+                          userData?.currency +
+                            " " +
+                            userData?.display_loan_amount
+                        }}
+                      </p>
+
+                      <p>
+                        PayBack:
+                        {{ userData?.currency + " " + payBackAmount }}
+                      </p>
+
+                      @if (!userData?.is_loan_eligible) {
+                      <p class="alert alert-info">
+                        You currently do not qualify for any loan services.
+                        Please try again or contact customer service
+                      </p>
+                      }
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Employment Status</mat-label>
+                        <mat-select formControlName="employment_status">
+                          <mat-option value="employed">Employed</mat-option>
+                          <mat-option value="self-employed"
+                            >Self Employed</mat-option
+                          >
+                          <mat-option value="business owner"
+                            >Businness Owner</mat-option
+                          >
+                          <mat-option value="student">Student</mat-option>
+                          <mat-option value="unemployed">Unemployed</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Monthly or Annual Income</mat-label>
+                        <input
+                          matInput
+                          inputmode="numeric"
+                          type="number"
+                          placeholder=""
+                          formControlName="income"
+                        />
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Monthly Expense</mat-label>
+                        <input
+                          matInput
+                          inputmode="numeric"
+                          type="number"
+                          placeholder=""
+                          formControlName="expense"
+                        />
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Loan Duration</mat-label>
+                        <mat-select formControlName="duration">
+                          <mat-option value="3 months">3 Months</mat-option>
+                          <mat-option value="6 months">6 Months</mat-option>
+                          <mat-option value="1 year">1 Year</mat-option>
+                          <mat-option value="2 years">2 Years</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field class="col-12" appearance="outline">
+                        <mat-label>Description (Optional)</mat-label>
+
+                        <textarea
+                          matInput
+                          formControlName="description"
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="pinModal"
+                      tabindex="-1"
+                      aria-labelledby="pinModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="pinModalLabel">
+                              Enter Transaction Pin
+                            </h1>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <div
+                              formArrayName="digits"
+                              class="code-input-container"
+                            >
+                              @for (digit of digitsArray.controls; track $index)
+                              {
+                              <mat-form-field appearance="outline">
+                                <input
+                                  id="digit{{ $index }}"
+                                  class="code-input"
+                                  type="password"
+                                  maxlength="1"
+                                  [formControlName]="$index"
+                                  (input)="moveToNext($index, $event)"
+                                  (keydown)="moveToNext($index, $event)"
+                                  matInput
+                                />
+                              </mat-form-field>
+                              }
+                            </div>
+
+                            <button
+                              type="button"
+                              [disabled]="isLoading || pin.length < 4"
+                              class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                              (click)="checkPin()"
+                            >
+                              Confirm
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      #openModal
+                      data-bs-toggle="modal"
+                      data-bs-target="#otpModal"
+                      style="visibility: hidden"
+                    >
+                      OpenOtpModal
+                    </button>
+
+                    <div class="row justify-content-center">
+                      <div class="col-12">
+                        @if(!isSubmitBtn) {
+                        <button
+                          type="button"
+                          (click)="enterPin()"
+                          [disabled]="
+                            isLoading ||
+                            loanForm.invalid ||
+                            !userData.is_loan_eligible
+                          "
+                          data-bs-toggle="modal"
+                          data-bs-target="#pinModal"
+                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                        >
+                          Request Loan
+                        </button>
+                        }@else {
+                        <button
+                          type="submit"
+                          [disabled]="loanForm.invalid"
+                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                        >
+                          Confirm Transaction
+                        </button>
+                        }
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-8 mt-4 mt-md-0">
+          @if (isLoading) {
+          <div class="spinner">
+            <img
+              src="img/spinner.png"
+              class="rotating-img"
+              style="width: 50px; height: 50px"
+              alt="Loading"
+            />
+          </div>
+          }
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <h5>Recent loans</h5>
+
+                @if (isBrowser) {
+                <div class="card theme-rounded card-dark-theme mt-4">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table datatable class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Loan Amount</th>
+                            <th scope="col">Payback Amount</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Loan Date</th>
+                            <th scope="col">Payback Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let loan of loans">
+                            <td class="text-truncate">
+                              <div class="d-flex align-items-center">
+                                <mat-icon class="text-success">
+                                  arrow_circle_down
+                                </mat-icon>
+                                <span class="ms-3">{{
+                                  userData?.currency + "" + loan?.loan_amount
+                                }}</span>
+                              </div>
+                            </td>
+                            <td class="text-truncate">
+                              {{
+                                userData?.currency + "" + loan?.payback_amount
+                              }}
+                            </td>
+                            <td class="text-truncate">
+                              {{ loan?.duration }}
+                            </td>
+                            <td class="text-truncate">
+                              @if (loan?.status == 0) {
+                              <span class="badge text-bg-warning">Pending</span>
+                              }@else if (loan?.status == 1) {
+                              <span class="badge text-bg-success">Approved</span
+                              >}@else if (loan?.status == 3) {
+                              <span class="badge text-bg-secondary"
+                                >Cleared</span
+                              >
+                              }@else {
+                              <span class="badge text-bg-danger">Declined</span>
+                              }
+                            </td>
+                            <td class="text-truncate">
+                              {{ loan?.created_at | date : "long" }}
+                            </td>
+                            <td class="text-truncate">
+                              {{ loan?.description }}
+                            </td>
+                            <td class="text-truncate">
+                              {{ loan?.expiration_date | date : "long" }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ main {
 
 /* Default styles for larger screens */
 .sidebar {
-  width: 230px; /* Fixed width for sidebar */
+  width: 280px; /* Fixed width for sidebar */
   height: 100vh; /* Full viewport height */
   overflow-y: hidden; /* Scrollable if content exceeds height */
   position: fixed; /* Fix the sidebar in place */
@@ -16,14 +16,14 @@ main {
 }
 
 .content {
-  margin-left: 230px; /* Offset for sidebar width */
+  margin-left: 280px; /* Offset for sidebar width */
   min-height: 80vh; /* Full viewport height */
   overflow-y: auto; /* Scrollable if content exceeds height */
 }
 
 /* Hide scrollbar buttons for WebKit-based browsers */
 .full-height-sidenav::-webkit-scrollbar {
-  width: 6px; /* Width of the scrollbar */
+  width: 2px; /* Width of the scrollbar */
 }
 
 .full-height-sidenav::-webkit-scrollbar-thumb {
