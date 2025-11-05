@@ -11,6 +11,9 @@ import {
 } from '@angular/forms';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
 import { PageNumberComponent } from './page-number/page-number.component';
+import { FrontImageUploadComponent } from '../../components/front-image-upload/front-image-upload.component';
+import { BackImageUploadComponent } from '../../components/back-image-upload/back-image-upload.component';
+import { FileUploadComponent } from '../../components/file-upload/file-upload.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { SnackBarService } from '../../services/snack-bar.service';
@@ -25,6 +28,8 @@ import { GoogleTranslateService } from '../../services/google-translate.service'
     AngularMaterialModule,
     ReactiveFormsModule,
     PageNumberComponent,
+    FrontImageUploadComponent,
+    BackImageUploadComponent,
     AsyncPipe,
     RouterModule,
   ],
@@ -41,7 +46,7 @@ export class SignUpComponent {
     'For the purpose of industry regulation, your details are required.';
 
   currentPage: number = 0;
-  pageCount: number = 3;
+  pageCount: number = 4;
 
   passed: number = 0;
   active: number = 1;
@@ -56,8 +61,6 @@ export class SignUpComponent {
   isLoading: boolean = false;
   preloader: boolean = false;
   isDocPreload: boolean = true;
-
-  isFormValid = false;
 
   constructor(
     private countryService: CountriesService,
@@ -252,28 +255,14 @@ export class SignUpComponent {
     currency: new FormControl([], Validators.required),
     phone: new FormControl([], Validators.required),
     password: new FormControl([], Validators.required),
-    password_confirmation: new FormControl([], Validators.required),
+    password_confirmation: new FormControl(''),
+    doc_type: new FormControl([], Validators.required),
+    front_doc: new FormControl([], Validators.required),
+    back_doc: new FormControl([], Validators.required),
   });
 
-  passwordMatch() {
-    if (
-      this.passwordInput.nativeElement.value !=
-      this.confirmPasswordInput.nativeElement.value
-    ) {
-      this.isFormValid = false;
-      this.snackBarService.error(
-        'Password do not match. Please confirm password!'
-      );
-    } else if (this.passwordInput.nativeElement.value.length < 8) {
-      this.isFormValid = false;
-      this.snackBarService.error('Password must be at least 8 characters');
-    } else {
-      this.isFormValid = true;
-    }
-  }
-
   submitForm() {
-    if (this.signupForm.valid && this.isFormValid) {
+    if (this.signupForm.valid) {
       this.isLoading = true;
       const formData = this.signupForm.value;
       this.userService.registerUser(formData).subscribe({
@@ -293,6 +282,14 @@ export class SignUpComponent {
       });
     } else {
       this.snackBarService.error('Invalid form inputs');
+    }
+  }
+
+  onImageUpload(imageType: string, url: any) {
+    if (imageType === 'front') {
+      this.signupForm.patchValue({ front_doc: url });
+    } else if (imageType === 'back') {
+      this.signupForm.patchValue({ back_doc: url });
     }
   }
 
