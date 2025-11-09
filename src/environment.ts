@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.globetrustcapital.com/api', // Example environment variable
+  apiUrl: 'https://backend.tavricapitalciti.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.globetrustcapital.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.globetrustcapital.com',
+  csrfUrl: 'https://backend.tavricapitalciti.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.tavricapitalciti.com',
 };
