@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.woventallciti.com/api', // Example environment variable
+  apiUrl: 'https://backend.woventallowhold.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.woventallciti.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.woventallciti.com',
+  csrfUrl: 'https://backend.woventallowhold.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.woventallowhold.com',
 };
