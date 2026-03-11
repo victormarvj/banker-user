@@ -1,12 +1,12 @@
-@if(isLoading) {
-<div class="spinner">
-  <img
-    src="img/spinner.png"
-    class="rotating-img"
-    style="width: 50px; height: 50px"
-    alt=""
-  />
-</div>
+@if (isLoading) {
+  <div class="spinner">
+    <img
+      src="img/spinner.png"
+      class="rotating-img"
+      style="width: 50px; height: 50px"
+      alt=""
+    />
+  </div>
 }
 
 <div class="container-fluid">
@@ -43,11 +43,11 @@
                   <div class="d-flex flex-column text-light me-3">
                     <span class="fw-light fs-12">VALID THRU</span>
                     @if (userData?.master_card_expiry !== null) {
-                    <span class="fs-12">{{
-                      userData?.master_card_expiry
-                    }}</span>
-                    }@else {
-                    <span class="fs-12">**/**</span>
+                      <span class="fs-12">{{
+                        userData?.master_card_expiry
+                      }}</span>
+                    } @else {
+                      <span class="fs-12">**/**</span>
                     }
                   </div>
                 </div>
@@ -55,15 +55,15 @@
               <div class="d-flex justify-content-between px-2">
                 <div class="d-flex flex-column text-light">
                   @if (userData?.master_card !== null) {
-                  <p class="mt-2">
-                    {{
-                      userData?.master_card.substring(0, 4) +
-                        "**** ****" +
-                        userData?.master_card.substring(-4)
-                    }}
-                  </p>
-                  }@else {
-                  <p class="mt-2">**** **** **** ****</p>
+                    <p class="mt-2">
+                      {{
+                        userData?.master_card.substring(0, 4) +
+                          "**** ****" +
+                          userData?.master_card.substring(-4)
+                      }}
+                    </p>
+                  } @else {
+                    <p class="mt-2">**** **** **** ****</p>
                   }
                 </div>
                 <div>
@@ -184,63 +184,65 @@
                       </tr>
                     </thead>
                     <tbody class="">
-                      @for(recent of latestData; track $index) {
-                      <tr>
-                        <td class="text-truncate">
-                          <div class="d-flex align-items-center">
-                            @if (recent.transaction_type === 0 && userData?.id
-                            == recent.sender_id) {
-                            <img
-                              src="img/icon-danger.png"
-                              style="width: 41.72px; height: 41.72px"
-                              alt=""
-                            />
-                            }@else {
-                            <img
-                              src="img/icon-success.png"
-                              style="width: 41.72px; height: 41.72px"
-                              alt=""
-                            />
-                            }
-                            <span class="ms-3">{{ recent.description }}</span>
-                          </div>
-                        </td>
-                        <td class="text-truncate">
-                          {{ recent.created_at | date : "long" }}
-                        </td>
-                        <td class="text-truncate">
-                          {{ recent.receiver_name }}
-                        </td>
-                        <td class="text-truncate">
-                          <span
-                            [ngClass]="{
-                              'text-danger':
+                      @for (recent of latestData; track $index) {
+                        <tr>
+                          <td class="text-truncate">
+                            <div class="d-flex align-items-center">
+                              @if (
+                                recent.transaction_type === 0 &&
+                                userData?.id == recent.sender_id
+                              ) {
+                                <img
+                                  src="img/icon-danger.png"
+                                  style="width: 41.72px; height: 41.72px"
+                                  alt=""
+                                />
+                              } @else {
+                                <img
+                                  src="img/icon-success.png"
+                                  style="width: 41.72px; height: 41.72px"
+                                  alt=""
+                                />
+                              }
+                              <span class="ms-3">{{ recent.description }}</span>
+                            </div>
+                          </td>
+                          <td class="text-truncate">
+                            {{ recent.created_at | date: "long" }}
+                          </td>
+                          <td class="text-truncate">
+                            {{ recent.receiver_name }}
+                          </td>
+                          <td class="text-truncate">
+                            <span
+                              [ngClass]="{
+                                'text-danger':
+                                  recent.transaction_type == 0 &&
+                                  recent.sender_id == userData?.id,
+                                'text-success':
+                                  (recent.transaction_type == 1 ||
+                                    recent.transaction_type == 0) &&
+                                  recent.receiver_id == userData?.id,
+                              }"
+                            >
+                              {{
                                 recent.transaction_type == 0 &&
-                                recent.sender_id == userData?.id,
-                              'text-success':
-                                (recent.transaction_type == 1 ||
-                                  recent.transaction_type == 0) &&
-                                recent.receiver_id == userData?.id
-                            }"
-                          >
-                            {{
-                              recent.transaction_type == 0 &&
-                              recent.sender_id == userData?.id
-                                ? "- "
-                                : "+ "
-                            }}{{ recent.amount }}
-                          </span>
-                        </td>
-                        <td>
-                          @if (recent.status == 0) {
-                          <span class="badge text-bg-warning">Pending</span>
-                          }@else if (recent.status == 1) {
-                          <span class="badge text-bg-success">Success</span>
-                          }@else {
-                          <span class="badge text-bg-danger">Declined</span>
-                          }
-                        </td>
-                      </tr>
+                                recent.sender_id == userData?.id
+                                  ? "- "
+                                  : "+ "
+                              }}{{ recent.amount }}
+                            </span>
+                          </td>
+                          <td>
+                            @if (recent.status == 0) {
+                              <span class="badge text-bg-warning">Pending</span>
+                            } @else if (recent.status == 1) {
+                              <span class="badge text-bg-success">Success</span>
+                            } @else {
+                              <span class="badge text-bg-danger">Declined</span>
+                            }
+                          </td>
+                        </tr>
                       }
                     </tbody>
                   </table>
@@ -377,7 +379,7 @@
                   </div>
                   <div class="detail-item">
                     <i class="icon fas fa-university"></i>
-                    <span><strong>Bank Name:</strong> woventallowhold.com</span>
+                    <span><strong>Bank Name:</strong> zenatopthrust.com</span>
                   </div>
                   <div class="detail-item">
                     <i class="icon fas fa-file-invoice-dollar"></i>
@@ -411,47 +413,46 @@
           <div class="card theme-rounded card-dark-theme">
             <div class="card-body">
               @for (invoice of invoicesData; track $index) {
-
-              <div
-                class="d-flex justify-content-between align-items-center px-4 my-4"
-              >
-                @if (invoice.status === 0) {
-                <img src="img/icon-warning.png" alt="" />
-                }@else if (invoice.status === 1) {
-                <img src="img/icon-success.png" alt="" />
-                }@else {
-                <img src="img/icon-danger.png" alt="" />
-                }
-                <div>
-                  <span class="d-block fs-14">{{
-                    invoice.transfer_type === 0
-                      ? "Domestic"
-                      : invoice.transfer_type === 1
-                      ? "International"
-                      : "Europe"
-                  }}</span>
-                  <span class="d-block fs-12">? time Ago</span>
-                </div>
-                <div>
-                  <span
-                    [ngClass]="{
-                      'text-danger':
+                <div
+                  class="d-flex justify-content-between align-items-center px-4 my-4"
+                >
+                  @if (invoice.status === 0) {
+                    <img src="img/icon-warning.png" alt="" />
+                  } @else if (invoice.status === 1) {
+                    <img src="img/icon-success.png" alt="" />
+                  } @else {
+                    <img src="img/icon-danger.png" alt="" />
+                  }
+                  <div>
+                    <span class="d-block fs-14">{{
+                      invoice.transfer_type === 0
+                        ? "Domestic"
+                        : invoice.transfer_type === 1
+                          ? "International"
+                          : "Europe"
+                    }}</span>
+                    <span class="d-block fs-12">? time Ago</span>
+                  </div>
+                  <div>
+                    <span
+                      [ngClass]="{
+                        'text-danger':
+                          invoice.transaction_type == 0 &&
+                          invoice.sender_id == userData?.id,
+                        'text-success':
+                          invoice.transaction_type == 0 &&
+                          invoice.receiver_id == userData?.id,
+                      }"
+                    >
+                      {{
                         invoice.transaction_type == 0 &&
-                        invoice.sender_id == userData?.id,
-                      'text-success':
-                        invoice.transaction_type == 0 &&
-                        invoice.receiver_id == userData?.id
-                    }"
-                  >
-                    {{
-                      invoice.transaction_type == 0 &&
-                      invoice.sender_id == userData?.id
-                        ? "- "
-                        : "+ "
-                    }}{{ invoice.amount }}
-                  </span>
+                        invoice.sender_id == userData?.id
+                          ? "- "
+                          : "+ "
+                      }}{{ invoice.amount }}
+                    </span>
+                  </div>
                 </div>
-              </div>
               }
             </div>
           </div>
@@ -463,57 +464,59 @@
           <div class="card theme-rounded card-dark-theme">
             <div class="card-body">
               @for (beneficiary of beneficiaryData; track $index) {
-              <div
-                class="d-flex justify-content-between align-items-center p-2 my-3 bg-secondary-dark theme-rounded"
-              >
-                @if (beneficiary.status === 0) {
-                <img
-                  src="img/icon-warning.png"
-                  style="width: 41.72px; height: 41.72px"
-                  alt=""
-                />
-                }@else if (beneficiary.status === 1) {
-                <img
-                  src="img/icon-success.png"
-                  style="width: 41.72px; height: 41.72px"
-                  alt=""
-                />
-                }@else {
-                <img
-                  src="img/icon-danger.png"
-                  style="width: 41.72px; height: 41.72px"
-                  alt=""
-                />
-                }
-                <div class="text-dark">
-                  <span class="d-block fs-12">{{
-                    beneficiary.receiver_account_name
-                  }}</span>
+                <div
+                  class="d-flex justify-content-between align-items-center p-2 my-3 bg-secondary-dark theme-rounded"
+                >
+                  @if (beneficiary.status === 0) {
+                    <img
+                      src="img/icon-warning.png"
+                      style="width: 41.72px; height: 41.72px"
+                      alt=""
+                    />
+                  } @else if (beneficiary.status === 1) {
+                    <img
+                      src="img/icon-success.png"
+                      style="width: 41.72px; height: 41.72px"
+                      alt=""
+                    />
+                  } @else {
+                    <img
+                      src="img/icon-danger.png"
+                      style="width: 41.72px; height: 41.72px"
+                      alt=""
+                    />
+                  }
+                  <div class="text-dark">
+                    <span class="d-block fs-12">{{
+                      beneficiary.receiver_account_name
+                    }}</span>
 
-                  <span
-                    [ngClass]="{
-                      'text-danger':
+                    <span
+                      [ngClass]="{
+                        'text-danger':
+                          beneficiary.transaction_type == 0 &&
+                          beneficiary.sender_id == userData?.id,
+                        'text-success':
+                          beneficiary.transaction_type == 0 &&
+                          beneficiary.receiver_id == userData?.id,
+                      }"
+                    >
+                      {{
                         beneficiary.transaction_type == 0 &&
-                        beneficiary.sender_id == userData?.id,
-                      'text-success':
-                        beneficiary.transaction_type == 0 &&
-                        beneficiary.receiver_id == userData?.id
-                    }"
-                  >
-                    {{
-                      beneficiary.transaction_type == 0 &&
-                      beneficiary.sender_id == userData?.id
-                        ? "- "
-                        : "+ "
-                    }}{{ beneficiary.amount }}
-                  </span>
+                        beneficiary.sender_id == userData?.id
+                          ? "- "
+                          : "+ "
+                      }}{{ beneficiary.amount }}
+                    </span>
+                  </div>
+                  <div>
+                    <button
+                      class="btn btn-gradient-primary fs-10 d-inline w-100"
+                    >
+                      Repeat Transaction
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <button class="btn btn-gradient-primary fs-10 d-inline w-100">
-                    Repeat Transaction
-                  </button>
-                </div>
-              </div>
               }
             </div>
           </div>

@@ -1,12 +1,12 @@
-@if(isLoading) {
-<div class="spinner">
-  <img
-    src="img/spinner.png"
-    class="rotating-img"
-    style="width: 50px; height: 50px"
-    alt=""
-  />
-</div>
+@if (isLoading) {
+  <div class="spinner">
+    <img
+      src="img/spinner.png"
+      class="rotating-img"
+      style="width: 50px; height: 50px"
+      alt=""
+    />
+  </div>
 }
 
 <section>
@@ -18,14 +18,14 @@
         </a> -->
 
         <a class="navbar-brand" href="#">
-          <h2 class="logo-text"><i>WovenTallowHold.com</i></h2>
+          <h2 class="logo-text"><i>ZenaTopThrust.com</i></h2>
         </a>
 
         <h1 class="banking-text">Banking starts here.</h1>
 
         <p class="login-text">
-          Login to get started with WovenTallowHold If not yet registered click
-          on sign up to get started.
+          Login to get started with ZenaTopThrust If not yet registered click on
+          sign up to get started.
         </p>
 
         <div class="row">
@@ -77,153 +77,157 @@
 
               <div class="row">
                 @if (isLoading || preloader) {
-                <div class="col-12 my-2">
-                  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-                </div>
+                  <div class="col-12 my-2">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                  </div>
                 }
               </div>
 
               @if (!preloader) {
-              <div #pageContainer id="pageContainer">
-                <div #pageMenu id="pageMenu">
-                  <div #pageOne class="mt-5 page-item" id="pageOne">
-                    <div class="row">
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>Country</mat-label>
-                        <input
-                          type="text"
-                          matInput
-                          formControlName="country"
-                          [matAutocomplete]="auto"
-                        />
-                        <mat-autocomplete #auto="matAutocomplete">
-                          @for (country of filteredCountries | async; track
-                          $index) {
-                          <mat-option [value]="country.name.common"
-                            ><img
-                              src="{{ country.flags.svg }}"
-                              class="icon-good me-2"
-                              alt="{{ country.name.common }} flag image"
-                            />{{ country.name.common }}</mat-option
-                          >
-                          }
-                        </mat-autocomplete>
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field
-                        class="col-12 col-md-6"
-                        appearance="outline"
+                <div #pageContainer id="pageContainer">
+                  <div #pageMenu id="pageMenu">
+                    <div #pageOne class="mt-5 page-item" id="pageOne">
+                      <div class="row">
+                        <mat-form-field class="col-12" appearance="outline">
+                          <mat-label>Country</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            formControlName="country"
+                            [matAutocomplete]="auto"
+                          />
+                          <mat-autocomplete #auto="matAutocomplete">
+                            @for (
+                              country of filteredCountries | async;
+                              track $index
+                            ) {
+                              <mat-option [value]="country.name.common"
+                                ><img
+                                  src="{{ country.flags.svg }}"
+                                  class="icon-good me-2"
+                                  alt="{{ country.name.common }} flag image"
+                                />{{ country.name.common }}</mat-option
+                              >
+                            }
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field
+                          class="col-12 col-md-6"
+                          appearance="outline"
+                        >
+                          <mat-label>Firstname</mat-label>
+                          <input
+                            matInput
+                            placeholder=""
+                            formControlName="firstname"
+                          />
+                          <!-- <mat-hint>Hint</mat-hint> -->
+                        </mat-form-field>
+                        <mat-form-field
+                          class="col-12 col-md-6"
+                          appearance="outline"
+                        >
+                          <mat-label>Lastname</mat-label>
+                          <input
+                            matInput
+                            placeholder=""
+                            formControlName="lastname"
+                          />
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field class="col-12" appearance="outline">
+                          <mat-label>Gender</mat-label>
+                          <mat-select formControlName="gender">
+                            <mat-option value="0">Male</mat-option>
+                            <mat-option value="1">Female</mat-option>
+                            <mat-option value="2">Other</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field class="col-12" appearance="outline">
+                          <mat-label>DOB</mat-label>
+                          <input
+                            matInput
+                            type="date"
+                            placeholder=""
+                            formControlName="dob"
+                          />
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field class="col-12" appearance="outline">
+                          <mat-label>Email Address</mat-label>
+                          <input
+                            matInput
+                            type="email"
+                            placeholder=""
+                            formControlName="email"
+                          />
+                        </mat-form-field>
+                      </div>
+                      <button
+                        type="button"
+                        class="col-12 btn btn-gradient-primary btn-gradient-padding mt-3"
+                        (click)="
+                          goToNextPage(
+                            'country',
+                            'firstname',
+                            'lastname',
+                            'gender',
+                            'dob',
+                            'email'
+                          )
+                        "
                       >
-                        <mat-label>Firstname</mat-label>
-                        <input
-                          matInput
-                          placeholder=""
-                          formControlName="firstname"
-                        />
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                      </mat-form-field>
-                      <mat-form-field
-                        class="col-12 col-md-6"
-                        appearance="outline"
-                      >
-                        <mat-label>Lastname</mat-label>
-                        <input
-                          matInput
-                          placeholder=""
-                          formControlName="lastname"
-                        />
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>Gender</mat-label>
-                        <mat-select formControlName="gender">
-                          <mat-option value="0">Male</mat-option>
-                          <mat-option value="1">Female</mat-option>
-                          <mat-option value="2">Other</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>DOB</mat-label>
-                        <input
-                          matInput
-                          type="date"
-                          placeholder=""
-                          formControlName="dob"
-                        />
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>Email Address</mat-label>
-                        <input
-                          matInput
-                          type="email"
-                          placeholder=""
-                          formControlName="email"
-                        />
-                      </mat-form-field>
-                    </div>
-                    <button
-                      type="button"
-                      class="col-12 btn btn-gradient-primary btn-gradient-padding mt-3"
-                      (click)="
-                        goToNextPage(
-                          'country',
-                          'firstname',
-                          'lastname',
-                          'gender',
-                          'dob',
-                          'email'
-                        )
-                      "
-                    >
-                      Next
-                    </button>
-                  </div>
-
-                  <div #pageTwo class="mt-5 page-item" id="pageTwo">
-                    <div class="row">
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>Phone Number</mat-label>
-                        <input
-                          matInput
-                          type="tel"
-                          placeholder=""
-                          formControlName="phone"
-                        />
-                      </mat-form-field>
+                        Next
+                      </button>
                     </div>
 
-                    <div class="row">
-                      <!-- Currency Autocomplete -->
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>Currency</mat-label>
-                        <input
-                          type="text"
-                          matInput
-                          formControlName="currency"
-                          [matAutocomplete]="currencyAuto"
-                        />
-                        <mat-autocomplete #currencyAuto="matAutocomplete">
-                          @for (currency of filteredCurrencies | async; track
-                          $index) {
-                          <mat-option [value]="currency.symbol">
-                            <img
-                              src="{{ currency.flag }}"
-                              class="icon-good me-2"
-                              alt="{{ currency.country }} flag image"
-                            />
-                            {{ currency.name }} ({{ currency.code }} -
-                            {{ currency.symbol }})
-                          </mat-option>
-                          }
-                        </mat-autocomplete>
-                      </mat-form-field>
-                      <!-- <mat-form-field class="col-12" appearance="outline">
+                    <div #pageTwo class="mt-5 page-item" id="pageTwo">
+                      <div class="row">
+                        <mat-form-field class="col-12" appearance="outline">
+                          <mat-label>Phone Number</mat-label>
+                          <input
+                            matInput
+                            type="tel"
+                            placeholder=""
+                            formControlName="phone"
+                          />
+                        </mat-form-field>
+                      </div>
+
+                      <div class="row">
+                        <!-- Currency Autocomplete -->
+                        <mat-form-field class="col-12" appearance="outline">
+                          <mat-label>Currency</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            formControlName="currency"
+                            [matAutocomplete]="currencyAuto"
+                          />
+                          <mat-autocomplete #currencyAuto="matAutocomplete">
+                            @for (
+                              currency of filteredCurrencies | async;
+                              track $index
+                            ) {
+                              <mat-option [value]="currency.symbol">
+                                <img
+                                  src="{{ currency.flag }}"
+                                  class="icon-good me-2"
+                                  alt="{{ currency.country }} flag image"
+                                />
+                                {{ currency.name }} ({{ currency.code }} -
+                                {{ currency.symbol }})
+                              </mat-option>
+                            }
+                          </mat-autocomplete>
+                        </mat-form-field>
+                        <!-- <mat-form-field class="col-12" appearance="outline">
                         <mat-label>Currency</mat-label>
                         <mat-select formControlName="currency">
                           <mat-option value="$">USD $</mat-option>
@@ -232,214 +236,228 @@
                           <mat-option value="£">GBP £</mat-option>
                         </mat-select>
                       </mat-form-field> -->
-                    </div>
-                    <div class="row">
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>Password</mat-label>
-                        <input
-                          matInput
-                          type="password"
-                          #passwordInput
-                          placeholder=""
-                          formControlName="password"
-                        />
-                        <mat-icon
-                          (click)="togglePasswordVisibility()"
-                          class="cursor-pointer"
-                          matIconSuffix
-                          >{{
-                            passwordVisible ? "visibility_off" : "visibility"
-                          }}</mat-icon
-                        >
-                      </mat-form-field>
-                    </div>
-
-                    <small class="text-secondary">
-                      *Password should contain atleast one uppercase, lowercase,
-                      digit, symbol and minimum of 8 characters*
-                    </small>
-
-                    <div class="row">
-                      <mat-form-field class="col-12" appearance="outline">
-                        <mat-label>Confirm Password</mat-label>
-                        <input
-                          matInput
-                          type="password"
-                          #confirmPasswordInput
-                          placeholder=""
-                          formControlName="password_confirmation"
-                        />
-                        <mat-icon
-                          (click)="togglePasswordVisibility()"
-                          class="cursor-pointer"
-                          matIconSuffix
-                          >{{
-                            passwordVisible ? "visibility_off" : "visibility"
-                          }}</mat-icon
-                        >
-                      </mat-form-field>
-                    </div>
-
-                    <div class="row mt-5">
-                      <div class="col-6">
-                        <button
-                          type="button"
-                          class="col-12 btn btn-outline-primary"
-                          style="padding: 15px 50px"
-                          (click)="goToBackPage()"
-                        >
-                          Back
-                        </button>
                       </div>
-                      <div class="col-6">
-                        <button
-                          type="button"
-                          class="col-12 btn btn-gradient-primary btn-gradient-padding"
-                          (click)="
-                            goToNextPage(
-                              'phone',
-                              'curreny',
-                              'password',
-                              'password_confirmation'
-                            )
-                          "
-                          [disabled]="currentPage === pageCount"
-                        >
-                          Next
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div #pageThree class="mt-5 page-item" id="pageThree">
-                    <div class="row">
-                      @if (isDocPreload) {
-                      <div class="col-12">
-                        <div class="d-flex align-items-center">
-                          <img src="img/id-vector.png" class="me-5" alt="" />
-                          <span
-                            >Take a picture of a valid photo ID. We use this to
-                            verify your personal information.</span
-                          >
-                        </div>
-                        <div class="d-flex align-items-center mt-5">
-                          <img
-                            src="img/camera-vector.png"
-                            class="me-5"
-                            alt=""
+                      <div class="row">
+                        <mat-form-field class="col-12" appearance="outline">
+                          <mat-label>Password</mat-label>
+                          <input
+                            matInput
+                            type="password"
+                            #passwordInput
+                            placeholder=""
+                            formControlName="password"
                           />
-                          <!-- <span
+                          <mat-icon
+                            (click)="togglePasswordVisibility()"
+                            class="cursor-pointer"
+                            matIconSuffix
+                            >{{
+                              passwordVisible ? "visibility_off" : "visibility"
+                            }}</mat-icon
+                          >
+                        </mat-form-field>
+                      </div>
+
+                      <small class="text-secondary">
+                        *Password should contain atleast one uppercase,
+                        lowercase, digit, symbol and minimum of 8 characters*
+                      </small>
+
+                      <div class="row">
+                        <mat-form-field class="col-12" appearance="outline">
+                          <mat-label>Confirm Password</mat-label>
+                          <input
+                            matInput
+                            type="password"
+                            #confirmPasswordInput
+                            placeholder=""
+                            formControlName="password_confirmation"
+                          />
+                          <mat-icon
+                            (click)="togglePasswordVisibility()"
+                            class="cursor-pointer"
+                            matIconSuffix
+                            >{{
+                              passwordVisible ? "visibility_off" : "visibility"
+                            }}</mat-icon
+                          >
+                        </mat-form-field>
+                      </div>
+
+                      <div class="row mt-5">
+                        <div class="col-6">
+                          <button
+                            type="button"
+                            class="col-12 btn btn-outline-primary"
+                            style="padding: 15px 50px"
+                            (click)="goToBackPage()"
+                          >
+                            Back
+                          </button>
+                        </div>
+                        <div class="col-6">
+                          <button
+                            type="button"
+                            class="col-12 btn btn-gradient-primary btn-gradient-padding"
+                            (click)="
+                              goToNextPage(
+                                'phone',
+                                'curreny',
+                                'password',
+                                'password_confirmation'
+                              )
+                            "
+                            [disabled]="currentPage === pageCount"
+                          >
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div #pageThree class="mt-5 page-item" id="pageThree">
+                      <div class="row">
+                        @if (isDocPreload) {
+                          <div class="col-12">
+                            <div class="d-flex align-items-center">
+                              <img
+                                src="img/id-vector.png"
+                                class="me-5"
+                                alt=""
+                              />
+                              <span
+                                >Take a picture of a valid photo ID. We use this
+                                to verify your personal information.</span
+                              >
+                            </div>
+                            <div class="d-flex align-items-center mt-5">
+                              <img
+                                src="img/camera-vector.png"
+                                class="me-5"
+                                alt=""
+                              />
+                              <!-- <span
                             >Record a short video of your face. We use this to
                             match to your photo ID.</span
                           > -->
-                          <span
-                            >Take a picture of the back of the photo ID. We
-                            might need informations present for furthor
-                            verification</span
-                          >
-                        </div>
-
-                        <p class="text-secondary mt-5">
-                          Please note, the information you share will be
-                          encrypted, stored securely, and only used to verify
-                          your identity.
-                        </p>
-                      </div>
-                      } @else {
-                      <div class="col-12">
-                        <div class="row">
-                          <mat-form-field class="col-12" appearance="outline">
-                            <mat-label>Identification Type</mat-label>
-                            <mat-select formControlName="doc_type">
-                              <mat-option value="0">Drivers License</mat-option>
-                              <mat-option value="1">Passport</mat-option>
-                              <mat-option value="2"
-                                >International ID</mat-option
+                              <span
+                                >Take a picture of the back of the photo ID. We
+                                might need informations present for furthor
+                                verification</span
                               >
-                            </mat-select>
-                          </mat-form-field>
-                        </div>
+                            </div>
 
-                        <div class="row">
-                          <div class="col-12">
-                            <span>Front Document</span>
-                            <app-front-image-upload
-                              [imageType]="'front'"
-                              (onFrontImageUpload)="
-                                onImageUpload('front', $event)
-                              "
-                            ></app-front-image-upload>
+                            <p class="text-secondary mt-5">
+                              Please note, the information you share will be
+                              encrypted, stored securely, and only used to
+                              verify your identity.
+                            </p>
                           </div>
-                        </div>
-
-                        <div class="row mt-4">
-                          <div class="col-12">
-                            <span>Back Document</span>
-                            <app-back-image-upload
-                              [imageType]="'back'"
-                              (onBackImageUpload)="
-                                onImageUpload('back', $event)
-                              "
-                            ></app-back-image-upload>
-                          </div>
-                        </div>
-
-                        <p class="text-secondary mt-5">
-                          The ID you plan to use can include a drivers license,
-                          passport, or national identification card. Make sure
-                          it is:
-                        </p>
-
-                        <ul class="condition-list">
-                          <li class="text-secondary">
-                            Valid (has not expired)
-                          </li>
-                          <li class="text-secondary">Clear and easy to read</li>
-                          <li class="text-secondary">Can be fully captured</li>
-                        </ul>
-
-                        <p class="text-secondary">
-                          Depending on the type of identifction card you use, we
-                          may need to scan the front and back of the ID.
-                        </p>
-                      </div>
-                      }
-                    </div>
-
-                    <div class="row mt-5">
-                      <div class="col-6">
-                        <button
-                          type="button"
-                          class="col-12 btn btn-outline-primary"
-                          style="padding: 15px 50px"
-                          (click)="goToBackPage(); toggleDocUpload()"
-                        >
-                          Back
-                        </button>
-                      </div>
-                      <div class="col-6">
-                        @if(isDocPreload) {
-                        <button
-                          type="button"
-                          class="col-12 btn btn-gradient-primary btn-gradient-padding"
-                          (click)="toggleDocUpload()"
-                          [disabled]="isLoading"
-                        >
-                          Start
-                        </button>
                         } @else {
-                        <button
-                          type="submit"
-                          class="col-12 btn btn-gradient-primary btn-gradient-padding"
-                        >
-                          Register
-                        </button>
+                          <div class="col-12">
+                            <div class="row">
+                              <mat-form-field
+                                class="col-12"
+                                appearance="outline"
+                              >
+                                <mat-label>Identification Type</mat-label>
+                                <mat-select formControlName="doc_type">
+                                  <mat-option value="0"
+                                    >Drivers License</mat-option
+                                  >
+                                  <mat-option value="1">Passport</mat-option>
+                                  <mat-option value="2"
+                                    >International ID</mat-option
+                                  >
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-12">
+                                <span>Front Document</span>
+                                <app-front-image-upload
+                                  [imageType]="'front'"
+                                  (onFrontImageUpload)="
+                                    onImageUpload('front', $event)
+                                  "
+                                ></app-front-image-upload>
+                              </div>
+                            </div>
+
+                            <div class="row mt-4">
+                              <div class="col-12">
+                                <span>Back Document</span>
+                                <app-back-image-upload
+                                  [imageType]="'back'"
+                                  (onBackImageUpload)="
+                                    onImageUpload('back', $event)
+                                  "
+                                ></app-back-image-upload>
+                              </div>
+                            </div>
+
+                            <p class="text-secondary mt-5">
+                              The ID you plan to use can include a drivers
+                              license, passport, or national identification
+                              card. Make sure it is:
+                            </p>
+
+                            <ul class="condition-list">
+                              <li class="text-secondary">
+                                Valid (has not expired)
+                              </li>
+                              <li class="text-secondary">
+                                Clear and easy to read
+                              </li>
+                              <li class="text-secondary">
+                                Can be fully captured
+                              </li>
+                            </ul>
+
+                            <p class="text-secondary">
+                              Depending on the type of identifction card you
+                              use, we may need to scan the front and back of the
+                              ID.
+                            </p>
+                          </div>
                         }
+                      </div>
+
+                      <div class="row mt-5">
+                        <div class="col-6">
+                          <button
+                            type="button"
+                            class="col-12 btn btn-outline-primary"
+                            style="padding: 15px 50px"
+                            (click)="goToBackPage(); toggleDocUpload()"
+                          >
+                            Back
+                          </button>
+                        </div>
+                        <div class="col-6">
+                          @if (isDocPreload) {
+                            <button
+                              type="button"
+                              class="col-12 btn btn-gradient-primary btn-gradient-padding"
+                              (click)="toggleDocUpload()"
+                              [disabled]="isLoading"
+                            >
+                              Start
+                            </button>
+                          } @else {
+                            <button
+                              type="submit"
+                              class="col-12 btn btn-gradient-primary btn-gradient-padding"
+                            >
+                              Register
+                            </button>
+                          }
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
               }
             </form>
 
