@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.zenatopthrust.com/api', // Example environment variable
+  apiUrl: 'https://backend.fenchestactivetrust.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.zenatopthrust.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.zenatopthrust.com',
+  csrfUrl: 'https://backend.fenchestactivetrust.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.fenchestactivetrust.com',
 };
