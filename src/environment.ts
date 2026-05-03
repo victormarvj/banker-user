@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.dynamoprivyhold.com/api', // Example environment variable
+  apiUrl: 'https://backend.zenviacitihold.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.dynamoprivyhold.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.dynamoprivyhold.com',
+  csrfUrl: 'https://backend.zenviacitihold.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.zenviacitihold.com',
 };
