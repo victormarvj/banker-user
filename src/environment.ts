@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.cityapexgroup.com/api', // Example environment variable
+  apiUrl: 'https://backend.nurtaurecrest.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.cityapexgroup.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.cityapexgroup.com',
+  csrfUrl: 'https://backend.nurtaurecrest.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.nurtaurecrest.com',
 };
