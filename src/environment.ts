@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.nurtaurecrest.com/api', // Example environment variable
+  apiUrl: 'https://backend.olivepeakpremierinc.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.nurtaurecrest.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.nurtaurecrest.com',
+  csrfUrl: 'https://backend.olivepeakpremierinc.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.olivepeakpremierinc.com',
 };
