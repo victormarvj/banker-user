@@ -8,8 +8,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.azorecitibeak.com/api', // Example environment variable
+  apiUrl: 'https://backend.summitridgevault.com/api', // Example environment variable
   appVersion: '1.0.0',
-  csrfUrl: 'https://backend.azorecitibeak.com/sanctum/csrf-cookie',
-  apiRootUrl: 'https://backend.azorecitibeak.com',
+  csrfUrl: 'https://backend.summitridgevault.com/sanctum/csrf-cookie',
+  apiRootUrl: 'https://backend.summitridgevault.com',
 };
