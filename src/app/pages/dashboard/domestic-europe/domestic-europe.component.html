@@ -1,12 +1,12 @@
-@if(isLoading) {
-<div class="spinner">
-  <img
-    src="img/spinner.png"
-    class="rotating-img"
-    style="width: 50px; height: 50px"
-    alt=""
-  />
-</div>
+@if (isLoading) {
+  <div class="spinner">
+    <img
+      src="img/spinner.png"
+      class="rotating-img"
+      style="width: 50px; height: 50px"
+      alt=""
+    />
+  </div>
 }
 
 <div class="container-fluid">
@@ -43,11 +43,11 @@
                   <div class="d-flex flex-column text-light me-3">
                     <span class="fw-light fs-12">VALID THRU</span>
                     @if (userData?.master_card_expiry !== null) {
-                    <span class="fs-12">{{
-                      userData?.master_card_expiry
-                    }}</span>
-                    }@else {
-                    <span class="fs-12">**/**</span>
+                      <span class="fs-12">{{
+                        userData?.master_card_expiry
+                      }}</span>
+                    } @else {
+                      <span class="fs-12">**/**</span>
                     }
                   </div>
                 </div>
@@ -55,15 +55,15 @@
               <div class="d-flex justify-content-between px-2 mt-md-3">
                 <div class="d-flex flex-column text-light">
                   @if (userData?.master_card !== null) {
-                  <p class="mt-2">
-                    {{
-                      userData?.master_card.substring(0, 4) +
-                        "**** ****" +
-                        userData?.master_card.substring(-4)
-                    }}
-                  </p>
-                  }@else {
-                  <p class="mt-2">**** **** **** ****</p>
+                    <p class="mt-2">
+                      {{
+                        userData.master_card.slice(0, 4) +
+                          " **** **** " +
+                          userData.master_card.slice(-4)
+                      }}
+                    </p>
+                  } @else {
+                    <p class="mt-2">**** **** **** ****</p>
                   }
                 </div>
                 <div>
@@ -97,9 +97,11 @@
                   <div class="d-flex flex-column text-light me-3">
                     <span class="fw-light fs-12">VALID THRU</span>
                     @if (userData?.visa_card_expiry !== null) {
-                    <span class="fs-12">{{ userData?.visa_card_expiry }}</span>
-                    }@else {
-                    <span class="fs-12">**/**</span>
+                      <span class="fs-12">{{
+                        userData?.visa_card_expiry
+                      }}</span>
+                    } @else {
+                      <span class="fs-12">**/**</span>
                     }
                   </div>
                 </div>
@@ -107,15 +109,15 @@
               <div class="d-flex justify-content-between px-2 mt-md-3">
                 <div class="d-flex flex-column text-light">
                   @if (userData?.visa_card !== null) {
-                  <p class="mt-2">
-                    {{
-                      userData?.visa_card.substring(0, 4) +
-                        "**** ****" +
-                        userData?.visa_card.substring(-4)
-                    }}
-                  </p>
-                  }@else {
-                  <p class="mt-2">**** **** **** ****</p>
+                    <p class="mt-2">
+                      {{
+                        userData.visa_card.slice(0, 4) +
+                          " **** **** " +
+                          userData.visa_card.slice(-4)
+                      }}
+                    </p>
+                  } @else {
+                    <p class="mt-2">**** **** **** ****</p>
                   }
                 </div>
                 <div>
@@ -166,12 +168,15 @@
                           (input)="checkAccountNumberInternational($event)"
                         />
                       </mat-form-field>
-                      @if (transferForm.get('account_number')?.touched &&
-                      transferForm.get('account_number')?.hasError('notDomestic'))
-                      {
-                      <small class="text-danger mb-2"
-                        >Account is not a domestic account</small
-                      >
+                      @if (
+                        transferForm.get("account_number")?.touched &&
+                        transferForm
+                          .get("account_number")
+                          ?.hasError("notDomestic")
+                      ) {
+                        <small class="text-danger mb-2"
+                          >Account is not a domestic account</small
+                        >
                       }
 
                       <mat-form-field
@@ -294,22 +299,31 @@
                           (input)="checkBalance($event)"
                         />
                       </mat-form-field>
-                      @if (transferForm.get('amount')?.touched &&
-                      transferForm.get('amount')?.hasError('insufficientBalance'))
-                      {
-                      <small class="text-danger mb-2"
-                        >Insufficient balance</small
-                      >
-                      } @if (transferForm.get('amount')?.touched &&
-                      transferForm.get('amount')?.hasError('transferLimit')) {
-                      <small class="text-danger mb-2"
-                        >Amount exceeds transfer limit</small
-                      >
-                      } @if (transferForm.get('amount')?.touched &&
-                      transferForm.get('amount')?.hasError('accountMinimum')) {
-                      <small class="text-danger mb-2"
-                        >Amount is below the minimum required</small
-                      >
+                      @if (
+                        transferForm.get("amount")?.touched &&
+                        transferForm
+                          .get("amount")
+                          ?.hasError("insufficientBalance")
+                      ) {
+                        <small class="text-danger mb-2"
+                          >Insufficient balance</small
+                        >
+                      }
+                      @if (
+                        transferForm.get("amount")?.touched &&
+                        transferForm.get("amount")?.hasError("transferLimit")
+                      ) {
+                        <small class="text-danger mb-2"
+                          >Amount exceeds transfer limit</small
+                        >
+                      }
+                      @if (
+                        transferForm.get("amount")?.touched &&
+                        transferForm.get("amount")?.hasError("accountMinimum")
+                      ) {
+                        <small class="text-danger mb-2"
+                          >Amount is below the minimum required</small
+                        >
                       }
 
                       <mat-form-field class="col-12" appearance="outline">
@@ -356,20 +370,22 @@
                               formArrayName="digits"
                               class="code-input-container"
                             >
-                              @for (digit of digitsArray.controls; track $index)
-                              {
-                              <mat-form-field appearance="outline">
-                                <input
-                                  id="digit{{ $index }}"
-                                  class="code-input"
-                                  type="password"
-                                  maxlength="1"
-                                  [formControlName]="$index"
-                                  (input)="moveToNext($index, $event)"
-                                  (keydown)="moveToNext($index, $event)"
-                                  matInput
-                                />
-                              </mat-form-field>
+                              @for (
+                                digit of digitsArray.controls;
+                                track $index
+                              ) {
+                                <mat-form-field appearance="outline">
+                                  <input
+                                    id="digit{{ $index }}"
+                                    class="code-input"
+                                    type="password"
+                                    maxlength="1"
+                                    [formControlName]="$index"
+                                    (input)="moveToNext($index, $event)"
+                                    (keydown)="moveToNext($index, $event)"
+                                    matInput
+                                  />
+                                </mat-form-field>
                               }
                             </div>
 
@@ -450,42 +466,42 @@
                       </div>
                     </div>
 
-                    @if (userData?.can_transfer === 0){
-                    <small
-                      class="label bg-warning"
-                      style="
-                        font-size: 12px;
-                        display: inline-block;
-                        padding: 2px 8px;
-                        margin-bottom: 5px;
-                      "
-                      >{{ userData?.reason }}</small
-                    >
+                    @if (userData?.can_transfer === 0) {
+                      <small
+                        class="label bg-warning"
+                        style="
+                          font-size: 12px;
+                          display: inline-block;
+                          padding: 2px 8px;
+                          margin-bottom: 5px;
+                        "
+                        >{{ userData?.reason }}</small
+                      >
                     }
                     <div class="row justify-content-center">
                       <div class="col-12">
-                        @if(!isSubmitBtn) {
-                        <button
-                          type="button"
-                          (click)="enterPin()"
-                          [disabled]="
-                            isLoading ||
-                            transferForm.invalid ||
-                            userData?.can_transfer === 0
-                          "
-                          data-bs-toggle="modal"
-                          data-bs-target="#pinModal"
-                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
-                        >
-                          Transfer
-                        </button>
-                        }@else {
-                        <button
-                          type="submit"
-                          class="btn w-100 btn-gradient-primary btn-gradient-padding"
-                        >
-                          Confirm Transaction
-                        </button>
+                        @if (!isSubmitBtn) {
+                          <button
+                            type="button"
+                            (click)="enterPin()"
+                            [disabled]="
+                              isLoading ||
+                              transferForm.invalid ||
+                              userData?.can_transfer === 0
+                            "
+                            data-bs-toggle="modal"
+                            data-bs-target="#pinModal"
+                            class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                          >
+                            Transfer
+                          </button>
+                        } @else {
+                          <button
+                            type="submit"
+                            class="btn w-100 btn-gradient-primary btn-gradient-padding"
+                          >
+                            Confirm Transaction
+                          </button>
                         }
                       </div>
                     </div>

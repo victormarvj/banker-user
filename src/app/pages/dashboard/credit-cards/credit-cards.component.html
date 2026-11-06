@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <mat-progress-bar mode="buffer" class="mb-3"></mat-progress-bar>
@@ -11,9 +11,9 @@
       />
     </div>
   </div>
-</div>
+</div> -->
 
-<!-- <div class="container-fluid">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="row">
@@ -23,77 +23,176 @@
               <h6>My Cards</h6>
             </div>
           </div>
-          <div class="card-div">
-            <img
-              src="img/master-card-bg.png"
-              class="w-100 theme-rounded"
-              alt=""
-            />
-            <div class="content-text w-100 p-3">
-              <span class="balance-text text-light">Balance</span>
-              <div class="d-flex justify-content-between">
-                <h5 class="text-light">$5,756</h5>
-                <mat-icon class="text-light">contactless</mat-icon>
-              </div>
 
-              <div class="d-flex justify-content-between px-2 mt-md-3">
-                <div class="d-flex flex-column text-light">
-                  <span class="fw-light fs-12">CARD HOLDER</span>
-                  <span class="fs-12">Richard Austin</span>
+          <p>Card balance is Shared Balance</p>
+
+          @if (!userData?.is_master_card && !userData?.is_visa_card) {
+            <div class="card-div">
+              <img
+                src="img/master-card-bg.png"
+                class="w-100 theme-rounded"
+                alt=""
+              />
+              <div class="content-text w-100 p-3">
+                <span class="balance-text text-light">Balance</span>
+                <div class="d-flex justify-content-between">
+                  <h3 class="text-light">
+                    {{ userData?.currency }} {{ userData?.display_balance }}
+                  </h3>
+                  <mat-icon class="text-light">contactless</mat-icon>
                 </div>
-                <div>
-                  <div class="d-flex flex-column text-light me-3">
-                    <span class="fw-light fs-12">VALID THRU</span>
-                    <span class="fs-12">12/22</span>
+
+                <div class="d-flex justify-content-between px-2 mt-3">
+                  <div class="d-flex flex-column text-light">
+                    <span class="fw-light fs-12">CARD HOLDER</span>
+                    <span class="fs-12">{{ userData?.fullname }}</span>
+                  </div>
+                  <div>
+                    <div class="d-flex flex-column text-light me-3">
+                      <span class="fw-light fs-12">VALID THRU</span>
+                      @if (userData?.master_card_expiry !== null) {
+                        <span class="fs-12">{{
+                          userData?.master_card_expiry
+                        }}</span>
+                      } @else {
+                        <span class="fs-12">**/**</span>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between px-2 mt-3">
+                  <div class="d-flex flex-column text-light">
+                    @if (userData?.master_card !== null) {
+                      <p class="mt-2">
+                        {{
+                          userData?.master_card.substring(0, 4) +
+                            "**** ****" +
+                            userData?.master_card.substring(-4)
+                        }}
+                      </p>
+                    } @else {
+                      <p class="mt-2">**** **** **** ****</p>
+                    }
+                  </div>
+                  <div>
+                    <img src="img/master-card-type.png" alt="" />
                   </div>
                 </div>
               </div>
-              <div class="d-flex justify-content-between px-2 mt-md-3">
-                <div class="d-flex flex-column text-light">
-                  <p class="mt-2">3778 **** **** 1234</p>
-                </div>
-                <div>
-                  <img src="img/master-card-type.png" alt="" />
-                </div>
-              </div>
             </div>
-          </div>
+          }
 
-          <div class="card-div mt-4">
-            <img
-              src="img/visa-card-bg.png"
-              class="w-100 theme-rounded"
-              alt=""
-            />
-            <div class="content-text w-100 p-3">
-              <span class="balance-text text-light">Balance</span>
-              <div class="d-flex justify-content-between">
-                <h5 class="text-light">$5,756</h5>
-                <mat-icon class="text-light">contactless</mat-icon>
-              </div>
-
-              <div class="d-flex justify-content-between px-2 mt-md-3">
-                <div class="d-flex flex-column text-light">
-                  <span class="fw-light fs-12">CARD HOLDER</span>
-                  <span class="fs-12">Richard Austin</span>
+          @if (userData?.is_master_card) {
+            <div class="card-div">
+              <img
+                src="img/master-card-bg.png"
+                class="w-100 theme-rounded"
+                alt=""
+              />
+              <div class="content-text w-100 p-3">
+                <span class="balance-text text-light">Balance</span>
+                <div class="d-flex justify-content-between">
+                  <h3 class="text-light">
+                    {{ userData?.currency }} {{ userData?.display_balance }}
+                  </h3>
+                  <mat-icon class="text-light">contactless</mat-icon>
                 </div>
-                <div>
-                  <div class="d-flex flex-column text-light me-3">
-                    <span class="fw-light fs-12">VALID THRU</span>
-                    <span class="fs-12">12/22</span>
+
+                <div class="d-flex justify-content-between px-2">
+                  <div class="d-flex flex-column text-light">
+                    <span class="fw-light fs-12">CARD HOLDER</span>
+                    <span class="fs-12">{{ userData?.fullname }}</span>
+                  </div>
+                  <div>
+                    <div class="d-flex flex-column text-light me-3">
+                      <span class="fw-light fs-12">VALID THRU</span>
+                      @if (userData?.master_card_expiry !== null) {
+                        <span class="fs-12">{{
+                          userData?.master_card_expiry
+                        }}</span>
+                      } @else {
+                        <span class="fs-12">**/**</span>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between px-2">
+                  <div class="d-flex flex-column text-light">
+                    @if (userData?.master_card) {
+                      <p class="mt-2">
+                        {{
+                          userData.master_card.slice(0, 4) +
+                            " **** **** " +
+                            userData.master_card.slice(-4)
+                        }}
+                      </p>
+                    } @else {
+                      <p class="mt-2">**** **** **** ****</p>
+                    }
+                  </div>
+                  <div>
+                    <img src="img/master-card-type.png" alt="" />
                   </div>
                 </div>
               </div>
-              <div class="d-flex justify-content-between px-2 mt-md-3">
-                <div class="d-flex flex-column text-light">
-                  <p class="mt-2">3778 **** **** 1234</p>
+            </div>
+          }
+
+          @if (userData?.is_visa_card) {
+            <div class="card-div mt-3">
+              <img
+                src="img/visa-card-bg.png"
+                class="w-100 theme-rounded"
+                alt=""
+              />
+              <div class="content-text w-100 p-3">
+                <span class="balance-text text-light">Balance</span>
+                <div class="d-flex justify-content-between">
+                  <h3 class="text-light">
+                    {{ userData?.currency }} {{ userData?.display_balance }}
+                  </h3>
+                  <mat-icon class="text-light">contactless</mat-icon>
                 </div>
-                <div>
-                  <img src="img/visa-card-type.png" alt="" />
+
+                <div class="d-flex justify-content-between px-2">
+                  <div class="d-flex flex-column text-light">
+                    <span class="fw-light fs-12">CARD HOLDER</span>
+                    <span class="fs-12">{{ userData?.fullname }}</span>
+                  </div>
+                  <div>
+                    <div class="d-flex flex-column text-light me-3">
+                      <span class="fw-light fs-12">VALID THRU</span>
+                      @if (userData?.visa_card_expiry !== null) {
+                        <span class="fs-12">{{
+                          userData?.visa_card_expiry
+                        }}</span>
+                      } @else {
+                        <span class="fs-12">**/**</span>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between px-2">
+                  <div class="d-flex flex-column text-light">
+                    @if (userData?.visa_card) {
+                      <p class="mt-2">
+                        {{
+                          userData.visa_card.slice(0, 4) +
+                            " **** **** " +
+                            userData.visa_card.slice(-4)
+                        }}
+                      </p>
+                    } @else {
+                      <p class="mt-2">**** **** **** ****</p>
+                    }
+                  </div>
+                  <div>
+                    <img src="img/visa-card-type.png" alt="" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          }
         </div>
         <div class="col-12 col-md-8 mt-4 mt-md-0" id="requestCard">
           <div class="row mb-4">
@@ -111,16 +210,28 @@
                   credit or obtain cash advances.
                 </p>
 
-                <form action="">
+                <form
+                  [formGroup]="creditCardForm"
+                  (ngSubmit)="onSubmit()"
+                  (keydown.enter)="$event.preventDefault()"
+                >
                   <div class="row">
                     <mat-form-field
                       class="col-12 col-md-6"
                       appearance="outline"
                     >
                       <mat-label>Card Type</mat-label>
-                      <mat-select formControlName="card_type">
-                        <mat-option value="0">Master Card</mat-option>
-                        <mat-option value="1">Visa Card</mat-option>
+                      <mat-select
+                        formControlName="card_type"
+                        (selectionChange)="checkCardEligibility($event.value)"
+                        required=""
+                      >
+                        @if (userData?.is_master_card != 2) {
+                          <mat-option value="0">Master Card</mat-option>
+                        }
+                        @if (userData?.is_visa_card != 2) {
+                          <mat-option value="1">Visa Card</mat-option>
+                        }
                       </mat-select>
                     </mat-form-field>
 
@@ -133,7 +244,10 @@
                         matInput
                         type="text"
                         placeholder=""
+                        value="{{ userData?.fullname }}"
+                        readonly=""
                         formControlName="name"
+                        required=""
                       />
                     </mat-form-field>
 
@@ -146,6 +260,7 @@
                         matInput
                         type="text"
                         placeholder=""
+                        value="**** **** **** ****"
                         formControlName="number"
                         readonly=""
                       />
@@ -160,6 +275,7 @@
                         matInput
                         type="text"
                         placeholder=""
+                        value="**/**"
                         formControlName="date"
                         readonly=""
                       />
@@ -167,13 +283,35 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-12 col-md-4">
-                      <button
-                        class="btn btn-gradient-primary btn-gradient-padding"
-                      >
-                        Add Card
-                      </button>
+                    <div class="col-12 mb-4">
+                      @if (
+                        creditCardForm.valid &&
+                        creditCardForm.get("isCardProcessing")?.value == true
+                      ) {
+                        <small class="alert alert-warning"
+                          >Your card request is still processing. Try
+                          again!</small
+                        >
+                      }
                     </div>
+                  </div>
+
+                  <div class="row">
+                    @for (method of methods; track $index) {
+                      <div class="col-12 col-md-4">
+                        <button
+                          (click)="openModal(method.id)"
+                          [disabled]="
+                            creditCardForm.invalid ||
+                            creditCardForm.get('isCardProcessing')?.value ==
+                              true
+                          "
+                          class="btn btn-gradient-primary btn-gradient-padding"
+                        >
+                          Apply via {{ method?.name }}
+                        </button>
+                      </div>
+                    }
                   </div>
                 </form>
               </div>
@@ -203,102 +341,114 @@
                               </tr>
                             </thead>
                             <tbody class="">
-                              <tr>
-                                <td class="text-truncate">
-                                  <div class="d-flex align-items-center">
-                                    <img
-                                      src="img/icon-master-card.png"
-                                      style="width: 41.72px; height: 41.72px"
-                                      alt=""
-                                    />
-                                    <div class="ms-3">
-                                      <p class="m-0 fw-bold">Card Type</p>
+                              @if (userData?.is_master_card == 2) {
+                                <tr>
+                                  <td class="text-truncate">
+                                    <div class="d-flex align-items-center">
+                                      <img
+                                        src="img/icon-master-card.png"
+                                        style="width: 41.72px; height: 41.72px"
+                                        alt=""
+                                      />
+                                      <div class="ms-3">
+                                        <p class="m-0 fw-bold">Card Type</p>
+                                        <p class="m-0 text-secondary fs-12">
+                                          Master
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <div>
+                                      <p class="m-0 fw-bold">Bank</p>
                                       <p class="m-0 text-secondary fs-12">
-                                        Master
+                                        SummitRidgeVault
                                       </p>
                                     </div>
-                                  </div>
-                                </td>
-                                <td class="text-truncate">
-                                  <div>
-                                    <p class="m-0 fw-bold">Bank</p>
-                                    <p class="m-0 text-secondary fs-12">
-                                      summitridgevault.com
-                                    </p>
-                                  </div>
-                                </td>
-                                <td class="text-truncate">
-                                  <div>
-                                    <p class="m-0 fw-bold">Card Number</p>
-                                    <p class="m-0 text-secondary fs-12">
-                                      **** **** 4343
-                                    </p>
-                                  </div>
-                                </td>
-                                <td class="text-truncate">
-                                  <div>
-                                    <p class="m-0 fw-bold">Name on Card</p>
-                                    <p class="m-0 text-secondary fs-12">
-                                      William Banks
-                                    </p>
-                                  </div>
-                                </td>
-                                <td class="text-truncate">
-                                  <a
-                                    routerLink="#"
-                                    class="text-primary cursor-pointer text-decoration-none fw-bold"
-                                    >view Details</a
-                                  >
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="text-truncate">
-                                  <div class="d-flex align-items-center">
-                                    <img
-                                      src="img/icon-visa-card.png"
-                                      style="width: 41.72px; height: 41.72px"
-                                      alt=""
-                                    />
-                                    <div class="ms-3">
-                                      <p class="m-0 fw-bold">Card Type</p>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <div>
+                                      <p class="m-0 fw-bold">Card Number</p>
                                       <p class="m-0 text-secondary fs-12">
-                                        Visa
+                                        {{
+                                          userData.master_card.slice(0, 4) +
+                                            " **** **** " +
+                                            userData.master_card.slice(-4)
+                                        }}
                                       </p>
                                     </div>
-                                  </div>
-                                </td>
-                                <td class="text-truncate">
-                                  <div>
-                                    <p class="m-0 fw-bold">Bank</p>
-                                    <p class="m-0 text-secondary fs-12">
-                                      summitridgevault.com
-                                    </p>
-                                  </div>
-                                </td>
-                                <td class="text-truncate">
-                                  <div>
-                                    <p class="m-0 fw-bold">Card Number</p>
-                                    <p class="m-0 text-secondary fs-12">
-                                      **** **** 4343
-                                    </p>
-                                  </div>
-                                </td>
-                                <td class="text-truncate">
-                                  <div>
-                                    <p class="m-0 fw-bold">Name on Card</p>
-                                    <p class="m-0 text-secondary fs-12">
-                                      William Banks
-                                    </p>
-                                  </div>
-                                </td>
-                                <td class="text-truncate">
-                                  <a
-                                    routerLink="#"
-                                    class="text-primary cursor-pointer text-decoration-none fw-bold"
-                                    >view Details</a
-                                  >
-                                </td>
-                              </tr>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <div>
+                                      <p class="m-0 fw-bold">Name on Card</p>
+                                      <p class="m-0 text-secondary fs-12">
+                                        {{ userData?.fullname }}
+                                      </p>
+                                    </div>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <a
+                                      routerLink="#"
+                                      class="text-primary cursor-pointer text-decoration-none fw-bold"
+                                      >view Details</a
+                                    >
+                                  </td>
+                                </tr>
+                              }
+                              @if (userData?.is_visa_card == 2) {
+                                <tr>
+                                  <td class="text-truncate">
+                                    <div class="d-flex align-items-center">
+                                      <img
+                                        src="img/icon-visa-card.png"
+                                        style="width: 41.72px; height: 41.72px"
+                                        alt=""
+                                      />
+                                      <div class="ms-3">
+                                        <p class="m-0 fw-bold">Card Type</p>
+                                        <p class="m-0 text-secondary fs-12">
+                                          Visa
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <div>
+                                      <p class="m-0 fw-bold">Bank</p>
+                                      <p class="m-0 text-secondary fs-12">
+                                        SummitRidgeVault
+                                      </p>
+                                    </div>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <div>
+                                      <p class="m-0 fw-bold">Card Number</p>
+                                      <p class="m-0 text-secondary fs-12">
+                                        {{
+                                          userData.visa_card.slice(0, 4) +
+                                            " **** **** " +
+                                            userData.visa_card.slice(-4)
+                                        }}
+                                      </p>
+                                    </div>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <div>
+                                      <p class="m-0 fw-bold">Name on Card</p>
+                                      <p class="m-0 text-secondary fs-12">
+                                        {{ userData?.fullname }}
+                                      </p>
+                                    </div>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <a
+                                      routerLink="#"
+                                      class="text-primary cursor-pointer text-decoration-none fw-bold"
+                                      >view Details</a
+                                    >
+                                  </td>
+                                </tr>
+                              }
                             </tbody>
                           </table>
                         </div>
@@ -362,4 +512,13 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
+
+@if (showModal) {
+  <app-credit-card-modal
+    [method_id]="method_id"
+    [card_type]="creditCardForm.get('card_type')?.value"
+    [i_amount]="amount"
+    (modalClosed)="closeModal()"
+  ></app-credit-card-modal>
+}

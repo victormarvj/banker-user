@@ -96,8 +96,28 @@
                 class="d-flex align-items-center nav-link nav-color"
                 [class.active]="activeLink == '/dashboard/domestic-europe'"
               >
-                <mat-icon>currency_exchange</mat-icon>
+                <mat-icon>euro</mat-icon>
                 <span class="ms-2">Domestic-EUR</span>
+              </a>
+            </mat-list-item>
+
+            <div class="dark-theme-bottom-divider">
+              <span class="ms-3 text-dark-responsive">Cards</span>
+            </div>
+
+            <mat-list-item
+              class="my-3"
+              data-bs-dismiss="offcanvas"
+              [activated]="activeLink === '/dashboard/credit-cards'"
+            >
+              <a
+                matListItemTitle
+                routerLink="/dashboard/credit-cards"
+                class="d-flex align-items-center nav-link nav-color"
+                [class.active]="activeLink == '/dashboard/credit-cards'"
+              >
+                <mat-icon>point_of_sale</mat-icon>
+                <span class="ms-2">Credit Cards</span>
               </a>
             </mat-list-item>
 
@@ -116,7 +136,7 @@
                 class="d-flex align-items-center nav-link nav-color"
                 [class.active]="activeLink == '/dashboard/deposit'"
               >
-                <mat-icon>point_of_sale</mat-icon>
+                <mat-icon>savings</mat-icon>
                 <span class="ms-2">Deposit</span>
               </a>
             </mat-list-item>
@@ -152,7 +172,7 @@
                 class="d-flex align-items-center nav-link nav-color"
                 [class.active]="activeLink == '/dashboard/withdrawal'"
               >
-                <mat-icon>point_of_sale</mat-icon>
+                <mat-icon>local_atm</mat-icon>
                 <span class="ms-2">Withdrawal</span>
               </a>
             </mat-list-item>
@@ -427,8 +447,27 @@
               class="d-flex align-items-center nav-link nav-color"
               [class.active]="activeLink == '/dashboard/domestic-europe'"
             >
-              <mat-icon>currency_exchange</mat-icon>
+              <mat-icon>euro</mat-icon>
               <span class="ms-2">Domestic-EUR</span>
+            </a>
+          </mat-list-item>
+
+          <div class="dark-theme-bottom-divider">
+            <span class="ms-3">Cards</span>
+          </div>
+
+          <mat-list-item
+            class="my-3"
+            [activated]="activeLink === '/dashboard/credit-cards'"
+          >
+            <a
+              matListItemTitle
+              routerLink="/dashboard/credit-cards"
+              class="d-flex align-items-center nav-link nav-color"
+              [class.active]="activeLink == '/dashboard/credit-cards'"
+            >
+              <mat-icon>credit_card</mat-icon>
+              <span class="ms-2">Credit Cards</span>
             </a>
           </mat-list-item>
 
@@ -446,7 +485,7 @@
               class="d-flex align-items-center nav-link nav-color"
               [class.active]="activeLink == '/dashboard/deposit'"
             >
-              <mat-icon>credit_card</mat-icon>
+              <mat-icon>savings</mat-icon>
               <span class="ms-2">Deposit</span>
             </a>
           </mat-list-item>
@@ -480,7 +519,7 @@
               class="d-flex align-items-center nav-link nav-color"
               [class.active]="activeLink == '/dashboard/withdrawal'"
             >
-              <mat-icon>credit_card</mat-icon>
+              <mat-icon>local_atm</mat-icon>
               <span class="ms-2">Withdrawal</span>
             </a>
           </mat-list-item>
