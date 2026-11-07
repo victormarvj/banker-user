@@ -19,113 +19,174 @@
               <h6>My Cards</h6>
             </div>
           </div>
-          <div class="card-div">
-            <img
-              src="img/master-card-bg.png"
-              class="w-100 theme-rounded"
-              alt=""
-            />
-            <div class="content-text w-100 p-3">
-              <span class="balance-text text-light">Balance</span>
-              <div class="d-flex justify-content-between">
-                <h5 class="text-light">
-                  {{ userData?.currency }} {{ userData?.display_balance }}
-                </h5>
-                <mat-icon class="text-light">contactless</mat-icon>
-              </div>
 
-              <div class="d-flex justify-content-between px-2 mt-md-3">
-                <div class="d-flex flex-column text-light">
-                  <span class="fw-light fs-12">CARD HOLDER</span>
-                  <span class="fs-12">{{ userData?.fullname }}</span>
+          @if (!userData?.is_master_card && !userData?.is_visa_card) {
+            <div class="card-div">
+              <img
+                src="img/master-card-bg.png"
+                class="w-100 theme-rounded"
+                alt=""
+              />
+              <div class="content-text w-100 p-3">
+                <span class="balance-text text-light">Balance</span>
+                <div class="d-flex justify-content-between">
+                  <h3 class="text-light">
+                    {{ userData?.currency }} {{ userData?.display_balance }}
+                  </h3>
+                  <mat-icon class="text-light">contactless</mat-icon>
                 </div>
-                <div>
-                  <div class="d-flex flex-column text-light me-3">
-                    <span class="fw-light fs-12">VALID THRU</span>
-                    @if (userData?.master_card_expiry !== null) {
-                      <span class="fs-12">{{
-                        userData?.master_card_expiry
-                      }}</span>
+
+                <div class="d-flex justify-content-between px-2 mt-3">
+                  <div class="d-flex flex-column text-light">
+                    <span class="fw-light fs-12">CARD HOLDER</span>
+                    <span class="fs-12">{{ userData?.fullname }}</span>
+                  </div>
+                  <div>
+                    <div class="d-flex flex-column text-light me-3">
+                      <span class="fw-light fs-12">VALID THRU</span>
+                      @if (userData?.master_card_expiry !== null) {
+                        <span class="fs-12">{{
+                          userData?.master_card_expiry
+                        }}</span>
+                      } @else {
+                        <span class="fs-12">**/**</span>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between px-2 mt-3">
+                  <div class="d-flex flex-column text-light">
+                    @if (userData?.master_card !== null) {
+                      <p class="mt-2">
+                        {{
+                          userData.master_card.slice(0, 4) +
+                            " **** **** " +
+                            userData.master_card.slice(-4)
+                        }}
+                      </p>
                     } @else {
-                      <span class="fs-12">**/**</span>
+                      <p class="mt-2">**** **** **** ****</p>
                     }
+                  </div>
+                  <div>
+                    <img src="img/master-card-type.png" alt="" />
                   </div>
                 </div>
               </div>
-              <div class="d-flex justify-content-between px-2 mt-md-3">
-                <div class="d-flex flex-column text-light">
-                  @if (userData?.master_card !== null) {
-                    <p class="mt-2">
-                      {{
-                        userData.master_card.slice(0, 4) +
-                          " **** **** " +
-                          userData.master_card.slice(-4)
-                      }}
-                    </p>
-                  } @else {
-                    <p class="mt-2">**** **** **** ****</p>
-                  }
-                </div>
-                <div>
-                  <img src="img/master-card-type.png" alt="" />
-                </div>
-              </div>
             </div>
-          </div>
+          }
 
-          <div class="card-div mt-4">
-            <img
-              src="img/visa-card-bg.png"
-              class="w-100 theme-rounded"
-              alt=""
-            />
-            <div class="content-text w-100 p-3">
-              <span class="balance-text text-light">Balance</span>
-              <div class="d-flex justify-content-between">
-                <h5 class="text-light">
-                  {{ userData?.currency }} {{ userData?.display_balance }}
-                </h5>
-                <mat-icon class="text-light">contactless</mat-icon>
-              </div>
-
-              <div class="d-flex justify-content-between px-2 mt-md-3">
-                <div class="d-flex flex-column text-light">
-                  <span class="fw-light fs-12">CARD HOLDER</span>
-                  <span class="fs-12">{{ userData?.fullname }}</span>
+          @if (userData?.is_master_card) {
+            <div class="card-div">
+              <img
+                src="img/master-card-bg.png"
+                class="w-100 theme-rounded"
+                alt=""
+              />
+              <div class="content-text w-100 p-3">
+                <span class="balance-text text-light">Balance</span>
+                <div class="d-flex justify-content-between">
+                  <h3 class="text-light">
+                    {{ userData?.currency }} {{ userData?.display_balance }}
+                  </h3>
+                  <mat-icon class="text-light">contactless</mat-icon>
                 </div>
-                <div>
-                  <div class="d-flex flex-column text-light me-3">
-                    <span class="fw-light fs-12">VALID THRU</span>
-                    @if (userData?.visa_card_expiry !== null) {
-                      <span class="fs-12">{{
-                        userData?.visa_card_expiry
-                      }}</span>
+
+                <div class="d-flex justify-content-between px-2">
+                  <div class="d-flex flex-column text-light">
+                    <span class="fw-light fs-12">CARD HOLDER</span>
+                    <span class="fs-12">{{ userData?.fullname }}</span>
+                  </div>
+                  <div>
+                    <div class="d-flex flex-column text-light me-3">
+                      <span class="fw-light fs-12">VALID THRU</span>
+                      @if (userData?.master_card_expiry !== null) {
+                        <span class="fs-12">{{
+                          userData?.master_card_expiry
+                        }}</span>
+                      } @else {
+                        <span class="fs-12">**/**</span>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between px-2">
+                  <div class="d-flex flex-column text-light">
+                    @if (userData?.master_card !== null) {
+                      <p class="mt-2">
+                        {{
+                          userData.master_card.slice(0, 4) +
+                            " **** **** " +
+                            userData.master_card.slice(-4)
+                        }}
+                      </p>
                     } @else {
-                      <span class="fs-12">**/**</span>
+                      <p class="mt-2">**** **** **** ****</p>
                     }
+                  </div>
+                  <div>
+                    <img src="img/master-card-type.png" alt="" />
                   </div>
                 </div>
               </div>
-              <div class="d-flex justify-content-between px-2 mt-md-3">
-                <div class="d-flex flex-column text-light">
-                  @if (userData?.visa_card !== null) {
-                    <p class="mt-2">
-                      {{
-                        userData.visa_card.slice(0, 4) +
-                          " **** **** " +
-                          userData.visa_card.slice(-4)
-                      }}
-                    </p>
-                  } @else {
-                    <p class="mt-2">**** **** **** ****</p>
-                  }
+            </div>
+          }
+
+          @if (userData?.is_visa_card) {
+            <div class="card-div mt-3">
+              <img
+                src="img/visa-card-bg.png"
+                class="w-100 theme-rounded"
+                alt=""
+              />
+              <div class="content-text w-100 p-3">
+                <span class="balance-text text-light">Balance</span>
+                <div class="d-flex justify-content-between">
+                  <h3 class="text-light">
+                    {{ userData?.currency }} {{ userData?.display_balance }}
+                  </h3>
+                  <mat-icon class="text-light">contactless</mat-icon>
                 </div>
-                <div>
-                  <img src="img/visa-card-type.png" alt="" />
+
+                <div class="d-flex justify-content-between px-2">
+                  <div class="d-flex flex-column text-light">
+                    <span class="fw-light fs-12">CARD HOLDER</span>
+                    <span class="fs-12">{{ userData?.fullname }}</span>
+                  </div>
+                  <div>
+                    <div class="d-flex flex-column text-light me-3">
+                      <span class="fw-light fs-12">VALID THRU</span>
+                      @if (userData?.visa_card_expiry !== null) {
+                        <span class="fs-12">{{
+                          userData?.visa_card_expiry
+                        }}</span>
+                      } @else {
+                        <span class="fs-12">**/**</span>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between px-2">
+                  <div class="d-flex flex-column text-light">
+                    @if (userData?.visa_card !== null) {
+                      <p class="mt-2">
+                        {{
+                          userData.visa_card.slice(0, 4) +
+                            " **** **** " +
+                            userData.visa_card.slice(-4)
+                        }}
+                      </p>
+                    } @else {
+                      <p class="mt-2">**** **** **** ****</p>
+                    }
+                  </div>
+                  <div>
+                    <img src="img/visa-card-type.png" alt="" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          }
         </div>
         <div class="col-12 col-md-4 mt-4">
           <div class="billing-details-div mt-4">

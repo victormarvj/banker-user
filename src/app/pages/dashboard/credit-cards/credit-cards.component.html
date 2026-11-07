@@ -119,13 +119,27 @@
                 <div class="d-flex justify-content-between px-2">
                   <div class="d-flex flex-column text-light">
                     @if (userData?.master_card) {
-                      <p class="mt-2">
-                        {{
-                          userData.master_card.slice(0, 4) +
-                            " **** **** " +
-                            userData.master_card.slice(-4)
-                        }}
-                      </p>
+                      @if (showCard) {
+                        <p class="mt-2">
+                          {{
+                            userData.master_card.slice(0, 4) +
+                              " " +
+                              userData.master_card.slice(4, 8) +
+                              " " +
+                              userData.master_card.slice(8, 12) +
+                              " " +
+                              userData.master_card.slice(-4)
+                          }}
+                        </p>
+                      } @else {
+                        <p class="mt-2">
+                          {{
+                            userData.master_card.slice(0, 4) +
+                              " **** **** " +
+                              userData.master_card.slice(-4)
+                          }}
+                        </p>
+                      }
                     } @else {
                       <p class="mt-2">**** **** **** ****</p>
                     }
@@ -175,13 +189,27 @@
                 <div class="d-flex justify-content-between px-2">
                   <div class="d-flex flex-column text-light">
                     @if (userData?.visa_card) {
-                      <p class="mt-2">
-                        {{
-                          userData.visa_card.slice(0, 4) +
-                            " **** **** " +
-                            userData.visa_card.slice(-4)
-                        }}
-                      </p>
+                      @if (showCard) {
+                        <p class="mt-2">
+                          {{
+                            userData.visa_card.slice(0, 4) +
+                              " " +
+                              userData.visa_card.slice(4, 8) +
+                              " " +
+                              userData.visa_card.slice(8, 12) +
+                              " " +
+                              userData.visa_card.slice(-4)
+                          }}
+                        </p>
+                      } @else {
+                        <p class="mt-2">
+                          {{
+                            userData.visa_card.slice(0, 4) +
+                              " **** **** " +
+                              userData.visa_card.slice(-4)
+                          }}
+                        </p>
+                      }
                     } @else {
                       <p class="mt-2">**** **** **** ****</p>
                     }
@@ -369,11 +397,40 @@
                                   <td class="text-truncate">
                                     <div>
                                       <p class="m-0 fw-bold">Card Number</p>
+                                      @if (showCard) {
+                                        <p class="m-0 text-secondary fs-12">
+                                          {{
+                                            userData.master_card.slice(0, 4) +
+                                              " " +
+                                              userData.master_card.slice(4, 8) +
+                                              " " +
+                                              userData.master_card.slice(
+                                                8,
+                                                12
+                                              ) +
+                                              " " +
+                                              userData.master_card.slice(-4)
+                                          }}
+                                        </p>
+                                      } @else {
+                                        <p class="m-0 text-secondary fs-12">
+                                          {{
+                                            userData.master_card.slice(0, 4) +
+                                              " **** **** " +
+                                              userData.master_card.slice(-4)
+                                          }}
+                                        </p>
+                                      }
+                                    </div>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <div>
+                                      <p class="m-0 fw-bold">CVV</p>
                                       <p class="m-0 text-secondary fs-12">
                                         {{
-                                          userData.master_card.slice(0, 4) +
-                                            " **** **** " +
-                                            userData.master_card.slice(-4)
+                                          showCard
+                                            ? userData.master_card_cvv
+                                            : "***"
                                         }}
                                       </p>
                                     </div>
@@ -388,6 +445,7 @@
                                   </td>
                                   <td class="text-truncate">
                                     <a
+                                      (click)="showCardDetails()"
                                       routerLink="#"
                                       class="text-primary cursor-pointer text-decoration-none fw-bold"
                                       >view Details</a
@@ -423,11 +481,37 @@
                                   <td class="text-truncate">
                                     <div>
                                       <p class="m-0 fw-bold">Card Number</p>
+                                      @if (showCard) {
+                                        <p class="m-0 text-secondary fs-12">
+                                          {{
+                                            userData.visa_card.slice(0, 4) +
+                                              " " +
+                                              userData.visa_card.slice(4, 8) +
+                                              " " +
+                                              userData.visa_card.slice(8, 12) +
+                                              " " +
+                                              userData.visa_card.slice(-4)
+                                          }}
+                                        </p>
+                                      } @else {
+                                        <p class="m-0 text-secondary fs-12">
+                                          {{
+                                            userData.visa_card.slice(0, 4) +
+                                              " **** **** " +
+                                              userData.visa_card.slice(-4)
+                                          }}
+                                        </p>
+                                      }
+                                    </div>
+                                  </td>
+                                  <td class="text-truncate">
+                                    <div>
+                                      <p class="m-0 fw-bold">CVV</p>
                                       <p class="m-0 text-secondary fs-12">
                                         {{
-                                          userData.visa_card.slice(0, 4) +
-                                            " **** **** " +
-                                            userData.visa_card.slice(-4)
+                                          showCard
+                                            ? userData.visa_card_cvv
+                                            : "***"
                                         }}
                                       </p>
                                     </div>
@@ -442,6 +526,7 @@
                                   </td>
                                   <td class="text-truncate">
                                     <a
+                                      (click)="showCardDetails()"
                                       routerLink="#"
                                       class="text-primary cursor-pointer text-decoration-none fw-bold"
                                       >view Details</a

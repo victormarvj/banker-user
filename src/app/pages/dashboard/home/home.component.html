@@ -11,11 +11,97 @@
 
 <div class="container-fluid">
   <div class="row">
+    <div class="col-12 mb-3" id="accountSummary">
+      <div class="card theme-rounded card-dark-theme p-2 p-md-4 px-3">
+        <h5 class="mb-0 mb-md-2">Account Summary</h5>
+
+        <div class="row gap-0">
+          <div class="col-6 col-md-3 mt-md-0 p-1">
+            <div
+              class="card theme-rounded card-dark-theme border-linear-accent"
+            >
+              <div class="d-flex p-2 px-md-3">
+                <img
+                  src="img/icon-income.png"
+                  style="width: 27.49px; height: 27.49px"
+                  alt=""
+                />
+                <div class="ms-md-4">
+                  <p class="m-1 text-secondary fs-12">Account</p>
+                  <h6>
+                    {{ userData?.currency }}{{ userData?.display_balance }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3 mt-md-0 p-1">
+            <div
+              class="card theme-rounded card-dark-theme border-linear-accent"
+            >
+              <div class="d-flex p-2 px-md-3">
+                <img
+                  src="img/icon-loan.png"
+                  style="width: 27.49px; height: 27.49px"
+                  alt=""
+                />
+                <div class="ms-md-4">
+                  <p class="m-1 text-secondary fs-12">Loan</p>
+                  <h6>
+                    {{ userData?.currency }}{{ userData?.display_loan_amount }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3 mt-md-0 p-1">
+            <div
+              class="card theme-rounded card-dark-theme border-linear-accent"
+            >
+              <div class="d-flex p-2 px-md-3">
+                <img
+                  src="img/icon-expenses.png"
+                  style="width: 27.49px; height: 27.49px"
+                  alt=""
+                />
+                <div class="ms-md-4">
+                  <p class="m-1 text-secondary fs-12">Expenses</p>
+                  <h6>
+                    {{ userData?.currency }}{{ userData?.display_expenses }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3 mt-md-0 p-1">
+            <div
+              class="card theme-rounded card-dark-theme border-linear-accent"
+            >
+              <div class="d-flex p-2 px-md-3">
+                <img
+                  src="img/icon-savings.png"
+                  style="width: 27.49px; height: 27.49px"
+                  alt=""
+                />
+                <div class="ms-md-4">
+                  <p class="m-1 text-secondary fs-12">Total Savings</p>
+                  <h6>
+                    {{ userData?.currency }}{{ userData?.display_balance }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-12 col-md-9">
       <div class="row">
-        <div class="row mb-4">
+        <div class="row mb-2">
           <div class="col-12">
-            <h6>My Card</h6>
+            <h6>Extras</h6>
           </div>
         </div>
         <div class="col-12 col-md-4" id="quickTransfer">
@@ -221,7 +307,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 mt-3" id="accountSummary">
+        <!-- <div class="col-12 mt-3" id="accountSummary">
           <div class="card theme-rounded card-dark-theme p-2 p-md-4">
             <h5 class="mb-5">Account Summary</h5>
 
@@ -302,7 +388,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- Details Modal -->
         <div

@@ -37,6 +37,8 @@ export class CreditCardsComponent implements OnInit {
 
   creditCardForm: FormGroup;
 
+  showCard: boolean = false;
+
   amount: number = 0;
 
   constructor(
@@ -117,5 +119,9 @@ export class CreditCardsComponent implements OnInit {
 
   closeModal() {
     this.showModal = false;
+  }
+
+  showCardDetails() {
+    this.showCard = !this.showCard;
   }
 }
