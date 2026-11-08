@@ -103,11 +103,6 @@ export const routes: Routes = [
         title: 'Incomplete Transaction | SummitRidgeVault.com',
       },
       {
-        path: 'credit-cards',
-        component: CreditCardsComponent,
-        title: 'Credit Cards | SummitRidgeVault.com',
-      },
-      {
         path: 'deposit',
         component: DepositComponent,
         title: 'Deposit | SummitRidgeVault.com',
@@ -140,7 +135,7 @@ export const routes: Routes = [
       {
         path: 'credit-cards',
         component: CreditCardsComponent,
-        title: 'Credit Cards | SummitRidgeVault.com',
+        title: 'Debit Cards | SummitRidgeVault.com',
       },
       {
         path: 'loans',
